@@ -1,0 +1,11 @@
+version: '3'
+services:
+  # Node
+  node:
+    image: node:8.16-alpine
+    volumes:
+      - ./:/var/www
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    working_dir: /var/www
+    tty: true
