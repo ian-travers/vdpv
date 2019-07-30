@@ -5,7 +5,11 @@
 /vendor
 .env
 .phpunit.result.cache
-Homestead.json
-Homestead.yaml
 npm-debug.log
-yarn-error.log
+
+.idea
+.phpstorm.meta.php
+_ide_help*.php
+/public/build
+notes.*
+
