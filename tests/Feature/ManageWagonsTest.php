@@ -47,25 +47,14 @@ class ManageWagonsTest extends TestCase
     }
 
     /** @test */
-    function guest_cannot_add_a_wagon()
-    {
-        $attributes = factory(Wagon::class)->raw();
-
-        $this->post('/wagons', $attributes)->assertRedirect('/login');
-    }
-
-    /** @test */
-    function guest_cannot_view_wagons()
-    {
-        $this->get('/wagons')->assertRedirect('/login');
-    }
-
-    /** @test */
-    function guest_cannot_view_a_single_wagons()
+    function guest_cannot_manage_wagons()
     {
         /** @var Wagon $wagon */
-        $wagon = factory(Wagon ::class)->create();
+        $wagon = factory(Wagon::class)->create();
+
         $this->get($wagon->path())->assertRedirect('/login');
+        $this->get('/wagons')->assertRedirect('/login');
+        $this->post('/wagons', $wagon->toArray())->assertRedirect('/login');
     }
 
     /** @test */
