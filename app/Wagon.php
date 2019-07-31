@@ -55,4 +55,9 @@ class Wagon extends Model
     protected $casts = [
         'is_empty' => 'boolean'
     ];
+
+    public function path()
+    {
+        return "/wagons/{$this->id}";
+    }
 }

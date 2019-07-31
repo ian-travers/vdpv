@@ -111,8 +111,6 @@ class ManageWagonsTest extends TestCase
     {
         $attributes = factory(Wagon::class)->raw(['is_empty' => null]);
 
-        dd($attributes);
-
         $this->post('/wagons', $attributes)->assertSessionHasErrors('is_empty');
     }
 }

@@ -13,14 +13,14 @@ $factory->define(Wagon::class, function (Faker $faker) {
         'detained_at' => Carbon::parse('-1 hours'),
         'released_at' => null,
         'departed_at' => null,
-        'detained_by' => 'Customs',
-        'reason' => 'It has no main shipment',
-        'cargo' => 'Gasoline',
-        'forwarder' => 'BTLS',
-        'ownership' => 'BCH',
-        'departure_station' => 'Shkirotava',
-        'destination_station' => 'Manhali',
-        'taken_measure' => 'Nothing',
-        'is_empty' => false
+        'detained_by' => $faker->word,
+        'reason' => $faker->sentence(4),
+        'cargo' => $faker->jobTitle,
+        'forwarder' => $faker->titleMale,
+        'ownership' => $faker->buildingNumber,
+        'departure_station' => $faker->city,
+        'destination_station' => $faker->city,
+        'taken_measure' => $faker->paragraph(2),
+        'is_empty' => $faker->boolean
     ];
 });

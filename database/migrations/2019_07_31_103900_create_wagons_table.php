@@ -22,7 +22,7 @@ class CreateWagonsTable extends Migration
             $table->string('ownership');
             $table->string('departure_station');
             $table->string('destination_station');
-            $table->string('taken_measure');
+            $table->text('taken_measure');
             $table->boolean('is_empty')->default(false);
             $table->timestamps();
 

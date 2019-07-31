@@ -14,6 +14,11 @@ class WagonsController extends Controller
         return view('wagons.index', compact('wagons'));
     }
 
+    public function show(Wagon $wagon)
+    {
+        return view('wagons.show', compact('wagon'));
+    }
+
     public function store()
     {
         $attributes = Request::validate([
