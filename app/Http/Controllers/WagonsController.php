@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Wagon;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WagonsController extends Controller
 {
@@ -37,6 +38,8 @@ class WagonsController extends Controller
             'taken_measure' => 'nullable',
             'is_empty' => 'required'
         ]);
+
+        $attributes['creator_id'] = Auth::id();
 
         Wagon::create($attributes);
 

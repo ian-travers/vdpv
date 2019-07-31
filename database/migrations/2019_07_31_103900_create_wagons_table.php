@@ -10,6 +10,7 @@ class CreateWagonsTable extends Migration
     {
         Schema::create('wagons', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('creator_id');
             $table->string('inw', 8);
             $table->timestamp('arrived_at')->nullable();
             $table->timestamp('detained_at')->nullable();

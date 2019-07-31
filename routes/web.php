@@ -10,6 +10,6 @@ Auth::routes();
 
 Route::get('/wagons', 'WagonsController@index');
 Route::get('/wagons/{wagon}', 'WagonsController@show');
-Route::post('/wagons', 'WagonsController@store');
+Route::post('/wagons', 'WagonsController@store')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');

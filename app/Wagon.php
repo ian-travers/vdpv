@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Wagon
  *
  * @property int $id
+ * @property int $creator_id
  * @property string $inw
  * @property \Illuminate\Support\Carbon|null $arrived_at
  * @property \Illuminate\Support\Carbon|null $detained_at
@@ -30,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereArrivedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCargo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCreatorId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDepartedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDepartureStation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDestinationStation($value)
