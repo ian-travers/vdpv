@@ -39,9 +39,7 @@ class WagonsController extends Controller
             'is_empty' => 'required'
         ]);
 
-        $attributes['creator_id'] = Auth::id();
-
-        Wagon::create($attributes);
+        Auth::user()->wagons()->create($attributes);
 
         return redirect('/wagons');
     }
