@@ -4,10 +4,12 @@ namespace Tests\Feature;
 
 use App\Wagon;
 use App\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 
 class ManageWagonsTest extends TestCase
 {
@@ -35,21 +37,60 @@ class ManageWagonsTest extends TestCase
             'taken_measure' => 'Nothing',
             'is_empty' => false
         ];
-        
+
         $response = $this->post('/wagons', $attributes);
 
         $response->assertRedirect('/wagons');
         $this->assertDatabaseHas('wagons', $attributes);
-        
+
         $this->get('/wagons')->assertSee($attributes['inw']);
     }
-    
-    /** @test */ 
-    function only_authenticated_user_can_add_wagon()
+
+    /** @test */
+    function guest_cannot_add_a_wagon()
     {
         $attributes = factory(Wagon::class)->raw();
 
         $this->post('/wagons', $attributes)->assertRedirect('/login');
+    }
+
+    /** @test */
+    function guest_cannot_view_wagons()
+    {
+        $this->get('/wagons')->assertRedirect('/login');
+    }
+
+    /** @test */
+    function guest_cannot_view_a_single_wagons()
+    {
+        /** @var Wagon $wagon */
+        $wagon = factory(Wagon ::class)->create();
+        $this->get($wagon->path())->assertRedirect('/login');
+    }
+
+    /** @test */
+    function a_user_can_view_their_wagons()
+    {
+        $this->be(factory(User::class)->create());
+
+        /** @var Wagon $wagon */
+        $wagon = factory(Wagon::class)->create(['creator_id' => Auth::id()]);
+
+        $this->get($wagon->path())
+            ->assertSee($wagon->inw)
+            ->assertSee($wagon->detained_by)
+            ->assertSee($wagon->reason);
+    }
+
+    /** @test */
+    function an_authenticated_user_cannot_view_other_wagons()
+    {
+        $this->be(factory(User::class)->create());
+
+        /** @var Wagon $wagon */
+        $wagon = factory(Wagon::class)->create();
+
+        $this->get($wagon->path())->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */

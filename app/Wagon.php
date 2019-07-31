@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $is_empty
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\User $creator
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon query()
@@ -61,5 +62,10 @@ class Wagon extends Model
     public function path()
     {
         return "/wagons/{$this->id}";
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
     }
 }

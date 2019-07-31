@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Wagon;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,13 +11,17 @@ class WagonsController extends Controller
 {
     public function index()
     {
-        $wagons = Wagon::all();
+        $wagons = Auth::user()->wagons;
 
         return view('wagons.index', compact('wagons'));
     }
 
     public function show(Wagon $wagon)
     {
+        if (Auth::user()->isNot($wagon->creator)) {
+            abort(Response::HTTP_FORBIDDEN);
+        }
+
         return view('wagons.show', compact('wagon'));
     }
 
