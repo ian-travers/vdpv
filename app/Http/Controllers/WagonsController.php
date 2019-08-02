@@ -13,7 +13,9 @@ class WagonsController extends Controller
     {
         $wagons = Auth::user()->wagons;
 
-        return view('wagons.index', compact('wagons'));
+        $locale = config('app.locale');
+
+        return view('wagons.index', compact('wagons', 'locale'));
     }
 
     public function show(Wagon $wagon)
@@ -25,14 +27,17 @@ class WagonsController extends Controller
         return view('wagons.show', compact('wagon'));
     }
 
+    public function create()
+    {
+        return view('wagons.create');
+    }
+
     public function store()
     {
         $attributes = Request::validate([
             'inw' => 'required|regex:/\b\d{8}\b/',
             'arrived_at' => 'required|date',
             'detained_at' => 'required|date',
-            'released_at' => 'nullable|date',
-            'departed_at' => 'nullable|date',
             'detained_by' => 'required|max:255',
             'reason' => 'required:max:255',
             'cargo' => 'required|max:255',
@@ -41,7 +46,7 @@ class WagonsController extends Controller
             'departure_station' => 'required|max:255',
             'destination_station' => 'required|max:255',
             'taken_measure' => 'nullable',
-            'is_empty' => 'required'
+            'is_empty' => 'nullable'
         ]);
 
         Auth::user()->wagons()->create($attributes);

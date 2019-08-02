@@ -19,6 +19,7 @@ class ManageWagonsTest extends TestCase
     function a_user_can_create_a_wagon()
     {
         $this->withoutExceptionHandling();
+
         $this->actingAs(factory(User::class)->create());
 
         $attributes = [
@@ -153,12 +154,4 @@ class ManageWagonsTest extends TestCase
         $this->post('/wagons', $attributes)->assertSessionHasErrors('destination_station');
     }
 
-    /** @test */
-    function a_wagon_required_an_is_empty_mark()
-    {
-        $this->actingAs(factory(User::class)->create());
-        $attributes = factory(Wagon::class)->raw(['is_empty' => null]);
-
-        $this->post('/wagons', $attributes)->assertSessionHasErrors('is_empty');
-    }
 }

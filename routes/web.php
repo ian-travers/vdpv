@@ -9,9 +9,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/wagons', 'WagonsController@index');
-    Route::get('/wagons/{wagon}', 'WagonsController@show');
-    Route::post('/wagons', 'WagonsController@store')->middleware('auth');
+    Route::get('/wagons', 'WagonsController@index')->name('wagons.index');
+    Route::get('/wagons/create', 'WagonsController@create')->name('wagons.create');
+    Route::get('/wagons/{wagon}', 'WagonsController@show')->name('wagons.show');
+    Route::post('/wagons', 'WagonsController@store')->name('wagons.store');
 
     Route::get('/home', 'HomeController@index')->name('home');
 });

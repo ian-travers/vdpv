@@ -3,8 +3,11 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
-    <h1>Вагоны</h1>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-end">
+      <h1>Список задержанных вагонов</h1>
+      <a href="{{ route('wagons.create') }}" class="btn btn-outline-primary">Добавить вагон</a>
+    </div>
 
     @forelse($wagons as $wagon)
       <ul>
