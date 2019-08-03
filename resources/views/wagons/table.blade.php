@@ -11,7 +11,7 @@
     <th>Ст. назн.</th>
     <th>Прибыл</th>
     <th>Задержан</th>
-    <th>Пинятые меры</th>
+    <th>Принятые меры</th>
     <th width="8%" class="text-center">Действия</th>
   </tr>
   </thead>

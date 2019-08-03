@@ -4,19 +4,19 @@
 
 @section('content')
   <div class="container-fluid">
-    <h1>Добавление вагона</h1>
+    <h1>Редактирование вагона</h1>
     <div class="bg-white rounded border border-secondary p-3">
       <h2>Информация по вагону</h2>
-      <form action="{{ route('wagons.index') }}" method="post">
+      <form action="{{route('wagons.update', $wagon->id)}}" method="post">
 
         @csrf
-
+        @method('patch')
         <div class="d-sm-inline-flex justify-content-lg-start align-items-start">
           {{-- Номер вагона --}}
           <div class="form-group mr-2">
             <label for="inw">Инвентарный номер</label>
-            <input type="text" id="inw" name="inw" value="{{ old('inw') }}"
-                   class="form-control {{ $errors->has('inw') ? 'is-invalid' : '' }}" required autofocus>
+            <input type="text" id="inw" name="inw" value="{{ old('inw', $wagon->inw) }}"
+                   class="form-control {{ $errors->has('inw') ? 'is-invalid' : '' }}" autofocus>
 
             @if($errors->has('inw'))
               <div class="invalid-feedback">
@@ -29,7 +29,7 @@
           {{-- Организация задержки --}}
           <div class="form-group mr-2">
             <label for="detained_by">Кем задержан</label>
-            <input type="text" id="detained_by" name="detained_by" value="{{ old('detained_by') }}"
+            <input type="text" id="detained_by" name="detained_by" value="{{ old('detained_by', $wagon->detained_by) }}"
                    class="form-control {{ $errors->has('detained_by') ? 'is-invalid' : '' }}" required>
 
             @if($errors->has('detained_by'))
@@ -43,7 +43,7 @@
           {{-- Причина задержки --}}
           <div class="form-group mr-2">
             <label for="reason">Причина задержки</label>
-            <input type="text" id="reason" name="reason" value="{{ old('reason') }}"
+            <input type="text" id="reason" name="reason" value="{{ old('reason', $wagon->reason) }}"
                    class="form-control {{ $errors->has('reason') ? 'is-invalid' : '' }}">
 
             @if($errors->has('reason'))
@@ -57,7 +57,7 @@
           {{-- Груз --}}
           <div class="form-group mr-2">
             <label for="cargo">Наименование груза</label>
-            <input type="text" id="cargo" name="cargo" value="{{ old('cargo') }}"
+            <input type="text" id="cargo" name="cargo" value="{{ old('cargo', $wagon->cargo) }}"
                    class="form-control {{ $errors->has('cargo') ? 'is-invalid' : '' }}">
 
             @if($errors->has('cargo'))
@@ -71,7 +71,7 @@
           {{-- Экспедитор --}}
           <div class="form-group mr-2">
             <label for="forwarder">Экспедитор по БЧ</label>
-            <input type="text" id="forwarder" name="forwarder" value="{{ old('forwarder') }}"
+            <input type="text" id="forwarder" name="forwarder" value="{{ old('forwarder', $wagon->forwarder) }}"
                    class="form-control {{ $errors->has('forwarder') ? 'is-invalid' : '' }}">
 
             @if($errors->has('forwarder'))
@@ -85,7 +85,7 @@
           {{-- Собственность вагона --}}
           <div class="form-group mr-2">
             <label for="ownership">Собственность</label>
-            <input type="text" id="ownership" name="ownership" value="{{ old('ownership') }}"
+            <input type="text" id="ownership" name="ownership" value="{{ old('ownership', $wagon->ownership) }}"
                    class="form-control {{ $errors->has('ownership') ? 'is-invalid' : '' }}">
 
             @if($errors->has('ownership'))
@@ -101,7 +101,7 @@
           {{-- Станция отправления --}}
           <div class="form-group mr-2">
             <label for="departure_station">Станция отправления</label>
-            <input type="text" id="departure_station" name="departure_station" value="{{ old('departure_station') }}"
+            <input type="text" id="departure_station" name="departure_station" value="{{ old('departure_station', $wagon->departure_station) }}"
                    class="form-control {{ $errors->has('departure_station') ? 'is-invalid' : '' }}" required>
 
             @if($errors->has('departure_station'))
@@ -116,7 +116,7 @@
           <div class="form-group mr-2">
             <label for="destination_station">Станция назначения</label>
             <input type="text" id="destination_station" name="destination_station"
-                   value="{{ old('destination_station') }}"
+                   value="{{ old('destination_station', $wagon->destination_station) }}"
                    class="form-control {{ $errors->has('destination_station') ? 'is-invalid' : '' }}" required>
 
             @if($errors->has('destination_station'))
@@ -131,7 +131,8 @@
           <div class="form-group mr-2">
             <label for="arrived_at">Дата/время прибытия</label>
             <input type="datetime-local" id="arrived_at" name="arrived_at"
-                   value="{{ old('arrived_at') }}"
+                   value="{{ old('arrived_at', $wagon->arrived_at->format('Y-m-d\TH:i')) }}"
+                   {{--value="2019-08-02T12:12"--}}
                    class="form-control {{ $errors->has('arrived_at') ? 'is-invalid' : '' }}" required>
 
             @if($errors->has('arrived_at'))
@@ -146,7 +147,7 @@
           <div class="form-group mr-2">
             <label for="detained_at">Дата/время задержания</label>
             <input type="datetime-local" id="detained_at" name="detained_at"
-                   value="{{ old('detained_at') }}"
+                   value="{{ old('detained_at', $wagon->detained_at->format('Y-m-d\TH:i')) }}"
                    class="form-control {{ $errors->has('detained_at') ? 'is-invalid' : '' }}" required>
 
             @if($errors->has('detained_at'))
@@ -167,5 +168,7 @@
 
   </div>
 @endsection
+
+
 
 

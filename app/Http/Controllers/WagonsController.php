@@ -38,6 +38,8 @@ class WagonsController extends Controller
             'inw' => 'required|regex:/\b\d{8}\b/',
             'arrived_at' => 'required|date',
             'detained_at' => 'required|date',
+            'released_at' => 'nullable|date',
+            'departed_at' => 'nullable|date',
             'detained_by' => 'required|max:255',
             'reason' => 'required:max:255',
             'cargo' => 'required|max:255',
@@ -52,5 +54,34 @@ class WagonsController extends Controller
         Auth::user()->wagons()->create($attributes);
 
         return redirect('/wagons');
+    }
+
+    public function edit(Wagon $wagon)
+    {
+        return view('wagons.edit', compact('wagon'));
+    }
+
+    public function update(Wagon $wagon)
+    {
+        $attributes = Request::validate([
+            'inw' => 'required|regex:/\b\d{8}\b/',
+            'arrived_at' => 'required|date',
+            'detained_at' => 'required|date',
+            'released_at' => 'nullable|date',
+            'departed_at' => 'nullable|date',
+            'detained_by' => 'required|max:255',
+            'reason' => 'required:max:255',
+            'cargo' => 'required|max:255',
+            'forwarder' => 'nullable',
+            'ownership' => 'nullable',
+            'departure_station' => 'required|max:255',
+            'destination_station' => 'required|max:255',
+            'taken_measure' => 'nullable',
+            'is_empty' => 'nullable'
+        ]);
+//        dd($attributes);
+        $wagon->update($attributes);
+
+        return redirect(route('wagons.index'));
     }
 }

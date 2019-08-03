@@ -18,8 +18,6 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_user_can_create_a_wagon()
     {
-        $this->withoutExceptionHandling();
-
         $this->actingAs(factory(User::class)->create());
 
         $attributes = [
@@ -41,9 +39,9 @@ class ManageWagonsTest extends TestCase
 
         $response = $this->post('/wagons', $attributes);
 
+        $this->get('/wagons/create')->assertOk();
         $response->assertRedirect('/wagons');
         $this->assertDatabaseHas('wagons', $attributes);
-
         $this->get('/wagons')->assertSee($attributes['inw']);
     }
 
@@ -53,9 +51,41 @@ class ManageWagonsTest extends TestCase
         /** @var Wagon $wagon */
         $wagon = factory(Wagon::class)->create();
 
-        $this->get($wagon->path())->assertRedirect('/login');
         $this->get('/wagons')->assertRedirect('/login');
+        $this->get('/wagons/create')->assertRedirect('/login');
+        $this->get($wagon->path() .'/edit')->assertRedirect('/login');
+        $this->get($wagon->path())->assertRedirect('/login');
         $this->post('/wagons', $wagon->toArray())->assertRedirect('/login');
+    }
+    
+    /** @test */ 
+    function a_user_can_update_a_wagon()
+    {
+        $this->withoutExceptionHandling();
+        /** @var Wagon $wagon */
+        $wagon = factory(Wagon::class)->create();
+
+        $this->actingAs($wagon->creator)
+            ->patch($wagon->path(), $attributes = [
+                'inw' => '12345678',
+                'arrived_at' => Carbon::now(),
+                'detained_at' => Carbon::now(),
+                'released_at' => Carbon::now(),
+                'departed_at' => Carbon::now(),
+                'detained_by' => 'changed',
+                'reason' => 'changed',
+                'cargo' => 'changed',
+                'forwarder' => 'changed',
+                'ownership' => 'changed',
+                'departure_station' => 'changed',
+                'destination_station' => 'changed',
+                'taken_measure' => 'changed',
+                'is_empty' => false
+            ])
+            ->assertRedirect(route('wagons.index'));
+
+        $this->get($wagon->path() . '/edit')->assertOk();
+        $this->assertDatabaseHas('wagons', $attributes);
     }
 
     /** @test */
@@ -66,10 +96,7 @@ class ManageWagonsTest extends TestCase
         /** @var Wagon $wagon */
         $wagon = factory(Wagon::class)->create(['creator_id' => Auth::id()]);
 
-        $this->get($wagon->path())
-            ->assertSee($wagon->inw)
-            ->assertSee($wagon->detained_by)
-            ->assertSee($wagon->reason);
+        $this->get($wagon->path())->assertOk();
     }
 
     /** @test */
