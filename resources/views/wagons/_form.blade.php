@@ -151,6 +151,21 @@
   </div>
 </div>
 
+<div class="d-block">
+  {{-- Принятые меры --}}
+  <div class="form-group mr-2">
+    <label for="taken_measure">Принятые меры</label>
+    <textarea id="taken_measure" name="taken_measure" rows="3" class="form-control">{{ old('taken_measure', $wagon->taken_measure) }}</textarea>
+
+    @if($errors->has('taken_measure'))
+      <div class="invalid-feedback">
+        <strong>{{ $errors->first('taken_measure') }}</strong>
+      </div>
+
+    @endif
+  </div>
+</div>
+
 <div class="form-group d-flex align-items-end">
   <button type="submit" class="btn btn-outline-primary btn-lg mr-2">Сохранить</button>
   <a href="{{route('wagons.index')}}" class="btn btn-outline-secondary btn-sm">Отменить</a>
