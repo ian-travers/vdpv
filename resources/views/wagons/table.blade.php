@@ -12,7 +12,7 @@
     <th>Прибыл</th>
     <th>Задержан</th>
     <th>Принятые меры</th>
-    <th width="8%" class="text-center">Действия</th>
+    <th width="6%" class="text-center">Действия</th>
   </tr>
   </thead>
   <tbody>
@@ -25,13 +25,12 @@
       <td>{{ $wagon->cargo }} / {{ $wagon->forwarder }} / {{ $wagon->ownership }}</td>
       <td>{{ $wagon->departure_station }}</td>
       <td>{{ $wagon->destination_station }}</td>
-      <td>{{ $wagon->arrived_at->format('d.m.Y H:i') }}</td>
-      <td>{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
+      <td class="text-center">{{ $wagon->arrived_at->format('d.m.Y H:i') }}</td>
+      <td class="text-center">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
       <td>{{ $wagon->taken_measure }}</td>
       <td class="text-center">
-        <a href="/wagons/{{ $wagon->id }}/edit" class="btn btn-sm btn-outline-primary">Р</a>
-        <a href="/wagons/{{ $wagon->id }}/release" class="btn btn-sm btn-outline-success">В</a>
-        <a href="/wagons/{{ $wagon->id }}/delete" class="btn btn-sm btn-outline-danger">У</a>
+        <a href="{{ route('wagons.edit', $wagon) }}" class="btn btn-sm btn-outline-primary" title="Редактировать">Р</a>
+        <a href="/wagons/{{ $wagon->id }}/delete" class="btn btn-sm btn-outline-danger" title="Удалить">У</a>
       </td>
     </tr>
 
