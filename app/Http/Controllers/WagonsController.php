@@ -79,7 +79,7 @@ class WagonsController extends Controller
             'taken_measure' => 'nullable',
             'is_empty' => 'nullable'
         ]);
-//        dd($attributes);
+
         $wagon->update($attributes);
 
         return redirect(route('wagons.index'));
