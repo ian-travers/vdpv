@@ -70,6 +70,11 @@ class Wagon extends Model
         return $this->belongsTo(User::class);
     }
 
+    public static function getInputDatetime($datetime)
+    {
+        return isset($datetime) ? $datetime->format('Y-m-d\TH:i') : '';
+    }
+
     // Mutators
     public function setArrivedAtAttribute($value)
     {
