@@ -15,6 +15,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/wagons/{wagon}/edit', 'WagonsController@edit')->name('wagons.edit');
     Route::patch('/wagons/{wagon}', 'WagonsController@update')->name('wagons.update');
     Route::post('/wagons', 'WagonsController@store')->name('wagons.store');
+    Route::delete('/wagons/{wagon}', 'WagonsController@destroy')->name('wagons.destroy');
 
     Route::get('/home', 'HomeController@index')->name('home');
 });

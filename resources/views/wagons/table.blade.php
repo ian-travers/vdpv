@@ -30,7 +30,12 @@
       <td>{{ $wagon->taken_measure }}</td>
       <td class="text-center">
         <a href="{{ route('wagons.edit', $wagon) }}" class="btn btn-sm btn-outline-primary" title="Редактировать">Р</a>
-        <a href="/wagons/{{ $wagon->id }}/delete" class="btn btn-sm btn-outline-danger" title="Удалить">У</a>
+        <form action="{{ route('wagons.destroy', $wagon) }}" method="post" class="d-inline">
+
+          @csrf
+          @method('delete')
+          <button type="submit" onclick="return confirm('Подтверждаете удаление?')" class="btn btn-sm btn-outline-danger" title="Удалить">У</button>
+        </form>
       </td>
     </tr>
 

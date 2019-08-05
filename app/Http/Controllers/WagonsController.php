@@ -84,4 +84,16 @@ class WagonsController extends Controller
 
         return redirect(route('wagons.index'));
     }
+
+    /**
+     * @param Wagon $wagon
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function destroy(Wagon $wagon)
+    {
+        $wagon->delete();
+
+        return redirect(route('wagons.index'));
+    }
 }

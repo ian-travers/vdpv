@@ -17,7 +17,7 @@ $factory->define(Wagon::class, function (Faker $faker) {
         'detained_by' => $faker->word,
         'reason' => $faker->sentence(4),
         'cargo' => $faker->jobTitle,
-        'forwarder' => $faker->titleMale,
+        'forwarder' => $faker->jobTitle,
         'ownership' => $faker->buildingNumber,
         'departure_station' => $faker->city,
         'destination_station' => $faker->city,

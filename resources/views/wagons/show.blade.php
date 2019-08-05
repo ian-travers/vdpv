@@ -69,7 +69,12 @@
 
         <div class="text-right">
           <a class="btn btn-outline-primary mr-2" href="{{ route('wagons.edit', $wagon) }}">Редактировать</a>
-          <a class="btn btn-outline-danger" href="/wagons/{{ $wagon->path() }}/delete">Удалить</a>
+          <form action="{{ route('wagons.destroy', $wagon) }}" method="post" class="d-inline">
+
+            @csrf
+            @method('delete')
+            <button type="submit" onclick="return confirm('Подтверждаете удаление?')" class="btn btn-outline-danger">Удалить</button>
+          </form>
         </div>
       </div>
     </div>

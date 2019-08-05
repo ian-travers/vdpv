@@ -16,6 +16,18 @@ class ManageWagonsTest extends TestCase
     use WithFaker, RefreshDatabase;
 
     /** @test */
+    function guest_cannot_manage_wagons()
+    {
+        $wagon = app(WagonFactory::class)->create();
+
+        $this->get('/wagons')->assertRedirect('/login');
+        $this->get('/wagons/create')->assertRedirect('/login');
+        $this->get($wagon->path() .'/edit')->assertRedirect('/login');
+        $this->get($wagon->path())->assertRedirect('/login');
+        $this->post('/wagons', $wagon->toArray())->assertRedirect('/login');
+    }
+
+    /** @test */
     function a_user_can_create_a_wagon()
     {
         $this->signIn();
@@ -43,18 +55,6 @@ class ManageWagonsTest extends TestCase
         $response->assertRedirect('/wagons');
         $this->assertDatabaseHas('wagons', $attributes);
         $this->get('/wagons')->assertSee($attributes['inw']);
-    }
-
-    /** @test */
-    function guest_cannot_manage_wagons()
-    {
-        $wagon = app(WagonFactory::class)->create();
-
-        $this->get('/wagons')->assertRedirect('/login');
-        $this->get('/wagons/create')->assertRedirect('/login');
-        $this->get($wagon->path() .'/edit')->assertRedirect('/login');
-        $this->get($wagon->path())->assertRedirect('/login');
-        $this->post('/wagons', $wagon->toArray())->assertRedirect('/login');
     }
     
     /** @test */ 
@@ -86,13 +86,29 @@ class ManageWagonsTest extends TestCase
         $this->get($wagon->path() . '/edit')->assertOk();
         $this->assertDatabaseHas('wagons', $attributes);
     }
+
+    /** @test */
+    function a_user_can_delete_their_wagons()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $wagon = app(WagonFactory::class)->createdBy(Auth::user())->create();
+
+        $this->assertDatabaseHas('wagons', $wagon->toArray());
+
+        $this->delete('/wagons/' . $wagon->id)
+            ->assertRedirect('/wagons');
+
+        $this->assertDatabaseMissing('wagons', $wagon->toArray());
+    }
     
     /** @test */
     function a_user_can_view_their_wagons()
     {
         $this->signIn();
 
-        $wagon = factory(Wagon::class)->create(['creator_id' => Auth::id()]);
+        $wagon = app(WagonFactory::class)->createdBy(Auth::user())->create();
 
         $this->get($wagon->path())->assertOk();
     }
@@ -102,8 +118,7 @@ class ManageWagonsTest extends TestCase
     {
         $this->signIn();
 
-        /** @var Wagon $wagon */
-        $wagon = factory(Wagon::class)->create();
+        $wagon = app(WagonFactory::class)->create();
 
         $this->get($wagon->path())->assertStatus(Response::HTTP_FORBIDDEN);
     }
