@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Wagon;
-use App\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
+use Tests\Setup\WagonFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +18,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_user_can_create_a_wagon()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
 
         $attributes = [
             'inw' => $this->faker->numerify('########'),
@@ -48,8 +48,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function guest_cannot_manage_wagons()
     {
-        /** @var Wagon $wagon */
-        $wagon = factory(Wagon::class)->create();
+        $wagon = app(WagonFactory::class)->create();
 
         $this->get('/wagons')->assertRedirect('/login');
         $this->get('/wagons/create')->assertRedirect('/login');
@@ -62,8 +61,8 @@ class ManageWagonsTest extends TestCase
     function a_user_can_update_a_wagon()
     {
         $this->withoutExceptionHandling();
-        /** @var Wagon $wagon */
-        $wagon = factory(Wagon::class)->create();
+
+        $wagon = app(WagonFactory::class)->create();
 
         $this->actingAs($wagon->creator)
             ->patch($wagon->path(), $attributes = [
@@ -87,13 +86,12 @@ class ManageWagonsTest extends TestCase
         $this->get($wagon->path() . '/edit')->assertOk();
         $this->assertDatabaseHas('wagons', $attributes);
     }
-
+    
     /** @test */
     function a_user_can_view_their_wagons()
     {
-        $this->be(factory(User::class)->create());
+        $this->signIn();
 
-        /** @var Wagon $wagon */
         $wagon = factory(Wagon::class)->create(['creator_id' => Auth::id()]);
 
         $this->get($wagon->path())->assertOk();
@@ -102,7 +100,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function an_authenticated_user_cannot_view_other_wagons()
     {
-        $this->be(factory(User::class)->create());
+        $this->signIn();
 
         /** @var Wagon $wagon */
         $wagon = factory(Wagon::class)->create();
@@ -113,7 +111,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_an_inw()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
         $attributes = factory(Wagon::class)->raw(['inw' => '']);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('inw');
@@ -122,7 +120,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_inw_is_exactly_8_digits()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
         $attributes = factory(Wagon::class)->raw(['inw' => '1234567']);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('inw');
@@ -139,7 +137,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_an_arrived_at()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
         $attributes = factory(Wagon::class)->raw(['arrived_at' => null]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('arrived_at');
@@ -148,7 +146,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_a_detained_at()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
         $attributes = factory(Wagon::class)->raw(['detained_at' => null]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('detained_at');
@@ -157,7 +155,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_a_detained_by()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
         $attributes = factory(Wagon::class)->raw(['detained_by' => '']);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('detained_by');
@@ -166,7 +164,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_a_departure_station()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
         $attributes = factory(Wagon::class)->raw(['departure_station' => '']);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('departure_station');
@@ -175,7 +173,7 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_a_destination_station()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->signIn();
         $attributes = factory(Wagon::class)->raw(['destination_station' => '']);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('destination_station');
