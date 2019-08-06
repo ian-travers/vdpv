@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Wagon;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,16 +10,19 @@ class WagonsController extends Controller
 {
     public function index()
     {
-        $wagons = Auth::user()->wagons()->paginate(8);
+        $wagons = Auth::user()->wagons()->paginate(10);
 
         return view('wagons.index', compact('wagons'));
     }
 
+    /**
+     * @param Wagon $wagon
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function show(Wagon $wagon)
     {
-        if (Auth::user()->isNot($wagon->creator)) {
-            abort(Response::HTTP_FORBIDDEN);
-        }
+        $this->authorize('manage', $wagon);
 
         return view('wagons.show', compact('wagon'));
     }
@@ -90,6 +92,8 @@ class WagonsController extends Controller
      */
     public function destroy(Wagon $wagon)
     {
+        $this->authorize('manage', $wagon);
+
         $wagon->delete();
 
         return redirect(route('wagons.index'));

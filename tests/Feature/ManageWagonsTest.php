@@ -90,7 +90,6 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_user_can_delete_their_wagons()
     {
-        $this->withoutExceptionHandling();
         $this->signIn();
 
         $wagon = app(WagonFactory::class)->createdBy(Auth::user())->create();
@@ -101,6 +100,19 @@ class ManageWagonsTest extends TestCase
             ->assertRedirect('/wagons');
 
         $this->assertDatabaseMissing('wagons', $wagon->toArray());
+    }
+
+    /** @test */
+    function an_unauthorized_user_cannot_delete_other_wagon()
+    {
+        $this->signIn();
+
+        $wagon = app(WagonFactory::class)->create();
+
+        $this->delete('/wagons/' . $wagon->id)
+            ->assertStatus(Response::HTTP_FORBIDDEN);
+
+        $this->assertDatabaseHas('wagons', $wagon->toArray());
     }
     
     /** @test */
