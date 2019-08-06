@@ -46,7 +46,6 @@ class ManageWagonsTest extends TestCase
             'departure_station' => 'Shkirotava',
             'destination_station' => 'Manhali',
             'taken_measure' => 'Nothing',
-            'is_empty' => false
         ];
 
         $response = $this->post('/wagons', $attributes);
@@ -79,7 +78,6 @@ class ManageWagonsTest extends TestCase
                 'departure_station' => 'changed',
                 'destination_station' => 'changed',
                 'taken_measure' => 'changed',
-                'is_empty' => false
             ])
             ->assertRedirect(route('wagons.index'));
 

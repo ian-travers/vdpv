@@ -5,6 +5,7 @@
 use App\Wagon;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Faker\Generator as Faker;
 
 $factory->define(Wagon::class, function (Faker $faker) {
@@ -14,7 +15,7 @@ $factory->define(Wagon::class, function (Faker $faker) {
         'detained_at' => Carbon::parse('-1 hours'),
         'released_at' => null,
         'departed_at' => null,
-        'detained_by' => $faker->word,
+        'detained_by' => Arr::random(array_keys(Wagon::$detainers)),
         'reason' => $faker->sentence(4),
         'cargo' => $faker->jobTitle,
         'forwarder' => $faker->jobTitle,
@@ -22,7 +23,6 @@ $factory->define(Wagon::class, function (Faker $faker) {
         'departure_station' => $faker->city,
         'destination_station' => $faker->city,
         'taken_measure' => $faker->paragraph(2),
-        'is_empty' => $faker->boolean,
         'creator_id' => function () {
             return factory(User::class)->create()->id;
         }

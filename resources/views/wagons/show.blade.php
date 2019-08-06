@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="d-flex mb-4 justify-content-between">
       <div>
-        <h2>Информация по вагону</h2>
+        <h2>Информация по вагону {{ $wagon->inw }}</h2>
       </div>
       <div>
         <a class="btn btn-outline-primary" href="{{ route('wagons.index') }}">Список вагонов</a>
@@ -17,8 +17,12 @@
         <table class="table table-sm border border-bottom">
           <tbody>
           <tr>
-            <td width="15%" class="text-right text-muted">Номер</td>
-            <td>{{ $wagon->inw }}</td>
+            <td width="15%" class="text-right text-muted">Прибыл</td>
+            <td>{{ $wagon->arrived_at->format('d.m.Y в H:i') }}</td>
+          </tr>
+          <tr>
+            <td width="15%" class="text-right text-muted">Задержан</td>
+            <td>{{ $wagon->getDetainer() }} {{ $wagon->detained_at->format('d.m.Y в H:i') }}</td>
           </tr>
           <tr>
             <td width="15%" class="text-right text-muted">Причина задержки</td>
@@ -43,14 +47,6 @@
           <tr>
             <td width="15%" class="text-right text-muted">Ст. назначения</td>
             <td>{{ $wagon->destination_station }}</td>
-          </tr>
-          <tr>
-            <td width="15%" class="text-right text-muted">Прибыл</td>
-            <td>{{ $wagon->arrived_at }}</td>
-          </tr>
-          <tr>
-            <td width="15%" class="text-right text-muted">Задержан</td>
-            <td>{{ $wagon->detained_at }}</td>
           </tr>
           <tr>
             <td width="15%" class="text-right text-muted">Принятые меры</td>

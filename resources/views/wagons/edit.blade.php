@@ -8,7 +8,7 @@
       <form action="{{route('wagons.update', $wagon->id)}}" method="post">
 
         @method('patch')
-        @include('wagons._form')
+        @include('wagons._form', [$detainers = \App\Wagon::$detainers])
       </form>
   </div>
 @endsection

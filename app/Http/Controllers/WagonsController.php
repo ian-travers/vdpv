@@ -71,7 +71,7 @@ class WagonsController extends Controller
     protected function validateRequest()
     {
         return Request::validate([
-            'inw' => 'required|regex:/\b\d{8}\b/',
+            'inw' => 'required|regex:/^\d{8}$/',
             'arrived_at' => 'required|date',
             'detained_at' => 'required|date',
             'released_at' => 'nullable|date',
@@ -84,7 +84,6 @@ class WagonsController extends Controller
             'departure_station' => 'required|max:255',
             'destination_station' => 'required|max:255',
             'taken_measure' => 'nullable',
-            'is_empty' => 'nullable'
         ]);
     }
 

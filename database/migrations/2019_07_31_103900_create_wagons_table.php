@@ -19,12 +19,11 @@ class CreateWagonsTable extends Migration
             $table->string('detained_by');
             $table->string('reason');
             $table->string('cargo');
-            $table->string('forwarder');
-            $table->string('ownership');
+            $table->string('forwarder')->nullable();
+            $table->string('ownership')->nullable();
             $table->string('departure_station');
             $table->string('destination_station');
             $table->text('taken_measure')->nullable();
-            $table->boolean('is_empty')->default(false);
             $table->timestamps();
 
             $table->index('arrived_at');

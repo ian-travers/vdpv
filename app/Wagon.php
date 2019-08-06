@@ -52,6 +52,18 @@ use Carbon\Carbon;
  */
 class Wagon extends Model
 {
+    public const UNKNOWN_DETAINER = 'Неизвестная организация';
+
+    public static $detainers = [
+        'customs' => 'Таможенная служба',
+        'technicals' => 'Служба вагонного хозяйства',
+        'commercials' => 'Служба коммерческого хозяйства',
+        'veterinaries' => 'Ветеринарный контроль',
+        'phytosanitaries' => 'Фитосанитарный контроль',
+        'expeditors' => 'Транспортно-экспедиционная организация',
+        'others' => 'Другие организации',
+    ];
+
     protected $guarded = [];
 
     protected $dates = ['arrived_at', 'detained_at', 'released_at', 'departed_at'];
@@ -73,6 +85,11 @@ class Wagon extends Model
     public static function getInputDatetime($datetime)
     {
         return isset($datetime) ? $datetime->format('Y-m-d\TH:i') : '';
+    }
+
+    public function getDetainer()
+    {
+        return array_key_exists($this->detained_by, self::$detainers) ? self::$detainers[$this->detained_by] : 'Неизвестная организация';
     }
 
     // Mutators

@@ -24,8 +24,10 @@
       {{-- Организация задержки --}}
       <div class="form-group mr-2">
         <label for="detained_by">Кем задержан</label>
-        <input type="text" id="detained_by" name="detained_by" value="{{ old('detained_by', $wagon->detained_by) }}"
-               class="form-control {{ $errors->has('detained_by') ? 'is-invalid' : '' }}" required>
+        <select id="detained_by" name="detained_by"
+                class="form-control {{ $errors->has('detained_by') ? 'is-invalid' : '' }}"
+                required
+        >@include('wagons._detainers')</select>
 
         @if($errors->has('detained_by'))
           <div class="invalid-feedback">
