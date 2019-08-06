@@ -11,11 +11,9 @@ class WagonsController extends Controller
 {
     public function index()
     {
-        $wagons = Auth::user()->wagons;
+        $wagons = Auth::user()->wagons()->paginate(8);
 
-        $locale = config('app.locale');
-
-        return view('wagons.index', compact('wagons', 'locale'));
+        return view('wagons.index', compact('wagons'));
     }
 
     public function show(Wagon $wagon)
