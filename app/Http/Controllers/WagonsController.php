@@ -34,24 +34,7 @@ class WagonsController extends Controller
 
     public function store()
     {
-        $attributes = Request::validate([
-            'inw' => 'required|regex:/\b\d{8}\b/',
-            'arrived_at' => 'required|date',
-            'detained_at' => 'required|date',
-            'released_at' => 'nullable|date',
-            'departed_at' => 'nullable|date',
-            'detained_by' => 'required|max:255',
-            'reason' => 'required:max:255',
-            'cargo' => 'required|max:255',
-            'forwarder' => 'nullable',
-            'ownership' => 'nullable',
-            'departure_station' => 'required|max:255',
-            'destination_station' => 'required|max:255',
-            'taken_measure' => 'nullable',
-            'is_empty' => 'nullable'
-        ]);
-
-        Auth::user()->wagons()->create($attributes);
+        Auth::user()->wagons()->create($this->validateRequest());
 
         return redirect('/wagons');
     }
@@ -63,24 +46,7 @@ class WagonsController extends Controller
 
     public function update(Wagon $wagon)
     {
-        $attributes = Request::validate([
-            'inw' => 'required|regex:/\b\d{8}\b/',
-            'arrived_at' => 'required|date',
-            'detained_at' => 'required|date',
-            'released_at' => 'nullable|date',
-            'departed_at' => 'nullable|date',
-            'detained_by' => 'required|max:255',
-            'reason' => 'required:max:255',
-            'cargo' => 'required|max:255',
-            'forwarder' => 'nullable',
-            'ownership' => 'nullable',
-            'departure_station' => 'required|max:255',
-            'destination_station' => 'required|max:255',
-            'taken_measure' => 'nullable',
-            'is_empty' => 'nullable'
-        ]);
-
-        $wagon->update($attributes);
+        $wagon->update($this->validateRequest());
 
         return redirect(route('wagons.index'));
     }
@@ -98,4 +64,28 @@ class WagonsController extends Controller
 
         return redirect(route('wagons.index'));
     }
+
+    /**
+     * @return mixed
+     */
+    protected function validateRequest()
+    {
+        return Request::validate([
+            'inw' => 'required|regex:/\b\d{8}\b/',
+            'arrived_at' => 'required|date',
+            'detained_at' => 'required|date',
+            'released_at' => 'nullable|date',
+            'departed_at' => 'nullable|date',
+            'detained_by' => 'required|max:255',
+            'reason' => 'required:max:255',
+            'cargo' => 'required|max:255',
+            'forwarder' => 'nullable',
+            'ownership' => 'nullable',
+            'departure_station' => 'required|max:255',
+            'destination_station' => 'required|max:255',
+            'taken_measure' => 'nullable',
+            'is_empty' => 'nullable'
+        ]);
+    }
+
 }
