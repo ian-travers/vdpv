@@ -12,7 +12,7 @@
     <th>Прибыл</th>
     <th>Задержан</th>
     <th>Принятые меры</th>
-    <th width="6%" class="text-center">Действия</th>
+    <th width="7%" class="text-center">Действия</th>
   </tr>
   </thead>
   <tbody>
@@ -29,12 +29,12 @@
       <td class="text-center">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
       <td>{{ $wagon->taken_measure }}</td>
       <td class="text-center">
-        <a href="{{ route('wagons.edit', $wagon) }}" class="btn btn-sm btn-outline-primary" title="Редактировать">Р</a>
+        <a href="{{ route('wagons.edit', $wagon) }}" class="btn btn-sm btn-outline-primary" title="Редактировать">&#x1F58A;</a>
         <form action="{{ route('wagons.destroy', $wagon) }}" method="post" class="d-inline">
 
           @csrf
           @method('delete')
-          <button type="submit" onclick="return confirm('Подтверждаете удаление?')" class="btn btn-sm btn-outline-danger" title="Удалить">У</button>
+          <button type="submit" onclick="return confirm('Подтверждаете удаление?')" class="btn btn-sm btn-outline-danger" title="Удалить">&#x1F5D1;</button>
         </form>
       </td>
     </tr>
