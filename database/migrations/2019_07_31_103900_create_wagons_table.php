@@ -24,6 +24,10 @@ class CreateWagonsTable extends Migration
             $table->string('departure_station');
             $table->string('destination_station');
             $table->text('taken_measure')->nullable();
+            $table->string('operation', 10)->nullable();
+            $table->string('park', 4)->nullable();
+            $table->string('way', 4)->nullable();
+            $table->string('nplf', 6)->nullable();
             $table->timestamps();
 
             $table->index('arrived_at');
