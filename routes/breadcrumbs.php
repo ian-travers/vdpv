@@ -25,3 +25,23 @@ Breadcrumbs::for('wagons.edit', function (BreadcrumbsGenerator $trail, $wagon) {
     $trail->parent('wagons.show', $wagon);
     $trail->push('Редактирование', route('wagons.edit', $wagon));
 });
+
+Breadcrumbs::for('login', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('home');
+    $trail->push('Вход на сайт', route('login'));
+});
+
+Breadcrumbs::for('register', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('home');
+    $trail->push('Регистрация', route('register'));
+});
+
+Breadcrumbs::for('password.request', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('login');
+    $trail->push('Запрос восстановления пароля', route('login'));
+});
+
+Breadcrumbs::for('password.reset', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('login');
+    $trail->push('Восстановление пароля', route('login'));
+});
