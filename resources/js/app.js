@@ -6,6 +6,25 @@
 
 require('./bootstrap');
 
+// Datetime picker
+window.moment = require('moment');
+require('tempusdominus-bootstrap-4');
+import 'moment-timezone';
+$.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+    locale: 'ru',
+    icons: {
+        time: 'fa fa-clock',
+        date: 'fa fa-calendar',
+        up: 'fa fa-arrow-up',
+        down: 'fa fa-arrow-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-calendar-check',
+        clear: 'fa fa-delete',
+        close: 'fa fa-times'
+    },
+});
+
 window.Vue = require('vue');
 
 /**

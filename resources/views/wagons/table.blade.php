@@ -29,12 +29,12 @@
       <td class="text-center">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
       <td>{{ $wagon->taken_measure }}</td>
       <td class="text-center">
-        <a href="{{ route('wagons.edit', $wagon) }}" class="btn btn-sm btn-outline-primary" title="Редактировать">&#x1F58A;</a>
+        <a href="{{ route('wagons.edit', $wagon) }}" class="btn btn-sm btn-outline-primary fa fa-edit" title="Редактировать"></a>
         <form action="{{ route('wagons.destroy', $wagon) }}" method="post" class="d-inline">
 
           @csrf
           @method('delete')
-          <button type="submit" onclick="return confirm('Подтверждаете удаление?')" class="btn btn-sm btn-outline-danger" title="Удалить">&#x1F5D1;</button>
+          <button type="submit" onclick="return confirm('Подтверждаете удаление?')" class="btn btn-sm btn-outline-danger fa fa-trash-alt" title="Удалить"></button>
         </form>
       </td>
     </tr>

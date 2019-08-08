@@ -127,10 +127,18 @@
 
       {{-- Дата/время прибытия --}}
       <div class="form-group mr-2">
-        <label for="arrived_at">Дата/время прибытия</label>
-        <input type="datetime-local" id="arrived_at" name="arrived_at"
-               value="{{ old('arrived_at', App\Wagon::getInputDatetime($wagon->arrived_at)) }}"
-               class="form-control {{ $errors->has('arrived_at') ? 'is-invalid' : '' }}" required>
+        <label for="dtp_arrived_at">Дата/время прибытия</label>
+        <div class="input-group" id="arrived_at" data-target-input="nearest">
+          <input type="text" id="dtp_arrived_at"
+                 name="arrived_at"
+                 class="form-control datetimepicker-input {{ $errors->has('arrived_at') ? 'is-invalid' : '' }}"
+                 data-target="#arrived_at"
+                 required
+          />
+          <div class="input-group-append" data-target="#arrived_at" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
 
         @if($errors->has('arrived_at'))
           <div class="invalid-feedback">
@@ -142,10 +150,18 @@
 
       {{-- Дата/время задержания --}}
       <div class="form-group mr-2">
-        <label for="detained_at">Дата/время задержания</label>
-        <input type="datetime-local" id="detained_at" name="detained_at"
-               value="{{ old('detained_at', App\Wagon::getInputDatetime($wagon->detained_at)) }}"
-               class="form-control {{ $errors->has('detained_at') ? 'is-invalid' : '' }}" required>
+        <label for="dtp_detained_at">Дата/время задержки</label>
+        <div class="input-group" id="detained_at" data-target-input="nearest">
+          <input type="text" id="dtp_detained_at"
+                 name="detained_at"
+                 class="form-control datetimepicker-input {{ $errors->has('detained_at') ? 'is-invalid' : '' }}"
+                 data-target="#detained_at"
+                 required
+          />
+          <div class="input-group-append" data-target="#detained_at" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
 
         @if($errors->has('detained_at'))
           <div class="invalid-feedback">
@@ -154,6 +170,7 @@
 
         @endif
       </div>
+
     </div>
   </div>
 </div>
@@ -164,7 +181,6 @@
   </div>
   <div class="d-block">
     <div class="form-group m-0 p-0">
-      {{--<label for="taken_measure"></label>--}}
       <textarea id="taken_measure" name="taken_measure" rows="3"
                 class="form-control" title="">{{ old('taken_measure', $wagon->taken_measure) }}</textarea>
 
@@ -184,11 +200,19 @@
   </div>
   <div class="card-body pb-0">
     <div class="d-inline-flex align-items-end justify-content-end">
+
       <div class="form-group mr-2">
-        <label for="released_at">Дата/время выпуска</label>
-        <input type="datetime-local" id="released_at" name="released_at"
-               value="{{ old('released_at', App\Wagon::getInputDatetime($wagon->released_at)) }}"
-               class="form-control {{ $errors->has('released_at') ? 'is-invalid' : '' }}">
+        <label for="dtp_released_at">Дата/время выпуска</label>
+        <div class="input-group" id="released_at" data-target-input="nearest">
+          <input type="text" id="dtp_released_at"
+                 name="released_at"
+                 class="form-control datetimepicker-input {{ $errors->has('released_at') ? 'is-invalid' : '' }}"
+                 data-target="#released_at"
+          />
+          <div class="input-group-append" data-target="#released_at" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
 
         @if($errors->has('released_at'))
           <div class="invalid-feedback">
@@ -199,10 +223,17 @@
       </div>
 
       <div class="form-group mr-2">
-        <label for="departed_at">Дата/время отправления</label>
-        <input type="datetime-local" id="departed_at" name="departed_at"
-               value="{{ old('departed_at', App\Wagon::getInputDatetime($wagon->departed_at)) }}"
-               class="form-control {{ $errors->has('departed_at') ? 'is-invalid' : '' }}">
+        <label for="dtp_departed_at">Дата/время отправления</label>
+        <div class="input-group" id="departed_at" data-target-input="nearest">
+          <input type="text" id="dtp_departed_at"
+                 name="departed_at"
+                 class="form-control datetimepicker-input {{ $errors->has('departed_at') ? 'is-invalid' : '' }}"
+                 data-target="#departed_at"
+          />
+          <div class="input-group-append" data-target="#departed_at" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
 
         @if($errors->has('departed_at'))
           <div class="invalid-feedback">
@@ -220,4 +251,18 @@
   <button type="submit" class="btn btn-outline-primary btn-lg mr-2">Сохранить</button>
   <a href="{{route('wagons.index')}}" class="btn btn-outline-secondary btn-sm">Отменить</a>
 </div>
+
+@section('script')
+  <script type="text/javascript">
+    let arrived_at = moment("{{ old('arrived_at', $wagon->arrived_at) }}").toDate();
+    let detained_at = moment("{{ old('detained_at', $wagon->detained_at) }}").toDate();
+    let released_at = moment("{{ old('released_at', $wagon->released_at) }}").toDate();
+    let departed_at = moment("{{ old('departed_at', $wagon->departed_at) }}").toDate();
+
+    $('#arrived_at').datetimepicker({date: arrived_at});
+    $('#detained_at').datetimepicker({date: detained_at});
+    $('#released_at').datetimepicker({date: released_at});
+    $('#departed_at').datetimepicker({date: departed_at});
+  </script>
+@endsection
 

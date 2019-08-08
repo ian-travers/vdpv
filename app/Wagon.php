@@ -95,21 +95,21 @@ class Wagon extends Model
     // Mutators
     public function setArrivedAtAttribute($value)
     {
-        $this->attributes['arrived_at'] = is_string($value) ? Carbon::createFromFormat('Y-m-d\TH:i', $value) : $value;
+        $this->attributes['arrived_at'] = is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
     }
 
     public function setDetainedAtAttribute($value)
     {
-        $this->attributes['detained_at'] = is_string($value) ? Carbon::createFromFormat('Y-m-d\TH:i', $value) : $value;
+        $this->attributes['detained_at'] = is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
     }
 
     public function setReleasedAtAttribute($value)
     {
-        $this->attributes['released_at'] = is_string($value) ? Carbon::createFromFormat('Y-m-d\TH:i', $value) : $value;
+        $this->attributes['released_at'] = is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
     }
 
     public function setDepartedAtAttribute($value)
     {
-        $this->attributes['departed_at'] = is_string($value) ? Carbon::createFromFormat('Y-m-d\TH:i', $value) : $value;
+        $this->attributes['departed_at'] = is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
     }
 }

@@ -80,5 +80,6 @@
   </main>
 </div>
 <script src="{{ mix('js/app.js', 'build') }}"></script>
+@yield('script')
 </body>
 </html>
