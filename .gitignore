@@ -13,3 +13,5 @@ _ide_help*.php
 /public/build
 notes.*
 
+/reports
+

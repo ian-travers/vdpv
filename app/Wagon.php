@@ -82,11 +82,6 @@ class Wagon extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function getInputDatetime($datetime)
-    {
-        return isset($datetime) ? $datetime->format('Y-m-d\TH:i') : '';
-    }
-
     public function getDetainer()
     {
         return array_key_exists($this->detained_by, self::$detainers) ? self::$detainers[$this->detained_by] : 'Неизвестная организация';
