@@ -153,6 +153,67 @@
   </div>
 </div>
 
+<div id="local-wagon" class="card border border-primary rounded-lg mb-2">
+  <div class="card-header bg-primary text-light lead py-1">
+    Дополнительная информация по местным вагонам
+  </div>
+  <div class="card-body pb-0">
+    <div class="d-inline-flex align-items-end justify-content-end">
+
+      {{-- Грузовая операция --}}
+      <div class="form-group mr-2">
+        <label for="operation">Операция</label>
+        <select id="operation" name="operation"
+                class="form-control {{ $errors->has('operation') ? 'is-invalid' : '' }}">
+          <option
+              value="loading"
+
+              @if($wagon->operation == 'loading')
+              selected="selected"
+              @endif
+          >Погрузка
+          </option>
+          <option
+              value="unloading"
+
+              @if($wagon->operation == 'unloading')
+              selected="selected"
+              @endif
+          >Выгрузка
+          </option>
+        </select>
+      </div>
+
+      {{-- Парк --}}
+      <div class="form-group mr-2">
+        <label for="park">Парк</label>
+        <input type="text" id="park" name="park"
+               value="{{ old('park', $wagon->park) }}"
+               class="form-control {{ $errors->has('park') ? 'is-invalid' : '' }}">
+
+      </div>
+
+      {{-- Путь --}}
+      <div class="form-group mr-2">
+        <label for="way">Путь</label>
+        <input type="text" id="way" name="way"
+               value="{{ old('way', $wagon->way) }}"
+               class="form-control {{ $errors->has('way') ? 'is-invalid' : '' }}">
+
+      </div>
+
+      {{-- НПЛФ --}}
+      <div class="form-group mr-2">
+        <label for="nplf">НПЛФ</label>
+        <input type="text" id="nplf" name="nplf"
+               value="{{ old('nplf', $wagon->nplf) }}"
+               class="form-control {{ $errors->has('nplf') ? 'is-invalid' : '' }}">
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="card border border-primary rounded-lg mb-2">
   <div class="card-header bg-primary text-light lead py-1">
     Выпуск вагона
@@ -200,15 +261,31 @@
 
 @section('script')
   <script type="text/javascript">
-    let arrived_at = moment("{{ old('arrived_at', $wagon->arrived_at) }}").toDate();
-    let detained_at = moment("{{ old('detained_at', $wagon->detained_at) }}").toDate();
-    let released_at = moment("{{ old('released_at', $wagon->released_at) }}").toDate();
-    let departed_at = moment("{{ old('departed_at', $wagon->departed_at) }}").toDate();
+      let arrived_at = moment("{{ old('arrived_at', $wagon->arrived_at) }}").toDate();
+      let detained_at = moment("{{ old('detained_at', $wagon->detained_at) }}").toDate();
+      let released_at = moment("{{ old('released_at', $wagon->released_at) }}").toDate();
+      let departed_at = moment("{{ old('departed_at', $wagon->departed_at) }}").toDate();
 
-    $('#arrived_at').datetimepicker({date: arrived_at});
-    $('#detained_at').datetimepicker({date: detained_at});
-    $('#released_at').datetimepicker({date: released_at});
-    $('#departed_at').datetimepicker({date: departed_at});
+      $('#arrived_at').datetimepicker({date: arrived_at});
+      $('#detained_at').datetimepicker({date: detained_at});
+      $('#released_at').datetimepicker({date: released_at});
+      $('#departed_at').datetimepicker({date: departed_at});
+  </script>
+
+  <script>
+      if (String($('#detainer_id').val()) !== String(8)) {
+          $('#local-wagon').hide();
+      }
+
+      $(document).ready(function () {
+          $('#detainer_id').change(function () {
+              if (String(this.value) === String(8)) {
+                  $('#local-wagon').show(300);
+              } else {
+                  $('#local-wagon').hide(300);
+              }
+          });
+      });
   </script>
 @endsection
 
