@@ -2,10 +2,10 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
+use App\Detainer;
 use App\Wagon;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Faker\Generator as Faker;
 
 $factory->define(Wagon::class, function (Faker $faker) {
@@ -15,7 +15,13 @@ $factory->define(Wagon::class, function (Faker $faker) {
         'detained_at' => Carbon::parse('-1 hours'),
         'released_at' => null,
         'departed_at' => null,
-        'detained_by' => Arr::random(array_keys(Wagon::$detainers)),
+        'detainer_id' => function () {
+            if (Detainer::all()->count()) {
+                return Detainer::first()->id;
+            }
+
+            return factory(Detainer::class)->create()->id;
+        },
         'reason' => $faker->sentence(4),
         'cargo' => $faker->jobTitle,
         'forwarder' => $faker->jobTitle,

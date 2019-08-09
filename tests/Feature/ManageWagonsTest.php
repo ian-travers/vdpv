@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Detainer;
 use App\Wagon;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
@@ -38,14 +39,14 @@ class ManageWagonsTest extends TestCase
             'detained_at' => Carbon::parse('-1 hours'),
             'released_at' => null,
             'departed_at' => null,
-            'detained_by' => 'Customs',
+            'detainer_id' => factory(Detainer::class)->create()->id,
             'reason' => 'It has no main shipment',
             'cargo' => 'Gasoline',
             'forwarder' => 'BTLS',
             'ownership' => 'BCH',
             'departure_station' => 'Shkirotava',
             'destination_station' => 'Manhali',
-            'taken_measure' => 'Nothing',
+            'taken_measure' => 'Nothing to do',
         ];
 
         $response = $this->post('/wagons', $attributes);
@@ -70,7 +71,7 @@ class ManageWagonsTest extends TestCase
                 'detained_at' => Carbon::now(),
                 'released_at' => Carbon::now(),
                 'departed_at' => Carbon::now(),
-                'detained_by' => 'changed',
+                'detainer_id' => Detainer::first()->id,
                 'reason' => 'changed',
                 'cargo' => 'changed',
                 'forwarder' => 'changed',
@@ -178,12 +179,12 @@ class ManageWagonsTest extends TestCase
     }
 
     /** @test */
-    function a_wagon_requires_a_detained_by()
+    function a_wagon_requires_a_detainer()
     {
         $this->signIn();
-        $attributes = factory(Wagon::class)->raw(['detained_by' => '']);
+        $attributes = factory(Wagon::class)->raw(['detainer_id' => '']);
 
-        $this->post('/wagons', $attributes)->assertSessionHasErrors('detained_by');
+        $this->post('/wagons', $attributes)->assertSessionHasErrors('detainer_id');
     }
 
     /** @test */

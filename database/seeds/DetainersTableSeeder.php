@@ -14,11 +14,11 @@ class DetainersTableSeeder extends Seeder
                 'long_detain_event' => 'detained_at'
             ],
             [
-                'name' => 'Вагонное предприятие',
+                'name' => 'Служба вагонного хозяйства (техбрак)',
                 'long_detain_event' => 'released_at'
             ],
             [
-                'name' => 'Коммерческая неисправность',
+                'name' => 'Служба коммерческого хозяйства (комбрак)',
                 'long_detain_event' => 'detained_at'
             ],
             [

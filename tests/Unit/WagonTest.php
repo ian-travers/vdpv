@@ -2,8 +2,9 @@
 
 namespace Tests\Unit;
 
+use App\Detainer;
 use App\User;
-use App\Wagon;
+use Carbon\Carbon;
 use Tests\Setup\WagonFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -29,14 +30,27 @@ class WagonTest extends TestCase
     }
 
     /** @test */
-    function is_has_a_detainer_name()
+    function it_belongs_to_detainer()
     {
         $wagon = app(WagonFactory::class)->create();
 
-        $this->assertEquals(Wagon::$detainers[$wagon->detained_by], $wagon->getDetainer());
+        $detainer = Detainer::find($wagon->detainer_id);
 
-        $wagon->detained_by = 'fake';
+        $this->assertInstanceOf(Detainer::class, $detainer);
+    }
+    
+    /** @test */ 
+    function check_arrived_at_setter()
+    {
+        $wagon = app(WagonFactory::class)->create();
 
-        $this->assertEquals(Wagon::UNKNOWN_DETAINER, $wagon->getDetainer());
+        $d = Carbon::parse('+20 min');
+
+        $wagon->setAttribute('arrived_at', $d);
+
+        $this->assertEquals($wagon->arrived_at, $d);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $wagon->setAttribute('arrived_at', '01.01.2019 12:55:00');
     }
 }

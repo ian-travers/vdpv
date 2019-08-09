@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
+
 /**
  * App\Wagon
  *
@@ -15,18 +16,22 @@ use Carbon\Carbon;
  * @property \Illuminate\Support\Carbon|null $detained_at
  * @property \Illuminate\Support\Carbon|null $released_at
  * @property \Illuminate\Support\Carbon|null $departed_at
- * @property string $detained_by
+ * @property int $detainer_id
  * @property string $reason
  * @property string $cargo
- * @property string $forwarder
- * @property string $ownership
+ * @property string|null $forwarder
+ * @property string|null $ownership
  * @property string $departure_station
  * @property string $destination_station
- * @property string $taken_measure
- * @property bool $is_empty
+ * @property string|null $taken_measure
+ * @property string|null $operation
+ * @property string|null $park
+ * @property string|null $way
+ * @property string|null $nplf
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User $creator
+ * @property-read \App\Detainer $detainer
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon query()
@@ -38,32 +43,23 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDepartureStation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDestinationStation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDetainedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDetainedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDetainerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereForwarder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereInw($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereIsEmpty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereNplf($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereOperation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereOwnership($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon wherePark($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereReleasedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereTakenMeasure($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereWay($value)
  * @mixin \Eloquent
  */
 class Wagon extends Model
 {
-    public const UNKNOWN_DETAINER = 'Неизвестная организация';
-
-    public static $detainers = [
-        'customs' => 'Таможенная служба',
-        'technicals' => 'Служба вагонного хозяйства',
-        'commercials' => 'Служба коммерческого хозяйства',
-        'veterinaries' => 'Ветеринарный контроль',
-        'phytosanitaries' => 'Фитосанитарный контроль',
-        'expeditors' => 'Транспортно-экспедиционная организация',
-        'others' => 'Другие организации',
-    ];
-
     protected $guarded = [];
 
     protected $dates = ['arrived_at', 'detained_at', 'released_at', 'departed_at'];
@@ -82,29 +78,34 @@ class Wagon extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getDetainer()
+    public function detainer()
     {
-        return array_key_exists($this->detained_by, self::$detainers) ? self::$detainers[$this->detained_by] : 'Неизвестная организация';
+        return $this->belongsTo(Detainer::class);
     }
 
     // Mutators
     public function setArrivedAtAttribute($value)
     {
-        $this->attributes['arrived_at'] = is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
+        $this->attributes['arrived_at'] = $this->createDatetime($value);
     }
 
     public function setDetainedAtAttribute($value)
     {
-        $this->attributes['detained_at'] = is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
+        $this->attributes['detained_at'] = $this->createDatetime($value);
     }
 
     public function setReleasedAtAttribute($value)
     {
-        $this->attributes['released_at'] = is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
+        $this->attributes['released_at'] = $this->createDatetime($value);
     }
 
     public function setDepartedAtAttribute($value)
     {
-        $this->attributes['departed_at'] = is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
+        $this->attributes['departed_at'] = $this->createDatetime($value);
+    }
+
+    protected function createDatetime($value)
+    {
+        return is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
     }
 }

@@ -1,13 +1,13 @@
-@foreach($detainers as $key => $value)
+@foreach($detainers as $detainer)
 
-  <option value="{{ $key }}"
+  <option value="{{ $detainer->id }}"
           @isset($wagon->id)
-            @if ($wagon->detained_by == $key)
+            @if ($wagon->detainer_id == $detainer->id)
               selected="selected"
             @endif
           @endisset
   >
-    {{ $value }}
+    {{ $detainer->name }}
   </option>
 @endforeach
 

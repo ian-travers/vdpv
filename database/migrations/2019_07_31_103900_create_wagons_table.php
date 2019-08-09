@@ -16,7 +16,7 @@ class CreateWagonsTable extends Migration
             $table->timestamp('detained_at')->nullable();
             $table->timestamp('released_at')->nullable();
             $table->timestamp('departed_at')->nullable();
-            $table->string('detained_by');
+            $table->unsignedBigInteger('detainer_id');
             $table->string('reason');
             $table->string('cargo');
             $table->string('forwarder')->nullable();
@@ -32,6 +32,9 @@ class CreateWagonsTable extends Migration
 
             $table->index('arrived_at');
             $table->index('detained_at');
+            $table->index('released_at');
+            $table->index('departed_at');
+
         });
     }
 

@@ -11,7 +11,7 @@
       <div class="form-group mr-2">
         <label for="inw">Инвентарный номер</label>
         <input type="text" id="inw" name="inw" value="{{ old('inw', $wagon->inw) }}"
-               class="form-control {{ $errors->has('inw') ? 'is-invalid' : '' }}" autofocus>
+               class="form-control {{ $errors->has('inw') ? 'is-invalid' : '' }}" autofocus required>
 
         @if($errors->has('inw'))
           <div class="invalid-feedback">
@@ -23,15 +23,15 @@
 
       {{-- Организация задержки --}}
       <div class="form-group mr-2">
-        <label for="detained_by">Кем задержан</label>
-        <select id="detained_by" name="detained_by"
-                class="form-control {{ $errors->has('detained_by') ? 'is-invalid' : '' }}"
+        <label for="detainer_id">Кем задержан</label>
+        <select id="detainer_id" name="detainer_id"
+                class="form-control {{ $errors->has('detainer_id') ? 'is-invalid' : '' }}"
                 required
         >@include('wagons._detainers')</select>
 
-        @if($errors->has('detained_by'))
+        @if($errors->has('detainer_id'))
           <div class="invalid-feedback">
-            <strong>{{ $errors->first('detained_by') }}</strong>
+            <strong>{{ $errors->first('detainer_id') }}</strong>
           </div>
 
         @endif
@@ -41,7 +41,7 @@
       <div class="form-group mr-2">
         <label for="reason">Причина задержки</label>
         <input type="text" id="reason" name="reason" value="{{ old('reason', $wagon->reason) }}"
-               class="form-control {{ $errors->has('reason') ? 'is-invalid' : '' }}">
+               class="form-control {{ $errors->has('reason') ? 'is-invalid' : '' }}" required>
 
         @if($errors->has('reason'))
           <div class="invalid-feedback">
@@ -56,13 +56,6 @@
         <label for="cargo">Наименование груза</label>
         <input type="text" id="cargo" name="cargo" value="{{ old('cargo', $wagon->cargo) }}"
                class="form-control {{ $errors->has('cargo') ? 'is-invalid' : '' }}">
-
-        @if($errors->has('cargo'))
-          <div class="invalid-feedback">
-            <strong>{{ $errors->first('cargo') }}</strong>
-          </div>
-
-        @endif
       </div>
 
       {{-- Экспедитор --}}
@@ -70,13 +63,6 @@
         <label for="forwarder">Экспедитор по БЧ</label>
         <input type="text" id="forwarder" name="forwarder" value="{{ old('forwarder', $wagon->forwarder) }}"
                class="form-control {{ $errors->has('forwarder') ? 'is-invalid' : '' }}">
-
-        @if($errors->has('forwarder'))
-          <div class="invalid-feedback">
-            <strong>{{ $errors->first('forwarder') }}</strong>
-          </div>
-
-        @endif
       </div>
 
       {{-- Собственность вагона --}}
@@ -84,13 +70,6 @@
         <label for="ownership">Собственность</label>
         <input type="text" id="ownership" name="ownership" value="{{ old('ownership', $wagon->ownership) }}"
                class="form-control {{ $errors->has('ownership') ? 'is-invalid' : '' }}">
-
-        @if($errors->has('ownership'))
-          <div class="invalid-feedback">
-            <strong>{{ $errors->first('ownership') }}</strong>
-          </div>
-
-        @endif
       </div>
     </div>
 
@@ -139,13 +118,6 @@
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
           </div>
         </div>
-
-        @if($errors->has('arrived_at'))
-          <div class="invalid-feedback">
-            <strong>{{ $errors->first('arrived_at') }}</strong>
-          </div>
-
-        @endif
       </div>
 
       {{-- Дата/время задержания --}}
@@ -162,13 +134,6 @@
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
           </div>
         </div>
-
-        @if($errors->has('detained_at'))
-          <div class="invalid-feedback">
-            <strong>{{ $errors->first('detained_at') }}</strong>
-          </div>
-
-        @endif
       </div>
 
     </div>
@@ -180,16 +145,10 @@
     Принятые меры
   </div>
   <div class="d-block">
-    <div class="form-group m-0 p-0">
+    <div class="m-3">
+
       <textarea id="taken_measure" name="taken_measure" rows="3"
                 class="form-control" title="">{{ old('taken_measure', $wagon->taken_measure) }}</textarea>
-
-      @if($errors->has('taken_measure'))
-        <div class="invalid-feedback">
-          <strong>{{ $errors->first('taken_measure') }}</strong>
-        </div>
-
-      @endif
     </div>
   </div>
 </div>
@@ -213,13 +172,6 @@
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
           </div>
         </div>
-
-        @if($errors->has('released_at'))
-          <div class="invalid-feedback">
-            <strong>{{ $errors->first('released_at') }}</strong>
-          </div>
-
-        @endif
       </div>
 
       <div class="form-group mr-2">
@@ -234,14 +186,8 @@
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
           </div>
         </div>
-
-        @if($errors->has('departed_at'))
-          <div class="invalid-feedback">
-            <strong>{{ $errors->first('departed_at') }}</strong>
-          </div>
-
-        @endif
       </div>
+
     </div>
   </div>
 </div>

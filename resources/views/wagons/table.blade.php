@@ -5,6 +5,7 @@
   <tr>
     <th>№</th>
     <th>Номер</th>
+    <th>Кем задержан</th>
     <th>Причина</th>
     <th>Груз/Эксп./Соб.</th>
     <th>Ст. отпр.</th>
@@ -21,6 +22,7 @@
     <tr>
       <td>{{ $loop->index + 1 }}</td>
       <td><a href="{{ $wagon->path() }}">{{ $wagon->inw }}</a></td>
+      <td>{{ $wagon->detainer->name }}</td>
       <td>{{ $wagon->reason }}</td>
       <td>{{ $wagon->cargo }} / {{ $wagon->forwarder }} / {{ $wagon->ownership }}</td>
       <td>{{ $wagon->departure_station }}</td>

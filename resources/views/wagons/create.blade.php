@@ -5,7 +5,7 @@
     <h2>Добавление вагона</h2>
     <form action="{{ route('wagons.store') }}" method="post">
 
-      @include('wagons._form', [$wagon = new App\Wagon(), $detainers = \App\Wagon::$detainers])
+      @include('wagons._form', [$wagon = new App\Wagon()])
     </form>
   </div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Detainer;
 use App\Wagon;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,9 @@ class WagonsController extends Controller
 
     public function create()
     {
-        return view('wagons.create');
+        $detainers = Detainer::all();
+
+        return view('wagons.create', compact('detainers'));
     }
 
     public function store()
@@ -41,7 +44,9 @@ class WagonsController extends Controller
 
     public function edit(Wagon $wagon)
     {
-        return view('wagons.edit', compact('wagon'));
+        $detainers = Detainer::all();
+
+        return view('wagons.edit', compact('wagon', 'detainers'));
     }
 
     public function update(Wagon $wagon)
@@ -76,7 +81,7 @@ class WagonsController extends Controller
             'detained_at' => 'required|date',
             'released_at' => 'nullable|date',
             'departed_at' => 'nullable|date',
-            'detained_by' => 'required|max:255',
+            'detainer_id' => 'required',
             'reason' => 'required:max:255',
             'cargo' => 'required|max:255',
             'forwarder' => 'nullable',
