@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
@@ -83,6 +84,52 @@ class Wagon extends Model
         return $this->belongsTo(Detainer::class);
     }
 
+    public function detainedInHours()
+    {
+        return isset($this->departed_at) ? $this->departed_at->diffInHours($this->detained_at) : now()->diffInHours($this->detained_at);
+    }
+
+    public function detainedLongInHours()
+    {
+        $fn = $this->getLongDetainFieldName();
+
+        $res = isset($this->departed_at) ? $this->departed_at->diffInHours($this->$fn) : now()->diffInHours($this->$fn);
+
+        $res -= 24;
+
+        return ($res > 0) ? $res : 0;
+    }
+
+    private function getLongDetainFieldName()
+    {
+        return $this->detainer->long_detain_event;
+    }
+
+    public function isDetainedLong()
+    {
+        return $this->detainedLongInHours() >= 24;
+    }
+
+    // helper functions
+    public static function detainedAllCount()
+    {
+        return Wagon::whereNull('departed_at')->get()->count();
+    }
+
+    public static function detainedLongCount(Detainer $detainer = null)
+    {
+        $wagons = $detainer ? Wagon::whereNull('departed_at')->where('detainer_id', $detainer->id)->get() : Wagon::whereNull('departed_at')->get();
+
+        $res = 0;
+        foreach ($wagons as $wagon) {
+            if ($wagon->isDetainedLong()) {
+                $res++;
+            }
+        }
+
+        return $res;
+    }
+
     // Mutators
     public function setArrivedAtAttribute($value)
     {
@@ -108,4 +155,11 @@ class Wagon extends Model
     {
         return is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
     }
+
+    // scopes
+    public function scopeDetainedNow(Builder $query)
+    {
+        return $query->whereNotNull('departed_at');
+    }
+
 }

@@ -22,4 +22,9 @@ use Illuminate\Database\Eloquent\Model;
 class Detainer extends Model
 {
     public $timestamps = false;
+
+    public function wagons()
+    {
+        return $this->hasMany(Wagon::class);
+    }
 }

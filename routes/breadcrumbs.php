@@ -2,6 +2,10 @@
 
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
+Breadcrumbs::for('root', function (BreadcrumbsGenerator $trail) {
+    $trail->push('Главная', route('root'));
+});
+
 Breadcrumbs::for('home', function (BreadcrumbsGenerator $trail) {
     $trail->push('Главная', route('home'));
 });
