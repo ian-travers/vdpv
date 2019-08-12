@@ -105,9 +105,9 @@ class Wagon extends Model
         return $this->detainer->long_detain_event;
     }
 
-    public function isDetainedLong()
+    public function isDetainedLong(): bool
     {
-        return $this->detainedLongInHours() >= 24;
+        return ($this->detainedLongInHours() > 0);
     }
 
     // helper functions

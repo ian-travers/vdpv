@@ -158,4 +158,68 @@ class WagonTest extends TestCase
 
         $this->assertEquals(2, $wagon->fresh()->detainedLongInHours());
     }
+
+    /** @test */
+    function check_is_detained_long_time()
+    {
+        $this->artisan('db:seed --class=DetainersTableSeeder');
+
+        $wagon = app(WagonFactory::class)->create();
+
+        $this->assertFalse($wagon->isDetainedLong());
+
+        $wagon->update([
+            'detainer_id' => 1,
+            'detained_at' => Carbon::parse('-45 hours'),
+        ]);
+
+        $this->assertTrue($wagon->isDetainedLong());
+
+        $wagon->update([
+            'departed_at' => Carbon::parse('-10 hours'),
+        ]);
+
+        $this->assertTrue($wagon->isDetainedLong());
+
+        $wagon->update([
+            'departed_at' => Carbon::parse('-35 hours'),
+        ]);
+
+        $this->assertFalse($wagon->isDetainedLong());
+    }
+
+    /** @test */
+    function check_is_detained_long_time_the_local_wagons()
+    {
+        $this->artisan('db:seed --class=DetainersTableSeeder');
+
+        $wagon = app(WagonFactory::class)->create();
+
+        $this->assertFalse($wagon->isDetainedLong());
+
+        $wagon->update([
+            'detainer_id' => 8,
+            'detained_at' => Carbon::parse('-45 hours'),
+        ]);
+
+        $this->assertFalse($wagon->fresh()->isDetainedLong());
+
+        $wagon->update([
+            'released_at' => Carbon::parse('-40 hours'),
+        ]);
+
+        $this->assertTrue($wagon->fresh()->isDetainedLong());
+
+        $wagon->update([
+            'departed_at' => Carbon::parse('-16 hours'),
+        ]);
+
+        $this->assertFalse($wagon->fresh()->isDetainedLong());
+
+        $wagon->update([
+            'departed_at' => Carbon::parse('-5 hours'),
+        ]);
+
+        $this->assertTrue($wagon->fresh()->isDetainedLong());
+    }
 }
