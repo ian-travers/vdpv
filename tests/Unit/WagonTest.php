@@ -222,4 +222,12 @@ class WagonTest extends TestCase
 
         $this->assertTrue($wagon->fresh()->isDetainedLong());
     }
+
+    /** @test */
+    function it_has_a_view_path()
+    {
+        $wagon = app(WagonFactory::class)->create();
+
+        $this->assertEquals("/view/{$wagon->id}", $wagon->viewPath());
+    }
 }

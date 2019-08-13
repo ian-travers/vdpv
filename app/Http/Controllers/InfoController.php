@@ -7,13 +7,36 @@ use App\Wagon;
 
 class InfoController extends Controller
 {
-    public function overall()
+    protected $wagonsPerPage = 10;
+
+    public function index()
     {
         $detainers = Detainer::all();
 
-        $total = Wagon::detainedAllCount();
-        $totalLong = Wagon::detainedLongCount();
+        $wagons = Wagon::with('detainer')
+            ->latestFirst()
+            ->filter(request()->only(['term']))
+            ->paginate($this->wagonsPerPage);
 
-        return view('info.overall', compact('detainers', 'total', 'totalLong'));
+
+        return view('info.index', compact('detainers', 'wagons'));
+    }
+
+    public function showWagon(Wagon $wagon)
+    {
+        $detainers = Detainer::all();
+
+        return view('info.show-wagon', compact('detainers', 'wagon'));
+    }
+
+    public function detainedBy(Detainer $detainer)
+    {
+        $detainers = Detainer::all();
+
+        $wagons = $detainer->wagons()
+            ->latestFirst()
+            ->paginate($this->wagonsPerPage);
+
+        return view('info.index', compact('detainers', 'wagons'));
     }
 }

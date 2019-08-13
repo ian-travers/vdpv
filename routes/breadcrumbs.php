@@ -2,16 +2,26 @@
 
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
-Breadcrumbs::for('root', function (BreadcrumbsGenerator $trail) {
-    $trail->push('Главная', route('root'));
-});
-
 Breadcrumbs::for('home', function (BreadcrumbsGenerator $trail) {
     $trail->push('Главная', route('home'));
 });
 
+Breadcrumbs::for('root', function (BreadcrumbsGenerator $trail) {
+    $trail->push('Главная', route('root'));
+});
+
+Breadcrumbs::for('show-wagon', function (BreadcrumbsGenerator $trail, $wagon) {
+    $trail->parent('root');
+    $trail->push($wagon->inw);
+});
+
+Breadcrumbs::for('detained-by', function (BreadcrumbsGenerator $trail, $detainer) {
+    $trail->parent('root');
+    $trail->push($detainer->name);
+});
+
 Breadcrumbs::for('wagons.index', function (BreadcrumbsGenerator $trail) {
-    $trail->parent('home');
+    $trail->parent('root');
     $trail->push('Вагоны', route('wagons.index'));
 });
 
@@ -31,12 +41,12 @@ Breadcrumbs::for('wagons.edit', function (BreadcrumbsGenerator $trail, $wagon) {
 });
 
 Breadcrumbs::for('login', function (BreadcrumbsGenerator $trail) {
-    $trail->parent('home');
+    $trail->parent('root');
     $trail->push('Вход на сайт', route('login'));
 });
 
 Breadcrumbs::for('register', function (BreadcrumbsGenerator $trail) {
-    $trail->parent('home');
+    $trail->parent('root');
     $trail->push('Регистрация', route('register'));
 });
 

@@ -33,6 +33,8 @@ use Carbon\Carbon;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User $creator
  * @property-read \App\Detainer $detainer
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon detainedNow()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon latestFirst()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon query()
@@ -74,6 +76,11 @@ class Wagon extends Model
         return "/wagons/{$this->id}";
     }
 
+    public function viewPath()
+    {
+        return "/view/{$this->id}";
+    }
+
     public function creator()
     {
         return $this->belongsTo(User::class);
@@ -110,7 +117,7 @@ class Wagon extends Model
         return ($this->detainedLongInHours() > 0);
     }
 
-    // helper functions
+//     helper functions
     public static function detainedAllCount()
     {
         return Wagon::whereNull('departed_at')->get()->count();
@@ -130,7 +137,27 @@ class Wagon extends Model
         return $res;
     }
 
-    // Mutators
+//    scopes
+    public function scopeLatestFirst(Builder $query)
+    {
+        return $query
+            ->whereNull('departed_at')
+            ->orWhere('departed_at', '<', Carbon::parse('-48 hours'))
+            ->orderBy('arrived_at', 'desc');
+    }
+
+    public function scopeFilter($query, $filter)
+    {
+        if (isset($filter['term']) && $term = $filter['term']) {
+            $query->where(function ($q) use ($term) {
+                // search in the model
+                $q->orWhere('inw', 'like', "%{$term}%");
+                $q->orWhere('ownership', 'like', "%{$term}%");
+            });
+        }
+    }
+
+//     Mutators
     public function setArrivedAtAttribute($value)
     {
         $this->attributes['arrived_at'] = $this->createDatetime($value);

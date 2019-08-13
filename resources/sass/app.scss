@@ -13,3 +13,44 @@
 
 // Datetime picker
 @import '~tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4';
+
+.widget {
+  border: 1px solid #e7e7e7;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
+}
+
+.widget, .search-widget {
+  margin-bottom: 1rem;
+}
+
+.widget-heading {
+  padding: 1rem;
+  border-bottom: 1px solid #e7e7e7;
+  background: rgba(0, 0, 0, 0.02) none repeat scroll 0 0;
+}
+
+.widget-heading h4 {
+  margin: 0;
+  color: #888;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+}
+
+ul.categories {
+  list-style: none;
+  padding: 1rem 1rem 0;
+  margin-bottom: 0;
+}
+
+ul.categories li {
+  border-bottom: 1px solid #e7e7e7;
+  display: block;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+ul.categories li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
