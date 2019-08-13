@@ -90,7 +90,7 @@ class WagonTest extends TestCase
         $this->assertEquals(1, $wagon->detainedLongInHours());
 
         $wagon->update([
-            'detainer_id' => 8,
+            'detainer_id' => 7, // local wagon
         ]);
 
         $this->assertEquals(1, $wagon->detainedLongInHours());
@@ -118,7 +118,7 @@ class WagonTest extends TestCase
         $this->assertEquals(31, $wagon->detainedLongInHours());
 
         $wagon->update([
-            'detainer_id' => 8,
+            'detainer_id' => 7,
         ]);
 
         $this->assertEquals(31, $wagon->detainedLongInHours());
@@ -147,7 +147,7 @@ class WagonTest extends TestCase
         $this->assertEquals(26, $wagon->detainedLongInHours());
 
         $wagon->update([
-            'detainer_id' => 8,
+            'detainer_id' => 7,
         ]);
 
         $this->assertEquals(26, $wagon->detainedLongInHours());
@@ -198,7 +198,7 @@ class WagonTest extends TestCase
         $this->assertFalse($wagon->isDetainedLong());
 
         $wagon->update([
-            'detainer_id' => 8,
+            'detainer_id' => 7,
             'detained_at' => Carbon::parse('-45 hours'),
         ]);
 

@@ -30,10 +30,6 @@ class DetainersTableSeeder extends Seeder
                 'long_detain_event' => 'detained_at'
             ],
             [
-                'name' => 'Транспортно-экспедиционная организация',
-                'long_detain_event' => 'detained_at'
-            ],
-            [
                 'name' => 'Пункт передачи выгонов',
                 'long_detain_event' => 'detained_at'
             ],
