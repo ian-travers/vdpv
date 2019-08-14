@@ -18,6 +18,22 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('wagons.index') }}">Работа с вагонами</a>
         </li>
+        <li class="nav-item dropdown">
+          <a href="" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Отчеты по задержанным вагонам <span class="caret"></span></a>
+          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">
+              Вчерашняя смена (8:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }} &mdash; 20:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }})
+            </a>
+            <a class="dropdown-item" href="#">
+               Предыдущая смена (20:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }} &mdash; 8:00 {{ Carbon\Carbon::now()->format('d.m.Y') }})
+            </a>
+            <a class="dropdown-item" href="#">
+              Текущая смена (c 8:00 {{ Carbon\Carbon::now()->format('d.m.Y') }})
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Произвольный отчет</a>
+          </div>
+        </li>
       </ul>
 
       <!-- Right Side Of Navbar -->

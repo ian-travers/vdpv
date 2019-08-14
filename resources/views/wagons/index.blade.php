@@ -3,7 +3,7 @@
 @section('content')
   <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-start mb-3">
-      <h2 class="mb-0">Список задержанных вагонов &#x1F683;</h2>
+      <h2 class="mb-0">Список задержанных вагонов</h2>
       <a href="{{ route('wagons.create') }}" class="btn btn-outline-primary">Добавить вагон</a>
     </div>
 

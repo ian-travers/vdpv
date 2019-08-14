@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $name
+ * @property string $slug
  * @property string $long_detain_event
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Wagon[] $wagons
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Detainer newModelQuery()
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Detainer whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Detainer whereLongDetainEvent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Detainer whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Detainer whereSlug($value)
  * @mixin \Eloquent
  */
 class Detainer extends Model

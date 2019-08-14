@@ -37,6 +37,6 @@ class InfoController extends Controller
             ->latestFirst()
             ->paginate($this->wagonsPerPage);
 
-        return view('info.index', compact('detainers', 'wagons'));
+        return view('info.detained-by', compact('detainers', 'detainer', 'wagons'));
     }
 }

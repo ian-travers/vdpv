@@ -34,6 +34,7 @@ use Carbon\Carbon;
  * @property-read \App\User $creator
  * @property-read \App\Detainer $detainer
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon detainedNow()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon filter($filter)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon latestFirst()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newQuery()
