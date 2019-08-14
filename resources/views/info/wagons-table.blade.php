@@ -13,7 +13,7 @@
 
   @foreach($wagons as $wagon)
     <tr>
-      <td class="text-center">{{ (request('page')) ? request('page') * 10 + $loop->index + 1 : $loop->index + 1 }}</td>
+      <td class="text-center">{{ (request('page')) ? (request('page') - 1) * 10 + $loop->index + 1 : $loop->index + 1 }}</td>
       <td class="text-center"><a href="{{ $wagon->viewPath() }}">{{ $wagon->inw }}</a></td>
       <td class="text-right">{{ $wagon->detainedInHours() }}</td>
       <td>{{ $wagon->reason }}</td>
