@@ -3,9 +3,9 @@
 <table class="table table-bordered">
   <thead>
   <tr class="text-center text-muted">
-    <th>№</th>
-    <th>Номер</th>
-    <th>Простой, ч.</th>
+    <th width="10%">№</th>
+    <th width="15%">Номер</th>
+    <th width="15%">Простой, ч.</th>
     <th>Причина</th>
   </tr>
   </thead>
@@ -13,7 +13,7 @@
 
   @foreach($wagons as $wagon)
     <tr>
-      <td class="text-center">{{ $loop->index + 1 }}</td>
+      <td class="text-center">{{ (request('page')) ? request('page') * 10 + $loop->index + 1 : $loop->index + 1 }}</td>
       <td class="text-center"><a href="{{ $wagon->viewPath() }}">{{ $wagon->inw }}</a></td>
       <td class="text-right">{{ $wagon->detainedInHours() }}</td>
       <td>{{ $wagon->reason }}</td>

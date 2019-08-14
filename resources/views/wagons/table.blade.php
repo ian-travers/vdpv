@@ -2,7 +2,7 @@
 
 <table class="table table-striped table-bordered">
   <thead>
-  <tr>
+  <tr class="text-center">
     <th>№</th>
     <th>Номер</th>
     <th>Кем задержан</th>
@@ -10,7 +10,6 @@
     <th>Груз/Эксп./Соб.</th>
     <th>Ст. отпр.</th>
     <th>Ст. назн.</th>
-    <th>Прибыл</th>
     <th>Задержан</th>
     <th>Принятые меры</th>
     <th width="7%" class="text-center">Действия</th>
@@ -20,14 +19,13 @@
 
   @foreach($wagons as $wagon)
     <tr>
-      <td>{{ $loop->index + 1 }}</td>
+      <td class="text-center">{{ (request('page')) ? request('page') * 10 + $loop->index + 1 : $loop->index + 1 }}</td>
       <td><a href="{{ $wagon->path() }}">{{ $wagon->inw }}</a></td>
       <td>{{ $wagon->detainer->name }}</td>
       <td>{{ $wagon->reason }}</td>
       <td>{{ $wagon->cargo }} / {{ $wagon->forwarder }} / {{ $wagon->ownership }}</td>
       <td>{{ $wagon->departure_station }}</td>
       <td>{{ $wagon->destination_station }}</td>
-      <td class="text-center">{{ $wagon->arrived_at->format('d.m.Y H:i') }}</td>
       <td class="text-center">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
       <td>{{ $wagon->taken_measure }}</td>
       <td class="text-center">

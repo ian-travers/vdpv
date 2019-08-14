@@ -18,7 +18,7 @@
           <tbody>
           <tr>
             <td width="15%" class="text-right text-muted">Прибыл</td>
-            <td>{{ $wagon->arrived_at->format('d.m.Y в H:i') }}</td>
+            <td>{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y в H:i') : '' }}</td>
           </tr>
           <tr>
             <td width="15%" class="text-right text-muted">Задержан</td>
@@ -54,11 +54,11 @@
           </tr>
           <tr>
             <td width="15%" class="text-right text-muted">Выпущен</td>
-            <td>{{ $wagon->released_at }}</td>
+            <td>{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y H:i') : ''}}</td>
           </tr>
           <tr>
             <td width="15%" class="text-right text-muted">Отправлен</td>
-            <td>{{ $wagon->departed_at }}</td>
+            <td>{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>
           </tr>
           </tbody>
         </table>

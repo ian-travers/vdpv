@@ -144,7 +144,7 @@ class Wagon extends Model
         return $query
             ->whereNull('departed_at')
             ->orWhere('departed_at', '<', Carbon::parse('-48 hours'))
-            ->orderBy('arrived_at', 'desc');
+            ->orderBy('detained_at', 'desc');
     }
 
     public function scopeFilter($query, $filter)

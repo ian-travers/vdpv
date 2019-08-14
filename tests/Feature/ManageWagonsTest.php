@@ -161,15 +161,6 @@ class ManageWagonsTest extends TestCase
     }
 
     /** @test */
-    function a_wagon_requires_an_arrived_at()
-    {
-        $this->signIn();
-        $attributes = factory(Wagon::class)->raw(['arrived_at' => null]);
-
-        $this->post('/wagons', $attributes)->assertSessionHasErrors('arrived_at');
-    }
-
-    /** @test */
     function a_wagon_requires_a_detained_at()
     {
         $this->signIn();
@@ -186,23 +177,4 @@ class ManageWagonsTest extends TestCase
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('detainer_id');
     }
-
-    /** @test */
-    function a_wagon_requires_a_departure_station()
-    {
-        $this->signIn();
-        $attributes = factory(Wagon::class)->raw(['departure_station' => '']);
-
-        $this->post('/wagons', $attributes)->assertSessionHasErrors('departure_station');
-    }
-
-    /** @test */
-    function a_wagon_requires_a_destination_station()
-    {
-        $this->signIn();
-        $attributes = factory(Wagon::class)->raw(['destination_station' => '']);
-
-        $this->post('/wagons', $attributes)->assertSessionHasErrors('destination_station');
-    }
-
 }

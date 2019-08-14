@@ -41,7 +41,7 @@
       <div class="form-group mr-2">
         <label for="reason">Причина задержки</label>
         <input type="text" id="reason" name="reason" value="{{ old('reason', $wagon->reason) }}"
-               class="form-control {{ $errors->has('reason') ? 'is-invalid' : '' }}" required>
+               class="form-control {{ $errors->has('reason') ? 'is-invalid' : '' }}">
 
         @if($errors->has('reason'))
           <div class="invalid-feedback">
@@ -79,7 +79,7 @@
         <label for="departure_station">Станция отправления</label>
         <input type="text" id="departure_station" name="departure_station"
                value="{{ old('departure_station', $wagon->departure_station) }}"
-               class="form-control {{ $errors->has('departure_station') ? 'is-invalid' : '' }}" required>
+               class="form-control {{ $errors->has('departure_station') ? 'is-invalid' : '' }}">
 
         @if($errors->has('departure_station'))
           <div class="invalid-feedback">
@@ -94,7 +94,7 @@
         <label for="destination_station">Станция назначения</label>
         <input type="text" id="destination_station" name="destination_station"
                value="{{ old('destination_station', $wagon->destination_station) }}"
-               class="form-control {{ $errors->has('destination_station') ? 'is-invalid' : '' }}" required>
+               class="form-control {{ $errors->has('destination_station') ? 'is-invalid' : '' }}">
 
         @if($errors->has('destination_station'))
           <div class="invalid-feedback">
@@ -112,7 +112,6 @@
                  name="arrived_at"
                  class="form-control datetimepicker-input {{ $errors->has('arrived_at') ? 'is-invalid' : '' }}"
                  data-target="#arrived_at"
-                 required
           />
           <div class="input-group-append" data-target="#arrived_at" data-toggle="datetimepicker">
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -127,8 +126,7 @@
           <input type="text" id="dtp_detained_at"
                  name="detained_at"
                  class="form-control datetimepicker-input {{ $errors->has('detained_at') ? 'is-invalid' : '' }}"
-                 data-target="#detained_at"
-                 required
+                 data-target="#detained_at" required
           />
           <div class="input-group-append" data-target="#detained_at" data-toggle="datetimepicker">
             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -273,13 +271,13 @@
   </script>
 
   <script>
-      if (String($('#detainer_id').val()) !== String(8)) {
+      if (String($('#detainer_id').val()) !== String(7)) {
           $('#local-wagon').hide();
       }
 
       $(document).ready(function () {
           $('#detainer_id').change(function () {
-              if (String(this.value) === String(8)) {
+              if (String(this.value) === String(7)) {
                   $('#local-wagon').show(300);
               } else {
                   $('#local-wagon').hide(300);

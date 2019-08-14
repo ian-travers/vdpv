@@ -77,21 +77,21 @@ class WagonsController extends Controller
     {
         return Request::validate([
             'inw' => 'required|regex:/^\d{8}$/',
-            'arrived_at' => 'required|date',
+            'arrived_at' => 'nullable|date',
             'detained_at' => 'required|date',
             'released_at' => 'nullable|date',
             'departed_at' => 'nullable|date',
             'detainer_id' => 'required',
-            'reason' => 'required:max:255',
-            'cargo' => 'required|max:255',
+            'reason' => 'nullable:max:255',
+            'cargo' => 'nullable|max:255',
             'forwarder' => 'nullable',
             'ownership' => 'nullable',
             'operation' => 'nullable',
             'park' => 'nullable',
             'way' => 'nullable',
             'nplf' => 'nullable',
-            'departure_station' => 'required|max:255',
-            'destination_station' => 'required|max:255',
+            'departure_station' => 'nullable|max:255',
+            'destination_station' => 'nullable|max:255',
             'taken_measure' => 'nullable',
         ]);
     }

@@ -83,7 +83,7 @@ class WagonTest extends TestCase
         $wagon = app(WagonFactory::class)->create();
 
         $wagon->update([
-            'detainer_id' => 1,
+            'detainer_id' => 2,
             'detained_at' => Carbon::parse('-25 hours')
         ]);
 
@@ -111,7 +111,7 @@ class WagonTest extends TestCase
         $wagon = app(WagonFactory::class)->create();
 
         $wagon->update([
-            'detainer_id' => 1,
+            'detainer_id' => 2,
             'detained_at' => Carbon::parse('-55 hours')
         ]);
 
@@ -139,7 +139,7 @@ class WagonTest extends TestCase
         $wagon = app(WagonFactory::class)->create();
 
         $wagon->update([
-            'detainer_id' => 1,
+            'detainer_id' => 2,
             'detained_at' => Carbon::parse('-55 hours'),
             'departed_at' => Carbon::parse('-5 hours')
         ]);
@@ -169,23 +169,23 @@ class WagonTest extends TestCase
         $this->assertFalse($wagon->isDetainedLong());
 
         $wagon->update([
-            'detainer_id' => 1,
+            'detainer_id' => 2,
             'detained_at' => Carbon::parse('-45 hours'),
         ]);
 
-        $this->assertTrue($wagon->isDetainedLong());
+        $this->assertTrue($wagon->fresh()->isDetainedLong());
 
         $wagon->update([
             'departed_at' => Carbon::parse('-10 hours'),
         ]);
 
-        $this->assertTrue($wagon->isDetainedLong());
+        $this->assertTrue($wagon->fresh()->isDetainedLong());
 
         $wagon->update([
             'departed_at' => Carbon::parse('-35 hours'),
         ]);
 
-        $this->assertFalse($wagon->isDetainedLong());
+        $this->assertFalse($wagon->fresh()->isDetainedLong());
     }
 
     /** @test */

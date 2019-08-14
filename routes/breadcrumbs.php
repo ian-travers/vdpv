@@ -15,10 +15,10 @@ Breadcrumbs::for('show-wagon', function (BreadcrumbsGenerator $trail, $wagon) {
     $trail->push($wagon->inw);
 });
 
-Breadcrumbs::for('detained-by', function (BreadcrumbsGenerator $trail, $name) {
+Breadcrumbs::for('detained-by', function (BreadcrumbsGenerator $trail, $detainer) {
     $trail->parent('root');
     $trail->push('Задержаны');
-    $trail->push($name);
+    $trail->push($detainer->name);
 });
 
 Breadcrumbs::for('wagons.index', function (BreadcrumbsGenerator $trail) {

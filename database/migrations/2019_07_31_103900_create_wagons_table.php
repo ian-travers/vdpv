@@ -17,12 +17,12 @@ class CreateWagonsTable extends Migration
             $table->timestamp('released_at')->nullable();
             $table->timestamp('departed_at')->nullable();
             $table->unsignedBigInteger('detainer_id');
-            $table->string('reason');
-            $table->string('cargo');
+            $table->string('reason')->nullable();
+            $table->string('cargo')->nullable();
             $table->string('forwarder')->nullable();
             $table->string('ownership')->nullable();
-            $table->string('departure_station');
-            $table->string('destination_station');
+            $table->string('departure_station')->nullable();
+            $table->string('destination_station')->nullable();
             $table->text('taken_measure')->nullable();
             $table->string('operation', 10)->nullable();
             $table->string('park', 4)->nullable();

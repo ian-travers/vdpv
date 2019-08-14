@@ -31,7 +31,7 @@
         @foreach($detainers as $detainer)
           <li>
             <div>
-              <a href="{{ route('detained-by', $detainer->name) }}">{{ $detainer->name }}</a>
+              <a href="{{ route('detained-by', $detainer) }}">{{ $detainer->name }}</a>
               <span class="badge badge-warning float-right">{{ App\Wagon::detainedLongCount($detainer) }}</span>
               <span class="badge badge-secondary float-right mr-1">{{ $detainer->wagons->count() }}</span>
             </div>

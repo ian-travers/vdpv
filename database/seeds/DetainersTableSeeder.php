@@ -10,15 +10,15 @@ class DetainersTableSeeder extends Seeder
 
         DB::table('detainers')->insert([
             [
-                'name' => 'Таможенная служба',
-                'long_detain_event' => 'detained_at'
-            ],
-            [
                 'name' => 'Служба вагонного хозяйства',
                 'long_detain_event' => 'released_at'
             ],
             [
                 'name' => 'Служба коммерческого хозяйства',
+                'long_detain_event' => 'detained_at'
+            ],
+            [
+                'name' => 'Таможенная служба',
                 'long_detain_event' => 'detained_at'
             ],
             [
