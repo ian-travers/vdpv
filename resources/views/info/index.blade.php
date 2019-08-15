@@ -4,6 +4,7 @@
 
 @section('content')
   <div class="container-fluid">
+    <h3 class="mt-3">Задержано: полный перечень вагонов</h3>
     <div class="row mt-3">
       <div class="col-9">
 

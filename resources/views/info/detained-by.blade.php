@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('breadcrumbs', '')
+
 @section('content')
   <div class="container-fluid">
-    <h3>{{ $detainer->name }}</h3>
+    <h3 class="mt-3">Задержано: {{ $detainer->name }}</h3>
     <div class="row mt-3">
 
       <div class="col-9">

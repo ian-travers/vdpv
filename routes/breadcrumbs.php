@@ -26,6 +26,12 @@ Breadcrumbs::for('long-only', function (BreadcrumbsGenerator $trail) {
     $trail->push('Длительно стоящие вагоны');
 });
 
+Breadcrumbs::for('recent', function (BreadcrumbsGenerator $trail, $day, $type) {
+    $trail->parent('root');
+    $trail->push(ucfirst($day));
+    $trail->push(ucfirst($type));
+});
+
 Breadcrumbs::for('wagons.index', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
     $trail->push('Вагоны', route('wagons.index'));

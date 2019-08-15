@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Detainer;
 use App\Wagon;
+use Carbon\Carbon;
 
 class InfoController extends Controller
 {
@@ -40,5 +41,26 @@ class InfoController extends Controller
             ->paginate($this->wagonsPerPage);
 
         return view('info.long-only', compact('wagons'));
+    }
+
+    public function recent($day, $type)
+    {
+        $wagons = $day == 'today'
+            ? Wagon::where($type . '_at', '>', Carbon::today())->paginate($this->wagonsPerPage)
+            : Wagon::whereBetween($type . '_at', [Carbon::yesterday(), Carbon::today()])->paginate($this->wagonsPerPage);
+
+//        dd($wagons->items());
+
+        $day = $day == 'today' ? 'Сегодня' : 'Вчера';
+
+        if ($type == 'detained') {
+            $type = 'задержано';
+        } elseif ($type == 'released') {
+            $type = 'выпущен';
+        } elseif ($type == 'departed') {
+            $type = 'отправлено';
+        }
+
+        return view('info.recent', compact('day', 'type', 'wagons'));
     }
 }
