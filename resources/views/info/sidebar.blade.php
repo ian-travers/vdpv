@@ -22,10 +22,10 @@
       <h4>
         Задержано вагонов
         <a href="{{ route('long-only') }}">
-          <span class="badge badge-warning float-right">{{ App\Wagon::detainedLongCount() }}</span>
+          <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongCount() }}</span>
         </a>
         <a href="{{ route('root') }}">
-          <span class="badge badge-secondary float-right mr-1">{{ App\Wagon::detainedCount() }}</span>
+          <span class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedCount() }}</span>
         </a>
       </h4>
     </div>
@@ -37,8 +37,8 @@
             <li>
               <div>
                 <a href="{{ route('detained-by', $detainer) }}">{{ $detainer->name }}</a>
-                <span class="badge badge-warning float-right">{{ App\Wagon::detainedLongCount($detainer) }}</span>
-                <span class="badge badge-secondary float-right mr-1">{{ App\Wagon::detainedCount($detainer) }}</span>
+                <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongCount($detainer) }}</span>
+                <span class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedCount($detainer) }}</span>
               </div>
             </li>
 
@@ -60,10 +60,10 @@
         <div>
           @if($curDayDetainedCount)
             <a href="{{ route('recent', ['today', 'detained']) }}">
-              <span class="badge badge-secondary">{{ $curDayDetainedCount }}</span>
+              <span class="badge badge-primary">{{ $curDayDetainedCount }}</span>
             </a>
           @else
-            <span class="badge badge-secondary">{{ $curDayDetainedCount }}</span>
+            <span class="badge badge-primary">{{ $curDayDetainedCount }}</span>
           @endif
         </div>
       </div>
@@ -72,10 +72,10 @@
         <div>
           @if($curDayReleasedCount)
             <a href="{{ route('recent', ['today', 'released']) }}">
-              <span class="badge badge-primary">{{ $curDayReleasedCount }}</span>
+              <span class="badge badge-secondary">{{ $curDayReleasedCount }}</span>
             </a>
           @else
-            <span class="badge badge-primary">{{ $curDayReleasedCount }}</span>
+            <span class="badge badge-secondary">{{ $curDayReleasedCount }}</span>
           @endif
         </div>
       </div>
@@ -100,10 +100,10 @@
       <div>
         @if($prevDayDetainedCount)
           <a href="{{ route('recent', ['yesterday', 'detained']) }}">
-            <span class="badge badge-secondary">{{ $prevDayDetainedCount }}</span>
+            <span class="badge badge-primary">{{ $prevDayDetainedCount }}</span>
           </a>
         @else
-          <span class="badge badge-secondary">{{ $prevDayDetainedCount }}</span>
+          <span class="badge badge-primary">{{ $prevDayDetainedCount }}</span>
         @endif
       </div>
     </div>
@@ -112,10 +112,10 @@
       <div>
         @if($prevDayReleasedCount)
           <a href="{{ route('recent', ['yesterday', 'released']) }}">
-            <span class="badge badge-primary">{{ $prevDayReleasedCount }}</span>
+            <span class="badge badge-secondary">{{ $prevDayReleasedCount }}</span>
           </a>
         @else
-          <span class="badge badge-primary">{{ $prevDayReleasedCount }}</span>
+          <span class="badge badge-secondary">{{ $prevDayReleasedCount }}</span>
         @endif
       </div>
     </div>

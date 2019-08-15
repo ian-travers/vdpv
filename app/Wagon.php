@@ -92,14 +92,27 @@ class Wagon extends Model
         return $this->belongsTo(Detainer::class);
     }
 
-    public function isReadyToDepart()
+    public function isReadyToDepart(): bool
     {
-        return $this->released_at > Carbon::now();
+        return isset($this->released_at) ? $this->released_at < Carbon::now() : false;
+    }
+
+    public function isDeparted(): bool
+    {
+        return isset($this->departed_at) ? $this->departed_at < Carbon::now() : false;
     }
 
     public function isDetainedLong(): bool
     {
         return ($this->detainedLongInHours() > 0);
+    }
+
+    public function linkCssClass()
+    {
+        if ($this->isDeparted()) return 'text-success';
+        if ($this->isDetainedLong()) return 'text-danger';
+        if ($this->isReadyToDepart()) return 'text-secondary';
+        return null;
     }
 
     public function detainedInHours()
