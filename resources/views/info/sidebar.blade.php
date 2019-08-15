@@ -21,7 +21,9 @@
     <div class="widget-heading">
       <h4>
         Задержано вагонов
-        <span class="badge badge-warning float-right">{{ App\Wagon::detainedLongCount() }}</span>
+        <a href="{{ route('long-only') }}">
+          <span class="badge badge-warning float-right">{{ App\Wagon::detainedLongCount() }}</span>
+        </a>
         <span class="badge badge-secondary float-right mr-1">{{ App\Wagon::detainedCount() }}</span>
       </h4>
     </div>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', 'InfoController@index')->name('root');
 Route::get('/view/{wagon}', 'InfoController@showWagon')->name('show-wagon');
 Route::get('/detained-by/{detainer}', 'InfoController@detainedBy')->name('detained-by');
+Route::get('/long-only', 'InfoController@longOnly')->name('long-only');
 
 Auth::routes();
 

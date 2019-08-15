@@ -35,7 +35,7 @@ class InfoController extends Controller
         $detainers = $this->detainers;
 
         $wagons = Wagon::with('detainer')
-            ->latestFirst()
+            ->longDetainedFirst()
             ->filter(request()->only(['term']))
             ->paginate($this->wagonsPerPage);
 
@@ -74,7 +74,7 @@ class InfoController extends Controller
         $detainers = Detainer::all();
 
         $wagons = $detainer->wagons()
-            ->latestFirst()
+            ->longDetainedFirst()
             ->paginate($this->wagonsPerPage);
 
         $curDayDetainedCount = $this->curDayDetainedCount;
@@ -88,5 +88,26 @@ class InfoController extends Controller
             'curDayDetainedCount', 'curDayReleasedCount', 'curDayDepartedCount',
             'prevDayDetainedCount', 'prevDayReleasedCount', 'prevDayDepartedCount'
             ));
+    }
+
+    public function longOnly()
+    {
+        $detainers = $this->detainers;
+
+        $wagons = Wagon::with('detainer')
+            ->longDetainedOnly()
+            ->paginate($this->wagonsPerPage);
+
+        $curDayDetainedCount = $this->curDayDetainedCount;
+        $curDayReleasedCount = $this->curDayReleasedCount;
+        $curDayDepartedCount = $this->curDayDepartedCount;
+        $prevDayDetainedCount = $this->prevDayDetainedCount;
+        $prevDayReleasedCount = $this->prevDayReleasedCount;
+        $prevDayDepartedCount = $this->prevDayDepartedCount;
+
+        return view('info.long-only', compact('detainers', 'wagons',
+            'curDayDetainedCount', 'curDayReleasedCount', 'curDayDepartedCount',
+            'prevDayDetainedCount', 'prevDayReleasedCount', 'prevDayDepartedCount'
+        ));
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <h3>{{ $detainer->name }}</h3>
+    <h3>Список длительно стоящих вагонов на станции</h3>
     <div class="row mt-3">
 
       <div class="col-9">

@@ -92,6 +92,16 @@ class Wagon extends Model
         return $this->belongsTo(Detainer::class);
     }
 
+    public function isReadyToDepart()
+    {
+        return $this->released_at > Carbon::now();
+    }
+
+    public function isDetainedLong(): bool
+    {
+        return ($this->detainedLongInHours() > 0);
+    }
+
     public function detainedInHours()
     {
         return isset($this->departed_at) ? $this->departed_at->diffInHours($this->detained_at) : now()->diffInHours($this->detained_at);
@@ -111,11 +121,6 @@ class Wagon extends Model
     private function getLongDetainFieldName()
     {
         return $this->detainer->long_detain_event;
-    }
-
-    public function isDetainedLong(): bool
-    {
-        return ($this->detainedLongInHours() > 0);
     }
 
 //     helper functions
@@ -147,7 +152,31 @@ class Wagon extends Model
             ->orderBy('detained_at', 'desc');
     }
 
-    public function scopeFilter($query, $filter)
+    public function scopeLongDetainedFirst(Builder $query)
+    {
+        return $query
+            ->whereNull('departed_at')
+            ->orWhere('departed_at', '<', Carbon::parse('-48 hours'))
+            ->orderBy('detained_at');
+    }
+
+    public function scopeLongDetainedOnly(Builder $query)
+    {
+        $wagons = Wagon::whereNull('departed_at')->get();
+
+        $ids = [];
+
+        foreach ($wagons as $wagon) {
+            if ($wagon->isDetainedLong()) {
+                $ids[] = $wagon->id;
+            }
+        }
+        return $query
+            ->whereIn('id',$ids)
+            ->orderBy('detained_at');
+    }
+
+    public function scopeFilter(Builder $query, $filter)
     {
         if (isset($filter['term']) && $term = $filter['term']) {
             $query->where(function ($q) use ($term) {
@@ -183,11 +212,4 @@ class Wagon extends Model
     {
         return is_string($value) ? Carbon::createFromFormat('d.m.Y H:i', $value) : $value;
     }
-
-    // scopes
-    public function scopeDetainedNow(Builder $query)
-    {
-        return $query->whereNotNull('departed_at');
-    }
-
 }

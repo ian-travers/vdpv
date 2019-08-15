@@ -21,6 +21,11 @@ Breadcrumbs::for('detained-by', function (BreadcrumbsGenerator $trail, $detainer
     $trail->push($detainer->name);
 });
 
+Breadcrumbs::for('long-only', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('root');
+    $trail->push('Длительно стоящие вагоны');
+});
+
 Breadcrumbs::for('wagons.index', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
     $trail->push('Вагоны', route('wagons.index'));
