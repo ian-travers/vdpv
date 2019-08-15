@@ -51,6 +51,16 @@
                 <td>{{ $wagon->taken_measure }}</td>
               </tr>
               <tr>
+                <td width="15%" class="text-right text-muted">Грузовая операция</td>
+                <td>{{ $wagon->operation }}</td>
+              </tr>
+              <tr>
+                <td width="15%" class="text-right text-muted">Парк/Путь &rarr; НПЛФ</td>
+                <td>
+                  {{ $wagon->park ? $wagon->park . "/" . $wagon->way : '' }}
+                  {{ $wagon->nplf ? '- ' . $wagon->nplf : '' }}</td>
+              </tr>
+              <tr>
                 <td width="15%" class="text-right text-muted">Выпущен</td>
                 <td>{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y в H:i') : '' }}</td>
               </tr>

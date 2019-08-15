@@ -57,6 +57,14 @@
             <td>{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y H:i') : ''}}</td>
           </tr>
           <tr>
+            <td width="15%" class="text-right text-muted">Грузовая операция</td>
+            <td>{{ $wagon->operation }}</td>
+          </tr>
+          <tr>
+            <td width="15%" class="text-right text-muted">Парк/Путь &mdash; НПЛФ</td>
+            <td>{{ $wagon->park }}/{{ $wagon->way }} &mdash; {{ $wagon->nplf }}</td>
+          </tr>
+          <tr>
             <td width="15%" class="text-right text-muted">Отправлен</td>
             <td>{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>
           </tr>
