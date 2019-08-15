@@ -4,7 +4,21 @@
   <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-start mb-3">
       <h2 class="mb-0">Список задержанных вагонов</h2>
-      <a href="{{ route('wagons.create') }}" class="btn btn-outline-primary">Добавить вагон</a>
+      <div class="d-flex">
+        <form action="{{ route('wagons.index') }}" class="mr-3">
+          <div class="input-group">
+            <input type="text" class="form-control" value="{{ request('term') }}" name="term"
+                   placeholder="Поиск вагона...">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div><!-- /input-group -->
+        </form>
+        <a href="{{ route('wagons.create') }}" class="btn btn-outline-primary">Добавить вагон</a>
+      </div>
+
     </div>
 
     @if(count($wagons))

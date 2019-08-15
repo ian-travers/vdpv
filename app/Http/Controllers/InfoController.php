@@ -11,6 +11,7 @@ class InfoController extends Controller
     private $detainers;
 
     protected $wagonsPerPage = 10;
+
     private $curDayDetainedCount;
     private $curDayReleasedCount;
     private $curDayDepartedCount;

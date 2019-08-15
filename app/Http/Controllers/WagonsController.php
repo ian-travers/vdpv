@@ -9,9 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class WagonsController extends Controller
 {
+    protected $wagonsPerPage = 10;
+
     public function index()
     {
-        $wagons = Auth::user()->wagons()->paginate(10);
+        $wagons = Auth::user()
+            ->wagons()
+            ->latestFirst()
+            ->filter(request()->only(['term']))
+            ->paginate($this->wagonsPerPage);
 
         return view('wagons.index', compact('wagons'));
     }

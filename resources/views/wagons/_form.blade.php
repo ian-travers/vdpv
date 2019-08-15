@@ -163,6 +163,7 @@
         <label for="operation">Операция</label>
         <select id="operation" name="operation"
                 class="form-control {{ $errors->has('operation') ? 'is-invalid' : '' }}">
+          <option value=""></option>
           <option
               value="loading"
 
