@@ -22,7 +22,7 @@
       <h4>
         Задержано вагонов
         <span class="badge badge-warning float-right">{{ App\Wagon::detainedLongCount() }}</span>
-        <span class="badge badge-secondary float-right mr-1">{{ App\Wagon::detainedAllCount() }}</span>
+        <span class="badge badge-secondary float-right mr-1">{{ App\Wagon::detainedCount() }}</span>
       </h4>
     </div>
     <div class="widget-body">
@@ -34,7 +34,7 @@
               <div>
                 <a href="{{ route('detained-by', $detainer) }}">{{ $detainer->name }}</a>
                 <span class="badge badge-warning float-right">{{ App\Wagon::detainedLongCount($detainer) }}</span>
-                <span class="badge badge-secondary float-right mr-1">{{ $detainer->wagons->count() }}</span>
+                <span class="badge badge-secondary float-right mr-1">{{ App\Wagon::detainedCount($detainer) }}</span>
               </div>
             </li>
 

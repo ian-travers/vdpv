@@ -119,9 +119,9 @@ class Wagon extends Model
     }
 
 //     helper functions
-    public static function detainedAllCount()
+    public static function detainedCount(Detainer $detainer = null)
     {
-        return Wagon::whereNull('departed_at')->get()->count();
+        return $detainer ? $detainer->wagons()->whereNull('departed_at')->count() : Wagon::whereNull('departed_at')->get()->count();
     }
 
     public static function detainedLongCount(Detainer $detainer = null)
