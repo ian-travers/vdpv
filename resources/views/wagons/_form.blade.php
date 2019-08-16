@@ -260,10 +260,10 @@
 
 @section('script')
   <script type="text/javascript">
-      let arrived_at = moment("{{ old('arrived_at', $wagon->arrived_at) }}").toDate();
-      let detained_at = moment("{{ old('detained_at', $wagon->detained_at) }}").toDate();
-      let released_at = moment("{{ old('released_at', $wagon->released_at) }}").toDate();
-      let departed_at = moment("{{ old('departed_at', $wagon->departed_at) }}").toDate();
+      let arrived_at = moment("{{ $wagon->arrived_at }}").toDate();
+      let detained_at = moment("{{ $wagon->detained_at }}").toDate();
+      let released_at = moment("{{ $wagon->released_at }}").toDate();
+      let departed_at = moment("{{ $wagon->departed_at }}").toDate();
 
       $('#arrived_at').datetimepicker({date: arrived_at});
       $('#detained_at').datetimepicker({date: detained_at});
