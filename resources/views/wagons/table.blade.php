@@ -5,12 +5,12 @@
   <tr class="text-center">
     <th>№</th>
     <th>Номер</th>
-    <th>Кем задержан</th>
+    <th width="15%" class="text-center">Кем задержан</th>
     <th>Причина</th>
     <th>Груз/Эксп./Соб.</th>
-    <th>Задержан</th>
-    <th>Выпущен</th>
-    <th>Отправлен</th>
+    <th width="10%" class="text-center">Задержан</th>
+    <th width="10%" class="text-center">Выпущен</th>
+    <th width="10%" class="text-center">Отправлен</th>
     <th width="7%" class="text-center">Действия</th>
   </tr>
   </thead>
