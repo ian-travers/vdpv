@@ -173,9 +173,11 @@ class Wagon extends Model
             ->orderBy('detained_at');
     }
 
-    public function scopeLongDetainedOnly(Builder $query)
+    public function scopeLongDetainedOnly(Builder $query, Detainer $detainer = null)
     {
-        $wagons = Wagon::whereNull('departed_at')->get();
+        $wagons = $detainer
+            ? Wagon::whereNull('departed_at')->where('detainer_id', $detainer->id)->get()
+            : Wagon::whereNull('departed_at')->get();
 
         $ids = [];
 

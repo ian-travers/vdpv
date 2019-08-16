@@ -34,6 +34,15 @@ class InfoController extends Controller
         return view('info.detained-by', compact('detainer', 'wagons'));
     }
 
+    public function detainedByLong(Detainer $detainer)
+    {
+        $wagons = $detainer->wagons()
+            ->longDetainedOnly($detainer)
+            ->paginate($this->wagonsPerPage);
+
+        return view('info.detained-by-long', compact('detainer', 'wagons'));
+    }
+
     public function longOnly()
     {
         $wagons = Wagon::with('detainer')

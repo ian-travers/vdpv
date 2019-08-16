@@ -36,9 +36,17 @@
           @if($detainer->wagons->count())
             <li>
               <div>
-                <a href="{{ route('detained-by', $detainer) }}">{{ $detainer->name }}</a>
-                <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongCount($detainer) }}</span>
-                <span class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedCount($detainer) }}</span>
+                <a href="{{ route('detained-by', $detainer) }}">
+                  {{ $detainer->name }}
+                </a>
+
+                <a href="{{ route('detained-by-long', $detainer) }}">
+                  <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongCount($detainer) }}</span>
+                </a>
+
+                <a href="{{ route('detained-by', $detainer) }}">
+                  <span class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedCount($detainer) }}</span>
+                </a>
               </div>
             </li>
 
@@ -49,6 +57,7 @@
     </div>
   </div>
 
+  {{--Последние изменения--}}
   <div class="widget">
     <div class="widget-heading">
       <h4>Последние изменения</h4>

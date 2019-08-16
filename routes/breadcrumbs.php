@@ -21,10 +21,18 @@ Breadcrumbs::for('detained-by', function (BreadcrumbsGenerator $trail, $detainer
     $trail->push($detainer->name);
 });
 
+Breadcrumbs::for('detained-by-long', function (BreadcrumbsGenerator $trail, $detainer) {
+    $trail->parent('root');
+    $trail->push('Длительно простаивающие');
+    $trail->push($detainer->name);
+});
+
+
 Breadcrumbs::for('long-only', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
     $trail->push('Длительно стоящие вагоны');
 });
+
 
 Breadcrumbs::for('recent', function (BreadcrumbsGenerator $trail, $day, $type) {
     $trail->parent('root');

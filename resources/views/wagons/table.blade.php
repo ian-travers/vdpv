@@ -19,7 +19,7 @@
 
   @foreach($wagons as $wagon)
     <tr>
-      <td class="text-center">{{ (request('page')) ? (request('page') - 1) * 10 + $loop->index + 1 : $loop->index + 1 }}</td>
+      <td class="text-center">{{ (request('page')) ? (request('page') - 1) * $wagons->perPage() + $loop->index + 1 : $loop->index + 1 }}</td>
       <td><a href="{{ $wagon->path() }}">{{ $wagon->inw }}</a></td>
       <td>{{ $wagon->detainer->name }}</td>
       <td>{{ $wagon->reason }}</td>
