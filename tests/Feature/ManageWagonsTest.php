@@ -67,7 +67,7 @@ class ManageWagonsTest extends TestCase
         $this->actingAs($wagon->creator)
             ->patch($wagon->path(), $attributes = [
                 'inw' => '12345678',
-                'arrived_at' => Carbon::now(),
+                'arrived_at' => Carbon::parse('-1 min'),
                 'detained_at' => Carbon::now(),
                 'released_at' => Carbon::now(),
                 'departed_at' => Carbon::now(),
