@@ -16,8 +16,8 @@
     <tr>
       <td class="text-center">{{ (request('page')) ? (request('page') - 1) * $wagons->perPage() + $loop->index + 1 : $loop->index + 1 }}</td>
       <td class="text-center"><a href="{{ $wagon->viewPath() }}" class="{{ $wagon->linkCssClass() }}">{{ $wagon->inw }}</a></td>
-      <td class="text-right">{{ $wagon->detained_at->diffInDays() }}</td>
-      <td class="text-right">{{ $wagon->detainedInHours() }}</td>
+      <td class="text-center">{{ $wagon->detained_at->diffInDays() }}</td>
+      <td class="text-center">{{ $wagon->detainedInHours() }}</td>
       <td>{{ $wagon->reason }}</td>
     </tr>
 

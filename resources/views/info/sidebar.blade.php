@@ -33,7 +33,7 @@
       <ul class="categories">
 
         @foreach($detainers as $detainer)
-          @if($detainer->wagons->count())
+          @if(App\Wagon::detainedCount($detainer))
             <li>
               <div>
                 <a href="{{ route('detained-by', $detainer) }}">
