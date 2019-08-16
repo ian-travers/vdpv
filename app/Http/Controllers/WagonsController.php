@@ -45,7 +45,10 @@ class WagonsController extends Controller
     {
         Auth::user()->wagons()->create($request->all());
 
-        return redirect('/wagons');
+        return redirect('/wagons')->with([
+            'message' => 'Информация по вагону сохранена',
+            'type' => 'success'
+        ]);
     }
 
     public function edit(Wagon $wagon)
@@ -59,7 +62,10 @@ class WagonsController extends Controller
     {
         $wagon->update($request->all());
 
-        return redirect(route('wagons.index'));
+        return redirect(route('wagons.index'))->with([
+            'message' => 'Информация по вагону изменена',
+            'type' => 'success',
+        ]);
     }
 
     /**
@@ -73,6 +79,9 @@ class WagonsController extends Controller
 
         $wagon->delete();
 
-        return redirect(route('wagons.index'));
+        return redirect(route('wagons.index'))->with([
+            'message' => 'Информация по вагону удалена',
+            'type' => 'success',
+        ]);
     }
 }

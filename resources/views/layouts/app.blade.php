@@ -29,5 +29,6 @@
 </div>
 <script src="{{ mix('js/app.js', 'build') }}"></script>
 @yield('script')
+@include('partials.alerts')
 </body>
 </html>
