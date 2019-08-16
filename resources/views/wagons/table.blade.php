@@ -8,10 +8,9 @@
     <th>Кем задержан</th>
     <th>Причина</th>
     <th>Груз/Эксп./Соб.</th>
-    <th>Ст. отпр.</th>
-    <th>Ст. назн.</th>
     <th>Задержан</th>
-    <th>Принятые меры</th>
+    <th>Выпущен</th>
+    <th>Отправлен</th>
     <th width="7%" class="text-center">Действия</th>
   </tr>
   </thead>
@@ -24,10 +23,9 @@
       <td>{{ $wagon->detainer->name }}</td>
       <td>{{ $wagon->reason }}</td>
       <td>{{ $wagon->cargo }} / {{ $wagon->forwarder }} / {{ $wagon->ownership }}</td>
-      <td>{{ $wagon->departure_station }}</td>
-      <td>{{ $wagon->destination_station }}</td>
       <td class="text-center">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
-      <td>{{ $wagon->taken_measure }}</td>
+      <td class="text-center">{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y H:i') : '' }}</td>
+      <td class="text-center">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : '' }}</td>
       <td class="text-center">
         <a href="{{ route('wagons.edit', $wagon) }}" class="btn btn-sm btn-outline-primary fa fa-edit" title="Редактировать"></a>
         <form action="{{ route('wagons.destroy', $wagon) }}" method="post" class="d-inline">
