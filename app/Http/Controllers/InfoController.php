@@ -12,10 +12,13 @@ class InfoController extends Controller
 
     public function index()
     {
-        $wagons = Wagon::with('detainer')
-            ->longDetainedFirst()
-            ->filter(request()->only(['term']))
-            ->paginate($this->wagonsPerPage);
+        $wagons = request('term')
+            ? Wagon::with('detainer')
+                ->filter(request()->only(['term']))
+                ->paginate($this->wagonsPerPage)
+            : Wagon::with('detainer')
+                ->longDetainedFirst()
+                ->paginate($this->wagonsPerPage);;
 
         return view('info.index', compact('wagons'));
     }
@@ -63,7 +66,7 @@ class InfoController extends Controller
         if ($type == 'detained') {
             $type = 'задержано';
         } elseif ($type == 'released') {
-            $type = 'выпущен';
+            $type = 'выпущено';
         } elseif ($type == 'departed') {
             $type = 'отправлено';
         }
