@@ -1,10 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url('/') }}">
-
       <img src="{{ asset('storage/images/tank-wagon.png') }}" alt="" width="36" class="mr-3 my-n1">
-
-{{--      <span class="h2">{{ config('app.name', 'Учет задержанных вагонов') }}</span>--}}
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -15,17 +12,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto ml-4">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('wagons.index') }}">Работа с вагонами</a>
-        </li>
+
+        @if(auth()->check())
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('wagons.index') }}">Работа с вагонами</a>
+          </li>
+
+        @endif
         <li class="nav-item dropdown">
-          <a href="" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Отчеты по задержанным вагонам <span class="caret"></span></a>
+          <a href="" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false" v-pre>Отчеты по задержанным вагонам <span class="caret"></span></a>
           <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">
-              Вчерашняя смена (8:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }} &mdash; 20:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }})
+              Вчерашняя смена (8:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }} &mdash;
+              20:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }})
             </a>
             <a class="dropdown-item" href="#">
-               Предыдущая смена (20:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }} &mdash; 8:00 {{ Carbon\Carbon::now()->format('d.m.Y') }})
+              Предыдущая смена (20:00 {{ Carbon\Carbon::parse('-1 day')->format('d.m.Y') }} &mdash;
+              8:00 {{ Carbon\Carbon::now()->format('d.m.Y') }})
             </a>
             <a class="dropdown-item" href="#">
               Текущая смена (c 8:00 {{ Carbon\Carbon::now()->format('d.m.Y') }})
