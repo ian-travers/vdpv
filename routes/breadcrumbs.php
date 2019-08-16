@@ -42,7 +42,7 @@ Breadcrumbs::for('recent', function (BreadcrumbsGenerator $trail, $day, $type) {
 
 Breadcrumbs::for('wagons.index', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
-    $trail->push('Вагоны', route('wagons.index'));
+    $trail->push('Работа с вагонами', route('wagons.index'));
 });
 
 Breadcrumbs::for('wagons.create', function (BreadcrumbsGenerator $trail) {
