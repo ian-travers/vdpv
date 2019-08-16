@@ -1,6 +1,6 @@
 @php /* @var App\Wagon $wagon */ @endphp
 
-<table class="table table-striped table-bordered">
+<table class="table table-sm table-bordered">
   <thead>
   <tr class="text-center">
     <th>№</th>
