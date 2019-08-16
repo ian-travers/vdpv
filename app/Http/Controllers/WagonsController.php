@@ -13,13 +13,14 @@ class WagonsController extends Controller
 
     public function index()
     {
+        $term = request()->only(['term']);
+
         $wagons = Auth::user()
             ->wagons()
-            ->latestFirst()
-            ->filter(request()->only(['term']))
+            ->filter($term)
             ->paginate($this->wagonsPerPage);
 
-        return view('wagons.index', compact('wagons'));
+        return view('wagons.index', compact('wagons', 'term'));
     }
 
     /**
