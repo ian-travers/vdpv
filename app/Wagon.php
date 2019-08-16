@@ -68,10 +68,6 @@ class Wagon extends Model
 
     protected $dates = ['arrived_at', 'detained_at', 'released_at', 'departed_at'];
 
-    protected $casts = [
-        'is_empty' => 'boolean'
-    ];
-
     public function path()
     {
         return "/wagons/{$this->id}";

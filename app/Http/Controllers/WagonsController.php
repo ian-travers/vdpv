@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Detainer;
+use App\Http\Requests\WagonRequest;
 use App\Wagon;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WagonsController extends Controller
@@ -41,9 +41,9 @@ class WagonsController extends Controller
         return view('wagons.create', compact('detainers'));
     }
 
-    public function store()
+    public function store(WagonRequest $request)
     {
-        Auth::user()->wagons()->create($this->validateRequest());
+        Auth::user()->wagons()->create($request->all());
 
         return redirect('/wagons');
     }
@@ -55,9 +55,9 @@ class WagonsController extends Controller
         return view('wagons.edit', compact('wagon', 'detainers'));
     }
 
-    public function update(Wagon $wagon)
+    public function update(WagonRequest $request, Wagon $wagon)
     {
-        $wagon->update($this->validateRequest());
+        $wagon->update($request->all());
 
         return redirect(route('wagons.index'));
     }
@@ -75,31 +75,4 @@ class WagonsController extends Controller
 
         return redirect(route('wagons.index'));
     }
-
-    /**
-     * @return mixed
-     */
-    protected function validateRequest()
-    {
-        return Request::validate([
-            'inw' => 'required|regex:/^\d{8}$/',
-            'arrived_at' => 'nullable|date',
-            'detained_at' => 'required|date',
-            'released_at' => 'nullable|date',
-            'departed_at' => 'nullable|date',
-            'detainer_id' => 'required',
-            'reason' => 'nullable:max:255',
-            'cargo' => 'nullable|max:255',
-            'forwarder' => 'nullable',
-            'ownership' => 'nullable',
-            'operation' => 'nullable',
-            'park' => 'nullable',
-            'way' => 'nullable',
-            'nplf' => 'nullable',
-            'departure_station' => 'nullable|max:255',
-            'destination_station' => 'nullable|max:255',
-            'taken_measure' => 'nullable',
-        ]);
-    }
-
 }
