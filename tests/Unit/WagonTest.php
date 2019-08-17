@@ -38,8 +38,8 @@ class WagonTest extends TestCase
 
         $this->assertInstanceOf(Detainer::class, $detainer);
     }
-    
-    /** @test */ 
+
+    /** @test */
     function check_arrived_at_setter()
     {
         $wagon = app(WagonFactory::class)->create();
@@ -229,5 +229,35 @@ class WagonTest extends TestCase
         $wagon = app(WagonFactory::class)->create();
 
         $this->assertEquals("/view/{$wagon->id}", $wagon->viewPath());
+    }
+
+    /** @test */
+    function check_wagon_link_css_class()
+    {
+        $this->artisan('db:seed --class=DetainersTableSeeder');
+
+        $wagon = app(WagonFactory::class)->create();
+
+        $this->assertNull($wagon->linkCssClass());
+
+        $wagon->update(['departed_at' => Carbon::now()]);
+
+        $this->assertEquals('text-success', $wagon->linkCssClass());
+
+        $wagon->update(['released_at' => Carbon::now()]);
+
+        $this->assertEquals('text-success', $wagon->linkCssClass());
+
+        $wagon->update(['departed_at' => null]);
+
+        $this->assertEquals('text-secondary', $wagon->linkCssClass());
+
+        $wagon->update(['detained_at' => Carbon::parse('-25 hours')]);
+
+        $this->assertEquals('text-secondary', $wagon->linkCssClass());
+
+        $wagon->update(['detainer_id' => 2]);
+
+        $this->assertEquals('text-danger', $wagon->fresh()->linkCssClass());
     }
 }

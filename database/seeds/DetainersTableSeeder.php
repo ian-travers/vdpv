@@ -14,7 +14,7 @@ class DetainersTableSeeder extends Seeder
                 'long_detain_event' => 'released_at'
             ],
             [
-                'name' => 'Служба коммерческого хозяйства',
+                'name' => 'Служба грузовой и внешнеэкономической деятельности',
                 'long_detain_event' => 'detained_at'
             ],
             [
@@ -30,7 +30,7 @@ class DetainersTableSeeder extends Seeder
                 'long_detain_event' => 'detained_at'
             ],
             [
-                'name' => 'Пункт передачи выгонов',
+                'name' => 'Пункт передачи вагонов',
                 'long_detain_event' => 'detained_at'
             ],
             [
