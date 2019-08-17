@@ -13,7 +13,7 @@ class WagonsController extends Controller
 
     public function index()
     {
-        $term = request()->only(['term']);
+        $term = request()->only('term');
 
         $wagons = Auth::user()
             ->wagons()
@@ -46,7 +46,7 @@ class WagonsController extends Controller
     {
         Auth::user()->wagons()->create($request->all());
 
-        return redirect('/wagons')->with([
+        return redirect(route('wagons.index'))->with([
             'message' => 'Информация по вагону сохранена',
             'type' => 'success'
         ]);

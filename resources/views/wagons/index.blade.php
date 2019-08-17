@@ -3,7 +3,7 @@
 @section('content')
   <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-start mb-3">
-      <h2 class="mb-0">{{ $term !== null ? 'Результаты поиска' : 'Список задержанных вагонов' }}</h2>
+      <h2 class="mb-0">{{ count($term) ? 'Результаты поиска' : 'Список задержанных вагонов' }}</h2>
       <div class="d-flex">
         <form action="{{ route('wagons.index') }}" class="mr-3">
           <div class="input-group">
@@ -18,7 +18,6 @@
         </form>
         <a href="{{ route('wagons.create') }}" class="btn btn-outline-primary">Добавить вагон</a>
       </div>
-
     </div>
 
     @if(count($wagons))
