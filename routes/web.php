@@ -9,6 +9,8 @@ Route::get('/detained-by/{detainer}/long', 'InfoController@detainedByLong')->nam
 Route::get('/recent/{day}/{type}', 'InfoController@recent')->name('recent');
 Route::get('/long-only', 'InfoController@longOnly')->name('long-only');
 
+Route::get('/reports/last', 'ReportsController@showLast')->name('reports.last');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {

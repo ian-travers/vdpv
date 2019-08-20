@@ -111,6 +111,21 @@ class Wagon extends Model
         return null;
     }
 
+    public function isDetainedBetween($startsAt, $endsAt)
+    {
+        return ($this->detained_at > $startsAt) && ($this->detained_at < $endsAt);
+    }
+
+    public function isReleasedBetween($startsAt, $endsAt)
+    {
+        return ($this->released_at > $startsAt) && ($this->released_at < $endsAt);
+    }
+
+    public function isDepartedBetween($startsAt, $endsAt)
+    {
+        return ($this->departed_at > $startsAt) && ($this->departed_at < $endsAt);
+    }
+
     public function detainedInHours()
     {
         return isset($this->departed_at) ? $this->departed_at->diffInHours($this->detained_at) : now()->diffInHours($this->detained_at);
@@ -133,14 +148,44 @@ class Wagon extends Model
     }
 
 //     helper functions
-    public static function detainedCount(Detainer $detainer = null)
+    public static function detainedCount(Detainer $detainer = null, Carbon $datetime = null)
     {
-        return $detainer ? $detainer->wagons()->whereNull('departed_at')->count() : Wagon::whereNull('departed_at')->get()->count();
+        if ($datetime) {
+            $query = $detainer
+                ? $detainer->wagons()
+                    ->whereDate('detained_at', '<=', $datetime)
+                    ->whereNull('departed_at')
+                    ->orWhereDate('departed_at', '>', $datetime)
+                    ->count()
+                : Wagon::whereDate('detained_at', '<=', $datetime)
+                    ->whereNull('departed_at')
+                    ->orWhereDate('departed_at', '>', $datetime)
+                    ->count();
+        } else {
+            $query = $detainer
+                ? $detainer->wagons()->whereNull('departed_at')->count()
+                : Wagon::whereNull('departed_at')->count();
+        }
+
+        return $query;
     }
 
-    public static function detainedLongCount(Detainer $detainer = null)
+    public static function detainedLongCount(Detainer $detainer = null, Carbon $datetime = null)
     {
-        $wagons = $detainer ? Wagon::whereNull('departed_at')->where('detainer_id', $detainer->id)->get() : Wagon::whereNull('departed_at')->get();
+        if ($datetime) {
+            $wagons = $detainer
+                ? $detainer->wagons()
+                    ->whereDate('detained_at', '<=', $datetime)
+                    ->whereNull('departed_at')
+                    ->orWhereDate('departed_at', '>', $datetime)
+                    ->get()
+                : Wagon::whereDate('detained_at', '<=', $datetime)
+                    ->whereNull('departed_at')
+                    ->orWhereDate('departed_at', '>', $datetime)
+                    ->get();
+        } else {
+            $wagons = $detainer ? Wagon::whereNull('departed_at')->where('detainer_id', $detainer->id)->get() : Wagon::whereNull('departed_at')->get();
+        }
 
         $res = 0;
         foreach ($wagons as $wagon) {
@@ -150,6 +195,16 @@ class Wagon extends Model
         }
 
         return $res;
+    }
+
+    public static function wagonsChangedForPeriod(Carbon $startsAt, Carbon $endsAt)
+    {
+        return Wagon::whereBetween('detained_at', [$startsAt, $endsAt])
+            ->orWhereBetween('released_at', [$startsAt, $endsAt])
+            ->orWhereBetween('departed_at', [$startsAt, $endsAt])
+            ->orderBy('detained_at')
+            ->get();
+
     }
 
 //    scopes
@@ -182,7 +237,7 @@ class Wagon extends Model
             }
         }
         return $query
-            ->whereIn('id',$ids)
+            ->whereIn('id', $ids)
             ->orderBy('detained_at');
     }
 

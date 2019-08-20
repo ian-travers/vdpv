@@ -40,6 +40,12 @@ Breadcrumbs::for('recent', function (BreadcrumbsGenerator $trail, $day, $type) {
     $trail->push(ucfirst($type));
 });
 
+Breadcrumbs::for('reports.last', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('root');
+    $trail->push('Отчеты по задержанным вагонам');
+    $trail->push('Последняя смена');
+});
+
 Breadcrumbs::for('wagons.index', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
     $trail->push('Работа с вагонами', route('wagons.index'));
