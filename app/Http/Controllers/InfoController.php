@@ -59,9 +59,17 @@ class InfoController extends Controller
     {
         $wagons = $day == 'today'
             ? Wagon::where($type . '_at', '>', Carbon::today())->paginate($this->wagonsPerPage)
-            : Wagon::whereBetween($type . '_at', [Carbon::yesterday(), Carbon::today()])->paginate($this->wagonsPerPage);
+            : $day == 'yesterday'
+                ?  Wagon::whereBetween($type . '_at', [Carbon::yesterday(), Carbon::today()])->paginate($this->wagonsPerPage)
+                : Wagon::whereBetween($type . '_at', [Carbon::parse('-2 days')->format('Y-m-d'), Carbon::yesterday()])->paginate($this->wagonsPerPage)
 
-        $day = $day == 'today' ? 'Сегодня' : 'Вчера';
+
+
+        ($day == 'today')
+            ? ($day == 'yesterday')
+                ? $day = 'Вчера'
+                : $day = 'Позавчера'
+            : $day = 'Сегодня';
 
         if ($type == 'detained') {
             $type = 'задержано';

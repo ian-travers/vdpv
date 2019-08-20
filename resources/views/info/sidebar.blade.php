@@ -140,6 +140,44 @@
         @endif
       </div>
     </div>
+
+    <p class="text-center lead">Позавчера {{ Carbon\Carbon::parse('-2 day')->format('d.m.Y') }} г.</p>
+    <div class="d-flex justify-content-between align-self-center px-3">
+      <div>Задержано</div>
+      <div>
+        @if($prevDayDetainedCount)
+          <a href="{{ route('recent', ['yesterday', 'detained']) }}">
+            <span class="badge badge-primary">{{ $prevDayDetainedCount }}</span>
+          </a>
+        @else
+          <span class="badge badge-primary">{{ $prevDayDetainedCount }}</span>
+        @endif
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-self-center px-3">
+      <div>Выпущено</div>
+      <div>
+        @if($prevDayReleasedCount)
+          <a href="{{ route('recent', ['yesterday', 'released']) }}">
+            <span class="badge badge-secondary">{{ $prevDayReleasedCount }}</span>
+          </a>
+        @else
+          <span class="badge badge-secondary">{{ $prevDayReleasedCount }}</span>
+        @endif
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-self-center px-3">
+      <div>Отправлено</div>
+      <div>
+        @if($prevDayDepartedCount)
+          <a href="{{ route('recent', ['yesterday', 'departed']) }}">
+            <span class="badge badge-success">{{ $prevDayDepartedCount }}</span>
+          </a>
+        @else
+          <span class="badge badge-success">{{ $prevDayDepartedCount }}</span>
+        @endif
+      </div>
+    </div>
   </div>
 </aside>
 
