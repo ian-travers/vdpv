@@ -148,7 +148,7 @@ class Wagon extends Model
     }
 
 //     helper functions
-    public static function detainedCount(Detainer $detainer = null, Carbon $datetime = null)
+    private static function detainedQuery(Detainer $detainer = null, Carbon $datetime = null)
     {
         if ($datetime) {
             $query = $detainer
@@ -156,36 +156,28 @@ class Wagon extends Model
                     ->whereDate('detained_at', '<=', $datetime)
                     ->whereNull('departed_at')
                     ->orWhereDate('departed_at', '>', $datetime)
-                    ->count()
+
                 : Wagon::whereDate('detained_at', '<=', $datetime)
                     ->whereNull('departed_at')
                     ->orWhereDate('departed_at', '>', $datetime)
-                    ->count();
+                    ;
         } else {
             $query = $detainer
-                ? $detainer->wagons()->whereNull('departed_at')->count()
-                : Wagon::whereNull('departed_at')->count();
+                ? $detainer->wagons()->whereNull('departed_at')
+                : Wagon::whereNull('departed_at');
         }
 
         return $query;
     }
 
+    public static function detainedCount(Detainer $detainer = null, Carbon $datetime = null)
+    {
+        return self::detainedQuery($detainer, $datetime)->count();
+    }
+
     public static function detainedLongCount(Detainer $detainer = null, Carbon $datetime = null)
     {
-        if ($datetime) {
-            $wagons = $detainer
-                ? $detainer->wagons()
-                    ->whereDate('detained_at', '<=', $datetime)
-                    ->whereNull('departed_at')
-                    ->orWhereDate('departed_at', '>', $datetime)
-                    ->get()
-                : Wagon::whereDate('detained_at', '<=', $datetime)
-                    ->whereNull('departed_at')
-                    ->orWhereDate('departed_at', '>', $datetime)
-                    ->get();
-        } else {
-            $wagons = $detainer ? Wagon::whereNull('departed_at')->where('detainer_id', $detainer->id)->get() : Wagon::whereNull('departed_at')->get();
-        }
+        $wagons = self::detainedQuery($detainer, $datetime)->get();
 
         $res = 0;
         foreach ($wagons as $wagon) {

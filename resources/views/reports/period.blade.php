@@ -76,12 +76,15 @@
         @forelse($wagons as $wagon)
           <tr>
             <td class="text-center">{{ $loop->index + 1 }}</td>
-            <td class="text-center">{{ $wagon->inw }}</td>
+            <td class="text-center">
+              <a href="{{ route('show-wagon', $wagon) }}">{{ $wagon->inw }}</a>
+
+            </td>
             <td class="text-center">{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y H:i') : '' }}</td>
-            <td class="text-center {{ $wagon->isDetainedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-primary' : '' }}">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
+            <td class="text-center {{ $wagon->isDetainedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-info font-weight-bolder' : '' }}">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
             <td>{{ $wagon->reason }}</td>
-            <td class="text-center {{ $wagon->isReleasedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-secondary' : '' }}">{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y H:i') : '' }}</td>
-            <td class="text-center {{ $wagon->isDepartedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-success' : '' }}">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>
+            <td class="text-center {{ $wagon->isReleasedBetween($shiftStartsAt, $shiftEndsAt) ? 'font-weight-bolder' : '' }}">{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y H:i') : '' }}</td>
+            <td class="text-center {{ $wagon->isDepartedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-success font-weight-bolder' : '' }}">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>
           </tr>
         @empty
           <p>Операций с задержанными вагонами за смену не было.</p>
