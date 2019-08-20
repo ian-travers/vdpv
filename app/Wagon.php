@@ -148,22 +148,25 @@ class Wagon extends Model
     }
 
 //     helper functions
-    private static function detainedQuery(Detainer $detainer = null, Carbon $datetime = null)
+    public static function detainedQuery(Detainer $detainer = null, Carbon $datetime = null)
     {
         if ($datetime) {
             $query = $detainer
                 ? $detainer->wagons()
-                    ->whereDate('detained_at', '<', $datetime)
+                    ->where('detained_at', '<', $datetime)
                     ->where(function ($query) use ($datetime) {
                         $query
                             ->whereNull('departed_at')
-                            ->orWhereDate('departed_at', '>=', $datetime);
+                            ->orWhere('departed_at', '>=', $datetime);
                     })
 
 
-                : Wagon::whereDate('detained_at', '<', $datetime)
-                    ->whereNull('departed_at')
-                    ->orWhereDate('departed_at', '>=', $datetime);
+                : Wagon::where('detained_at', '<', $datetime)
+                    ->where(function ($query) use ($datetime) {
+                        $query
+                            ->whereNull('departed_at')
+                            ->orWhere('departed_at', '>=', $datetime);
+                    });
         } else {
             $query = $detainer
                 ? $detainer->wagons()->whereNull('departed_at')
