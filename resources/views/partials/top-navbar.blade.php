@@ -26,7 +26,7 @@
             <a class="dropdown-item" href="{{ route('reports.last') }}">
               Последняя смена
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{ route('reports.previous') }}">
               Предпоследняя смена
             </a>
             <div class="dropdown-divider"></div>

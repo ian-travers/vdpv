@@ -10,6 +10,7 @@ Route::get('/recent/{day}/{type}', 'InfoController@recent')->name('recent');
 Route::get('/long-only', 'InfoController@longOnly')->name('long-only');
 
 Route::get('/reports/last', 'ReportsController@showLast')->name('reports.last');
+Route::get('/reports/previous', 'ReportsController@showPrevious')->name('reports.previous');
 
 Auth::routes();
 

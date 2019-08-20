@@ -113,17 +113,17 @@ class Wagon extends Model
 
     public function isDetainedBetween($startsAt, $endsAt)
     {
-        return ($this->detained_at > $startsAt) && ($this->detained_at < $endsAt);
+        return ($this->detained_at >= $startsAt) && ($this->detained_at < $endsAt);
     }
 
     public function isReleasedBetween($startsAt, $endsAt)
     {
-        return ($this->released_at > $startsAt) && ($this->released_at < $endsAt);
+        return ($this->released_at >= $startsAt) && ($this->released_at < $endsAt);
     }
 
     public function isDepartedBetween($startsAt, $endsAt)
     {
-        return ($this->departed_at > $startsAt) && ($this->departed_at < $endsAt);
+        return ($this->departed_at >= $startsAt) && ($this->departed_at < $endsAt);
     }
 
     public function detainedInHours()
@@ -153,14 +153,17 @@ class Wagon extends Model
         if ($datetime) {
             $query = $detainer
                 ? $detainer->wagons()
-                    ->whereDate('detained_at', '<=', $datetime)
-                    ->whereNull('departed_at')
-                    ->orWhereDate('departed_at', '>', $datetime)
+                    ->whereDate('detained_at', '<', $datetime)
+                    ->where(function ($query) use ($datetime) {
+                        $query
+                            ->whereNull('departed_at')
+                            ->orWhereDate('departed_at', '>=', $datetime);
+                    })
 
-                : Wagon::whereDate('detained_at', '<=', $datetime)
+
+                : Wagon::whereDate('detained_at', '<', $datetime)
                     ->whereNull('departed_at')
-                    ->orWhereDate('departed_at', '>', $datetime)
-                    ;
+                    ->orWhereDate('departed_at', '>=', $datetime);
         } else {
             $query = $detainer
                 ? $detainer->wagons()->whereNull('departed_at')

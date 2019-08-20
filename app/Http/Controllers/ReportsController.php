@@ -29,4 +29,16 @@ class ReportsController extends Controller
 
         return view('reports.period', compact('detainers', 'wagons', 'shiftStartsAt', 'shiftEndsAt'));
     }
+
+    public function showPrevious()
+    {
+        $detainers = Detainer::all();
+
+        $shiftStartsAt = $this->shift->getPrevShiftStart();
+        $shiftEndsAt = $this->shift->getPrevShiftEnd();
+
+        $wagons = Wagon::wagonsChangedForPeriod($shiftStartsAt, $shiftEndsAt);
+
+        return view('reports.period', compact('detainers', 'wagons', 'shiftStartsAt', 'shiftEndsAt'));
+    }
 }
