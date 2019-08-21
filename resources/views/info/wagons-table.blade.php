@@ -3,12 +3,12 @@
 <table class="table table-sm table-bordered">
   <thead>
   <tr class="text-center text-muted">
-    <th width="6%">№</th>
-    <th width="10%">Номер</th>
-    <th width="12%">Простой, дн.</th>
-    <th width="10%">Простой, ч.</th>
-    <th width="20%">Простой после выпуска, ч.</th>
-    <th>Причина</th>
+    <th width="6%" class="align-top">№</th>
+    <th width="10%" class="align-top">Номер</th>
+    <th width="12%" class="align-top">Простой, дн.</th>
+    <th width="11%" class="align-top">Простой, ч.</th>
+    <th width="13%" class="align-top">Простой после выпуска, ч.</th>
+    <th class="align-top">Причина</th>
   </tr>
   </thead>
   <tbody>
