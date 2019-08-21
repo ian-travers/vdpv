@@ -8,7 +8,7 @@
         <form action="{{ route('wagons.index') }}" class="mr-3">
           <div class="input-group">
             <input type="text" class="form-control" value="{{ request('term') }}" name="term"
-                   placeholder="Поиск вагона...">
+                   placeholder="Поиск вагона..." autofocus>
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="submit">
                 <i class="fas fa-search"></i>

@@ -6,7 +6,7 @@
     <form action="{{ route('root') }}">
       <div class="input-group input-group-lg">
         <input type="text" class="form-control" value="{{ request('term') }}" name="term"
-               placeholder="Поиск...">
+               placeholder="Поиск..." autofocus>
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="submit">
             <i class="fas fa-search"></i>
@@ -20,7 +20,7 @@
   <div class="widget">
     <div class="widget-heading">
       <h4>
-        Задержано вагонов
+        Задержано всего
         <a href="{{ route('long-only') }}">
           <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongCount() }}</span>
         </a>

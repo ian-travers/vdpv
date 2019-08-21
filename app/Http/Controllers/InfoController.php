@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class InfoController extends Controller
 {
-    protected $wagonsPerPage = 15;
+    protected $wagonsPerPage = 20;
 
     public function index()
     {
