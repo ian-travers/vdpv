@@ -17,46 +17,6 @@
 
   </div>
 
-  <div class="widget">
-    <div class="widget-heading">
-      <h4>
-        Задержано всего
-        <a href="{{ route('long-only') }}">
-          <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongCount() }}</span>
-        </a>
-        <a href="{{ route('root') }}">
-          <span class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedCount() }}</span>
-        </a>
-      </h4>
-    </div>
-    <div class="widget-body">
-      <ul class="categories">
-
-        @foreach($detainers as $detainer)
-          @if(App\Wagon::detainedCount($detainer))
-            <li>
-              <div>
-                <a href="{{ route('detained-by', $detainer) }}">
-                  {{ $detainer->name }}
-                </a>
-
-                <a href="{{ route('detained-by-long', $detainer) }}">
-                  <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongCount($detainer) }}</span>
-                </a>
-
-                <a href="{{ route('detained-by', $detainer) }}">
-                  <span class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedCount($detainer) }}</span>
-                </a>
-              </div>
-            </li>
-
-          @endif
-        @endforeach
-
-      </ul>
-    </div>
-  </div>
-
   {{--Последние изменения--}}
   <div class="widget">
     <div class="widget-heading">

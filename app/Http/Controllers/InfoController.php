@@ -12,15 +12,15 @@ class InfoController extends Controller
 
     public function index()
     {
+        $detainers = Detainer::all();
+
         $wagons = request('term')
             ? Wagon::with('detainer')
                 ->filter(request()->only(['term']))
                 ->paginate($this->wagonsPerPage)
-            : Wagon::with('detainer')
-                ->longDetainedFirst()
-                ->paginate($this->wagonsPerPage);;
+            : [];
 
-        return view('info.index', compact('wagons'));
+        return view('info.index', compact('detainers', 'wagons'));
     }
 
     public function showWagon(Wagon $wagon)

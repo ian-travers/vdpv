@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Detainer;
 use App\Wagon;
 use Carbon\Carbon;
 use Illuminate\View\View;
@@ -18,8 +17,6 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('info.sidebar', function (View $view) {
-            $detainers = Detainer::all();
-
             $todayDetainedCount = Wagon::where('detained_at', '>=', Carbon::today())->count();
             $todayReleasedCount = Wagon::where('released_at', '>=', Carbon::today())->count();
             $todayDepartedCount = Wagon::where('departed_at', '>=', Carbon::today())->count();
@@ -34,8 +31,7 @@ class ComposerServiceProvider extends ServiceProvider
             $beforeYesterdayReleasedCount = Wagon::whereBetween('released_at', [$beforeYesterday, Carbon::yesterday()])->count();
             $beforeYesterdayDepartedCount = Wagon::whereBetween('departed_at', [$beforeYesterday, Carbon::yesterday()])->count();
 
-            return $view->with(compact('detainers',
-                'todayDetainedCount' , 'todayReleasedCount', 'todayDepartedCount',
+            return $view->with(compact('todayDetainedCount' , 'todayReleasedCount', 'todayDepartedCount',
                 'yesterdayDetainedCount', 'yesterdayReleasedCount', 'yesterdayDepartedCount',
                 'beforeYesterdayDetainedCount', 'beforeYesterdayReleasedCount', 'beforeYesterdayDepartedCount'));
         });
