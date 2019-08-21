@@ -52,6 +52,12 @@ Breadcrumbs::for('reports.previous', function (BreadcrumbsGenerator $trail) {
     $trail->push('Предпоследняя смена');
 });
 
+Breadcrumbs::for('reports.custom', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('root');
+    $trail->push('Отчеты по задержанным вагонам');
+    $trail->push('Произвольный отчет');
+});
+
 Breadcrumbs::for('wagons.index', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
     $trail->push('Работа с вагонами', route('wagons.index'));
