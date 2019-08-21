@@ -1,3 +1,5 @@
+@include('partials.custom-report-modal')
+
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url('/') }}">
@@ -30,7 +32,7 @@
               Предпоследняя смена
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Произвольный отчет</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#custom-report">Произвольный отчет</a>
           </div>
         </li>
       </ul>
