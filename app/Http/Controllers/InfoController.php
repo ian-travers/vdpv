@@ -57,19 +57,19 @@ class InfoController extends Controller
 
     public function recent($day, $type)
     {
+        $beforeYesterday = Carbon::parse('-2 day')->hour(0)->minute(0)->second(0);
+
         $wagons = $day == 'today'
             ? Wagon::where($type . '_at', '>', Carbon::today())->paginate($this->wagonsPerPage)
             : $day == 'yesterday'
-                ?  Wagon::whereBetween($type . '_at', [Carbon::yesterday(), Carbon::today()])->paginate($this->wagonsPerPage)
-                : Wagon::whereBetween($type . '_at', [Carbon::parse('-2 days')->format('Y-m-d'), Carbon::yesterday()])->paginate($this->wagonsPerPage)
+                ? Wagon::whereBetween($type . '_at', [Carbon::yesterday(), Carbon::today()])->paginate($this->wagonsPerPage)
+                : Wagon::whereBetween($type . '_at', [$beforeYesterday, Carbon::yesterday()])->paginate($this->wagonsPerPage);
 
-
-
-        ($day == 'today')
-            ? ($day == 'yesterday')
-                ? $day = 'Вчера'
-                : $day = 'Позавчера'
-            : $day = 'Сегодня';
+        $day = $day == 'today'
+            ? 'Сегодня'
+            : $day == 'yesterday'
+                ? 'Вчера'
+                : 'Позавчера';
 
         if ($type == 'detained') {
             $type = 'задержано';

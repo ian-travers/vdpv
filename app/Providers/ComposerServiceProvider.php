@@ -19,16 +19,25 @@ class ComposerServiceProvider extends ServiceProvider
     {
         view()->composer('info.sidebar', function (View $view) {
             $detainers = Detainer::all();
-            $curDayDetainedCount = Wagon::where('detained_at', '>=', Carbon::today())->count();
-            $curDayReleasedCount = Wagon::where('released_at', '>=', Carbon::today())->count();
-            $curDayDepartedCount = Wagon::where('departed_at', '>=', Carbon::today())->count();
-            $prevDayDetainedCount = Wagon::whereBetween('detained_at', [Carbon::yesterday(), Carbon::today()])->count();
-            $prevDayReleasedCount = Wagon::whereBetween('released_at', [Carbon::yesterday(), Carbon::today()])->count();
-            $prevDayDepartedCount = Wagon::whereBetween('departed_at', [Carbon::yesterday(), Carbon::today()])->count();
+
+            $todayDetainedCount = Wagon::where('detained_at', '>=', Carbon::today())->count();
+            $todayReleasedCount = Wagon::where('released_at', '>=', Carbon::today())->count();
+            $todayDepartedCount = Wagon::where('departed_at', '>=', Carbon::today())->count();
+
+            $yesterdayDetainedCount = Wagon::whereBetween('detained_at', [Carbon::yesterday(), Carbon::today()])->count();
+            $yesterdayReleasedCount = Wagon::whereBetween('released_at', [Carbon::yesterday(), Carbon::today()])->count();
+            $yesterdayDepartedCount = Wagon::whereBetween('departed_at', [Carbon::yesterday(), Carbon::today()])->count();
+
+            $beforeYesterday = Carbon::parse('-2 day')->hour(0)->minute(0)->second(0);
+
+            $beforeYesterdayDetainedCount = Wagon::whereBetween('detained_at', [$beforeYesterday, Carbon::yesterday()])->count();
+            $beforeYesterdayReleasedCount = Wagon::whereBetween('released_at', [$beforeYesterday, Carbon::yesterday()])->count();
+            $beforeYesterdayDepartedCount = Wagon::whereBetween('departed_at', [$beforeYesterday, Carbon::yesterday()])->count();
 
             return $view->with(compact('detainers',
-                'curDayDetainedCount' , 'curDayReleasedCount', 'curDayDepartedCount',
-                'prevDayDetainedCount', 'prevDayReleasedCount', 'prevDayDepartedCount'));
+                'todayDetainedCount' , 'todayReleasedCount', 'todayDepartedCount',
+                'yesterdayDetainedCount', 'yesterdayReleasedCount', 'yesterdayDepartedCount',
+                'beforeYesterdayDetainedCount', 'beforeYesterdayReleasedCount', 'beforeYesterdayDepartedCount'));
         });
     }
 }

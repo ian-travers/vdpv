@@ -67,24 +67,24 @@
       <div class="d-flex justify-content-between align-self-center px-3">
         <div>Задержано</div>
         <div>
-          @if($curDayDetainedCount)
+          @if($todayDetainedCount)
             <a href="{{ route('recent', ['today', 'detained']) }}">
-              <span class="badge badge-primary">{{ $curDayDetainedCount }}</span>
+              <span class="badge badge-primary">{{ $todayDetainedCount }}</span>
             </a>
           @else
-            <span class="badge badge-primary">{{ $curDayDetainedCount }}</span>
+            <span class="badge badge-primary">{{ $todayDetainedCount }}</span>
           @endif
         </div>
       </div>
       <div class="d-flex justify-content-between align-self-center px-3">
         <div>Выпущено</div>
         <div>
-          @if($curDayReleasedCount)
+          @if($todayReleasedCount)
             <a href="{{ route('recent', ['today', 'released']) }}">
-              <span class="badge badge-secondary">{{ $curDayReleasedCount }}</span>
+              <span class="badge badge-secondary">{{ $todayReleasedCount }}</span>
             </a>
           @else
-            <span class="badge badge-secondary">{{ $curDayReleasedCount }}</span>
+            <span class="badge badge-secondary">{{ $todayReleasedCount }}</span>
           @endif
         </div>
       </div>
@@ -92,12 +92,12 @@
       <div class="d-flex justify-content-between align-self-center px-3">
         <div>Отправлено</div>
         <div>
-          @if($curDayDepartedCount)
+          @if($todayDepartedCount)
             <a href="{{ route('recent', ['today', 'departed']) }}">
-              <span class="badge badge-success">{{ $curDayDepartedCount }}</span>
+              <span class="badge badge-success">{{ $todayDepartedCount }}</span>
             </a>
           @else
-            <span class="badge badge-success">{{ $curDayDepartedCount }}</span>
+            <span class="badge badge-success">{{ $todayDepartedCount }}</span>
           @endif
         </div>
       </div>
@@ -107,36 +107,36 @@
     <div class="d-flex justify-content-between align-self-center px-3">
       <div>Задержано</div>
       <div>
-        @if($prevDayDetainedCount)
+        @if($yesterdayDetainedCount)
           <a href="{{ route('recent', ['yesterday', 'detained']) }}">
-            <span class="badge badge-primary">{{ $prevDayDetainedCount }}</span>
+            <span class="badge badge-primary">{{ $yesterdayDetainedCount }}</span>
           </a>
         @else
-          <span class="badge badge-primary">{{ $prevDayDetainedCount }}</span>
+          <span class="badge badge-primary">{{ $yesterdayDetainedCount }}</span>
         @endif
       </div>
     </div>
     <div class="d-flex justify-content-between align-self-center px-3">
       <div>Выпущено</div>
       <div>
-        @if($prevDayReleasedCount)
+        @if($yesterdayReleasedCount)
           <a href="{{ route('recent', ['yesterday', 'released']) }}">
-            <span class="badge badge-secondary">{{ $prevDayReleasedCount }}</span>
+            <span class="badge badge-secondary">{{ $yesterdayReleasedCount }}</span>
           </a>
         @else
-          <span class="badge badge-secondary">{{ $prevDayReleasedCount }}</span>
+          <span class="badge badge-secondary">{{ $yesterdayReleasedCount }}</span>
         @endif
       </div>
     </div>
     <div class="d-flex justify-content-between align-self-center px-3 mb-2">
       <div>Отправлено</div>
       <div>
-        @if($prevDayDepartedCount)
+        @if($yesterdayDepartedCount)
           <a href="{{ route('recent', ['yesterday', 'departed']) }}">
-            <span class="badge badge-success">{{ $prevDayDepartedCount }}</span>
+            <span class="badge badge-success">{{ $yesterdayDepartedCount }}</span>
           </a>
         @else
-          <span class="badge badge-success">{{ $prevDayDepartedCount }}</span>
+          <span class="badge badge-success">{{ $yesterdayDepartedCount }}</span>
         @endif
       </div>
     </div>
@@ -145,36 +145,36 @@
     <div class="d-flex justify-content-between align-self-center px-3">
       <div>Задержано</div>
       <div>
-        @if($prevDayDetainedCount)
-          <a href="{{ route('recent', ['yesterday', 'detained']) }}">
-            <span class="badge badge-primary">{{ $prevDayDetainedCount }}</span>
+        @if($beforeYesterdayDetainedCount)
+          <a href="{{ route('recent', ['before-yesterday', 'detained']) }}">
+            <span class="badge badge-primary">{{ $beforeYesterdayDetainedCount }}</span>
           </a>
         @else
-          <span class="badge badge-primary">{{ $prevDayDetainedCount }}</span>
+          <span class="badge badge-primary">{{ $beforeYesterdayDetainedCount }}</span>
         @endif
       </div>
     </div>
     <div class="d-flex justify-content-between align-self-center px-3">
       <div>Выпущено</div>
       <div>
-        @if($prevDayReleasedCount)
-          <a href="{{ route('recent', ['yesterday', 'released']) }}">
-            <span class="badge badge-secondary">{{ $prevDayReleasedCount }}</span>
+        @if($beforeYesterdayReleasedCount)
+          <a href="{{ route('recent', ['before-yesterday', 'released']) }}">
+            <span class="badge badge-secondary">{{ $beforeYesterdayReleasedCount }}</span>
           </a>
         @else
-          <span class="badge badge-secondary">{{ $prevDayReleasedCount }}</span>
+          <span class="badge badge-secondary">{{ $beforeYesterdayReleasedCount }}</span>
         @endif
       </div>
     </div>
     <div class="d-flex justify-content-between align-self-center px-3">
       <div>Отправлено</div>
       <div>
-        @if($prevDayDepartedCount)
-          <a href="{{ route('recent', ['yesterday', 'departed']) }}">
-            <span class="badge badge-success">{{ $prevDayDepartedCount }}</span>
+        @if($beforeYesterdayDepartedCount)
+          <a href="{{ route('recent', ['before-yesterday', 'departed']) }}">
+            <span class="badge badge-success">{{ $beforeYesterdayDepartedCount }}</span>
           </a>
         @else
-          <span class="badge badge-success">{{ $prevDayDepartedCount }}</span>
+          <span class="badge badge-success">{{ $beforeYesterdayDepartedCount }}</span>
         @endif
       </div>
     </div>
