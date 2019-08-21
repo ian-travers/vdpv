@@ -23,6 +23,17 @@ class InfoController extends Controller
         return view('info.index', compact('detainers', 'wagons'));
     }
 
+    public function all()
+    {
+        $detainers = Detainer::all();
+
+        $wagons = Wagon::with('detainer')
+            ->longDetainedFirst()
+            ->paginate($this->wagonsPerPage);
+
+        return view('info.all', compact('detainers', 'wagons'));
+    }
+
     public function showWagon(Wagon $wagon)
     {
         return view('info.show-wagon', compact('wagon'));

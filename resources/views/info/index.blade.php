@@ -23,7 +23,7 @@
                   <a href="{{ route('long-only') }}">
                     <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongCount() }}</span>
                   </a>
-                  <a href="{{ route('root') }}">
+                  <a href="{{ route('all') }}">
                     <span class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedCount() }}</span>
                   </a>
                 </h4>
@@ -61,6 +61,7 @@
           <nav>
             {{ $wagons->appends(request()->only(['term']))->links() }}
           </nav>
+
         @endif
 
 

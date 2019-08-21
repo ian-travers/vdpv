@@ -4,22 +4,24 @@
 
 @section('content')
   <div class="container-fluid">
-    <h3 class="mt-3">Задержано: {{ $detainer->name }}</h3>
+    <h3 class="mt-3">Задержано: все вагоны</h3>
     <div class="row mt-3">
       <div class="col-9">
 
-        @if(!$wagons->count())
+        @if(!count($wagons))
           <div class="alert alert-warning">
-            Ничего не найдено!
+            Задержанных вагонов нет!
           </div>
 
         @else
           @include('info.wagons-table')
+          <nav>
+            {{ $wagons->appends(request()->only(['term']))->links() }}
+          </nav>
+
         @endif
 
-        <nav>
-          {{ $wagons->appends(request()->only(['term']))->links() }}
-        </nav>
+
       </div>
       <div class="col-3">
 

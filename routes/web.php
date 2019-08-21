@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'InfoController@index')->name('root');
+Route::get('/all', 'InfoController@all')->name('all');
 Route::get('/view/{wagon}', 'InfoController@showWagon')->name('show-wagon');
 Route::get('/detained-by/{detainer}', 'InfoController@detainedBy')->name('detained-by');
 Route::get('/detained-by/{detainer}/long', 'InfoController@detainedByLong')->name('detained-by-long');

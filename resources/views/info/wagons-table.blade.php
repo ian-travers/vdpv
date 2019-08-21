@@ -3,11 +3,11 @@
 <table class="table table-sm table-bordered">
   <thead>
   <tr class="text-center text-muted">
-    <th width="7%">№</th>
-    <th width="13%">Номер</th>
+    <th width="6%">№</th>
+    <th width="10%">Номер</th>
     <th width="12%">Простой, дн.</th>
     <th width="10%">Простой, ч.</th>
-    <th width="14%">После выпуска, ч.</th>
+    <th width="20%">Простой после выпуска, ч.</th>
     <th>Причина</th>
   </tr>
   </thead>

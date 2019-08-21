@@ -10,6 +10,10 @@ Breadcrumbs::for('root', function (BreadcrumbsGenerator $trail) {
     $trail->push('Главная', route('root'));
 });
 
+Breadcrumbs::for('all', function (BreadcrumbsGenerator $trail) {
+    $trail->push('Главная', route('root'));
+});
+
 Breadcrumbs::for('show-wagon', function (BreadcrumbsGenerator $trail, $wagon) {
     $trail->parent('root');
     $trail->push($wagon->inw);
