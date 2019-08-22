@@ -32,7 +32,7 @@
               Предпоследняя смена
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#custom-report">Произвольный отчет</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#custom-report">Произвольный период</a>
           </div>
         </li>
       </ul>

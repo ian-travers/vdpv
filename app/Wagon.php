@@ -18,12 +18,12 @@ use Carbon\Carbon;
  * @property \Illuminate\Support\Carbon|null $released_at
  * @property \Illuminate\Support\Carbon|null $departed_at
  * @property int $detainer_id
- * @property string $reason
- * @property string $cargo
+ * @property string|null $reason
+ * @property string|null $cargo
  * @property string|null $forwarder
  * @property string|null $ownership
- * @property string $departure_station
- * @property string $destination_station
+ * @property string|null $departure_station
+ * @property string|null $destination_station
  * @property string|null $taken_measure
  * @property string|null $operation
  * @property string|null $park
@@ -33,9 +33,10 @@ use Carbon\Carbon;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User $creator
  * @property-read \App\Detainer $detainer
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon detainedNow()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon filter($filter)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon latestFirst()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon longDetainedFirst()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon longDetainedOnly(\App\Detainer $detainer = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon query()
@@ -157,7 +158,42 @@ class Wagon extends Model
     }
 
 //     helper functions
-    public static function detainedQuery(Detainer $detainer = null, Carbon $datetime = null)
+    public static function detainedPeriodQuery(Detainer $detainer = null, Carbon $startAt, Carbon $endAt)
+    {
+        return $detainer
+            ? $detainer->wagons()->where('detained_at', '>=', $startAt)->where('detained_at', '<', $endAt)
+            : Wagon::where('detained_at', '>=', $startAt)->where('detained_at', '<', $endAt);
+    }
+
+
+    /**
+     * Returns count detained wagons between two dates
+     *
+     * @param Detainer|null $detainer
+     * @param Carbon $startAt
+     * @param Carbon $endAt
+     * @return mixed
+     */
+    public static function detainedPeriodCount(Detainer $detainer = null, Carbon $startAt, Carbon $endAt)
+    {
+        return self::detainedPeriodQuery($detainer, $startAt, $endAt)->count();
+    }
+
+    public static function detainedLongPeriodCount(Detainer $detainer = null, Carbon $startAt, Carbon $endAt)
+    {
+        $wagons = self::detainedPeriodQuery($detainer, $startAt, $endAt)->get();
+
+        $res = 0;
+        foreach ($wagons as $wagon) {
+            if ($wagon->isDetainedLong()) {
+                $res++;
+            }
+        }
+
+        return $res;
+    }
+
+    public static function detainedAtQuery(Detainer $detainer = null, Carbon $datetime = null)
     {
         if ($datetime) {
             $query = $detainer
@@ -185,14 +221,29 @@ class Wagon extends Model
         return $query;
     }
 
-    public static function detainedCount(Detainer $detainer = null, Carbon $datetime = null)
+
+    /**
+     * Returns count detained wagons on the certain date (now if date is null)
+     *
+     * @param Detainer|null $detainer
+     * @param Carbon|null $datetime
+     * @return int
+     */
+    public static function detainedAtCount(Detainer $detainer = null, Carbon $datetime = null)
     {
-        return self::detainedQuery($detainer, $datetime)->count();
+        return self::detainedAtQuery($detainer, $datetime)->count();
     }
 
-    public static function detainedLongCount(Detainer $detainer = null, Carbon $datetime = null)
+    /**
+     * Returns count long detained wagons on the certain date (now if date is null)
+     *
+     * @param Detainer|null $detainer
+     * @param Carbon|null $datetime
+     * @return int
+     */
+    public static function detainedLongAtCount(Detainer $detainer = null, Carbon $datetime = null)
     {
-        $wagons = self::detainedQuery($detainer, $datetime)->get();
+        $wagons = self::detainedAtQuery($detainer, $datetime)->get();
 
         $res = 0;
         foreach ($wagons as $wagon) {
@@ -206,9 +257,9 @@ class Wagon extends Model
 
     public static function wagonsChangedForPeriod(Carbon $startsAt, Carbon $endsAt)
     {
-        return Wagon::whereBetween('detained_at', [$startsAt, $endsAt])
-            ->orWhereBetween('released_at', [$startsAt, $endsAt])
-            ->orWhereBetween('departed_at', [$startsAt, $endsAt])
+        return Wagon::where('detained_at', '>=', $startsAt)
+            ->where('detained_at', '<' , $endsAt)
+//            ->orWhereBetween('departed_at', [$startsAt, $endsAt])
             ->orderBy('detained_at')
             ->get();
 

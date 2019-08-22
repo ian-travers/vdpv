@@ -12,44 +12,30 @@
       <h4>{{ $shiftStartsAt->format('d.m.Y H:i') }} &mdash; {{ $shiftEndsAt->format('d.m.Y H:i') }}</h4>
     </div>
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-center">
       <div class="w-50 p-3">
-        <p class="text-center lead">На начало периода</p>
+        <p class="text-center lead"></p>
         <table class="table table-sm table-bordered">
           <tbody>
           <tr class="font-weight-bolder">
-            <td width="60%">Задержано всего:<br><span class="small text-muted">в том числе</span></td>
-            <td width="20%" class="text-center">{{ App\Wagon::detainedCount(null, $shiftStartsAt) }}</td>
-            <td width="20%" class="text-center">{{ App\Wagon::detainedLongCount(null, $shiftStartsAt) }}</td>
+            <td width="60%">Задержано: всего/длительно простаивающих<br><span class="small text-muted">в том числе:</span></td>
+            <td width="20%" class="text-center">
+              {{ App\Wagon::detainedPeriodCount(null, $shiftStartsAt, $shiftEndsAt) }}
+            </td>
+            <td width="20%" class="text-center">
+              {{ App\Wagon::detainedLongPeriodCount(null, $shiftStartsAt, $shiftEndsAt) }}
+            </td>
           </tr>
 
           @foreach($detainers as $detainer)
             <tr>
               <td>{{ $detainer->name }}</td>
-              <td class="text-center">{{ App\Wagon::detainedCount($detainer, $shiftStartsAt) }}</td>
-              <td class="text-center">{{ App\Wagon::detainedLongCount($detainer, $shiftStartsAt) }}</td>
-            </tr>
-
-          @endforeach
-          </tbody>
-        </table>
-      </div>
-
-      <div class="w-50 p-3">
-        <p class="text-center lead">На конец периода</p>
-        <table class="table table-sm table-bordered">
-          <tbody>
-          <tr class="font-weight-bolder">
-            <td width="60%">Задержано всего:<br><span class="small text-muted">в том числе</span></td>
-            <td width="20%" class="text-center">{{ App\Wagon::detainedCount(null, $shiftEndsAt) }}</td>
-            <td width="20%" class="text-center">{{ App\Wagon::detainedLongCount(null, $shiftEndsAt) }}</td>
-          </tr>
-
-          @foreach($detainers as $detainer)
-            <tr>
-              <td>{{ $detainer->name }}</td>
-              <td class="text-center">{{ App\Wagon::detainedCount($detainer, $shiftEndsAt) }}</td>
-              <td class="text-center">{{ App\Wagon::detainedLongCount($detainer, $shiftEndsAt) }}</td>
+              <td class="text-center">
+                {{ App\Wagon::detainedPeriodCount($detainer, $shiftStartsAt, $shiftEndsAt) }}
+              </td>
+              <td class="text-center">
+                {{ App\Wagon::detainedLongPeriodCount($detainer, $shiftStartsAt, $shiftEndsAt)}}
+              </td>
             </tr>
 
           @endforeach
@@ -70,7 +56,6 @@
             <th>Прибыл</th>
             <th>Задержан</th>
             <th>Причина</th>
-            <th>Выпущен</th>
             <th>Отправлен</th>
           </tr>
           </thead>
@@ -86,7 +71,6 @@
               <td class="text-center">{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y H:i') : '' }}</td>
               <td class="text-center {{ $wagon->isDetainedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-info font-weight-bolder' : '' }}">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
               <td>{{ $wagon->reason }}</td>
-              <td class="text-center {{ $wagon->isReleasedBetween($shiftStartsAt, $shiftEndsAt) ? 'font-weight-bolder' : '' }}">{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y H:i') : '' }}</td>
               <td class="text-center {{ $wagon->isDepartedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-success font-weight-bolder' : '' }}">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>
             </tr>
 
