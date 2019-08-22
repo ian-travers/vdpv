@@ -1,4 +1,5 @@
 @include('partials.custom-report-modal')
+@include('partials.at-time-modal')
 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
   <div class="container-fluid">
@@ -25,6 +26,10 @@
           <a href="" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
              aria-expanded="false" v-pre>Отчеты по задержанным вагонам <span class="caret"></span></a>
           <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#at-time-report">
+              На дату-время
+            </a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ route('reports.last') }}">
               Последняя смена
             </a>

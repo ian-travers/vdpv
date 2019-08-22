@@ -10,6 +10,7 @@ Route::get('/detained-by/{detainer}/long', 'InfoController@detainedByLong')->nam
 Route::get('/recent/{day}/{type}', 'InfoController@recent')->name('recent');
 Route::get('/long-only', 'InfoController@longOnly')->name('long-only');
 
+Route::get('/reports/at-time', 'ReportsController@showAtTime')->name('reports.at-time');
 Route::get('/reports/last', 'ReportsController@showLast')->name('reports.last');
 Route::get('/reports/previous', 'ReportsController@showPrevious')->name('reports.previous');
 Route::get('/reports/custom/{start}/{end}', 'ReportsController@showCustom')->name('reports.custom');

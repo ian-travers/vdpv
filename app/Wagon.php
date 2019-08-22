@@ -221,6 +221,17 @@ class Wagon extends Model
         return $query;
     }
 
+    /**
+     * Returns detained wagons at time
+     *
+     * @param Detainer|null $detainer
+     * @param Carbon|null $datetime
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+     */
+    public static function detainedAtAll(Detainer $detainer = null, Carbon $datetime = null)
+    {
+        return self::detainedAtQuery($detainer, $datetime)->get();
+    }
 
     /**
      * Returns count detained wagons on the certain date (now if date is null)

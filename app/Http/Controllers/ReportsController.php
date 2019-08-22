@@ -19,6 +19,19 @@ class ReportsController extends Controller
         $this->shift = $shift;
     }
 
+    public function showAtTime()
+    {
+        request()->validate(['time' => 'required']);
+
+        $detainers = Detainer::all();
+
+        $atTime = Carbon::createFromFormat('d.m.Y H:i', request('time'));
+
+        $wagons = Wagon::detainedAtAll(null, $atTime);
+
+        return view('reports.at-time', compact('detainers', 'atTime', 'wagons'));
+    }
+
     public function showLast()
     {
         $detainers = Detainer::all();
@@ -45,6 +58,11 @@ class ReportsController extends Controller
 
     public function showCustom()
     {
+        request()->validate([
+            'start' => 'required',
+            'end' => 'required'
+        ]);
+
         $detainers = Detainer::all();
 
         $shiftStartsAt = Carbon::createFromFormat('d.m.Y H:i', request('start'));
