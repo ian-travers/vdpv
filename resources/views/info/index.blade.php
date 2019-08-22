@@ -19,7 +19,7 @@
             <div class="widget">
               <div class="widget-heading">
                 <h4>
-                  Задержано: всего/длительно простаивающих
+                  Задержано: всего / длительно простаивающих
                   <a href="{{ route('long-only') }}">
                     <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongAtCount() }}</span>
                   </a>
