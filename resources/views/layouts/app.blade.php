@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="h-100" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,16 +16,24 @@
   <!-- Styles -->
   <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
 </head>
-<body>
-<div id="app">
+<body class="h-100">
+<div id="app" class="d-flex flex-column h-100">
+    <header>
 
-  @include('partials.top-navbar')
-  <main>
+      @include('partials.top-navbar')
+    </header>
 
-    @section('breadcrumbs', Breadcrumbs::render())
-    @yield('breadcrumbs')
-    @yield('content')
-  </main>
+    <main class="">
+
+      @section('breadcrumbs', Breadcrumbs::render())
+      @yield('breadcrumbs')
+      @yield('content')
+    </main>
+
+    <footer class="mt-auto">
+
+      @include('partials.footer')
+    </footer>
 </div>
 <script src="{{ mix('js/app.js', 'build') }}"></script>
 @yield('script')
