@@ -40,4 +40,25 @@ class ShiftTest extends TestCase
         $this->assertEquals(Carbon::yesterday()->hour(8)->minute(0)->second(0), $shift->getPrevShiftEnd());
         $this->assertEquals(0, $shift->getPrevShiftStart()->diffInMinutes(Carbon::parse('-2 day')->hour(20)->minute(0)->second(0)));
     }
+
+    /** @test */
+    function check_current_time()
+    {
+        $shift = new Shift();
+
+        $curHour = Carbon::now()->hour;
+
+        if ($curHour >=8 && $curHour < 20) {
+            $this->assertEquals(Carbon::today()->hour(8)->minute(0)->second(0), $shift->getLastShiftEnd());
+            $this->assertEquals(Carbon::yesterday()->hour(20)->minute(0)->second(0), $shift->getLastShiftStart());
+        } elseif ($curHour >= 20) {
+            $this->assertEquals(Carbon::today()->hour(20)->minute(0)->second(0), $shift->getLastShiftEnd());
+            $this->assertEquals(Carbon::today()->hour(8)->minute(0)->second(0), $shift->getLastShiftStart());
+        } else {
+            $this->assertEquals(Carbon::yesterday()->hour(20)->minute(0)->second(0), $shift->getLastShiftEnd());
+            $this->assertEquals(Carbon::yesterday()->hour(8)->minute(0)->second(0), $shift->getLastShiftStart());
+        }
+
+
+    }
 }

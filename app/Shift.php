@@ -26,9 +26,13 @@ class Shift
      */
     protected $prevShiftEnd;
 
-    public function __construct($hour = 0)
+    public function __construct($hour = null)
     {
-        $hour = ($hour >= 0 && $hour <= 23) ? $hour: 0;
+//        $hour = ($hour >= 0 && $hour <= 23) ? $hour: 0;
+//
+        isset($hour)
+            ? $hour = ($hour >= 0 && $hour <= 23) ? $hour: 0
+            : $hour = Carbon::now()->hour;
 
         if ($hour > 8 && $hour <= 20) {
             $this->lastShiftEnd = Carbon::today()->hour(8)->minute(0)->second(0);
