@@ -11,8 +11,8 @@
         @if(!count($wagons))
 
           @if(request('term'))
-            <div class="alert alert-warning">
-              Ничего не найдено по запросу "{{ request('term') }}"!
+            <div class="alert alert-warning border">
+              Ничего не найдено по запросу "{{ request('term') }}".
             </div>
 
           @else
