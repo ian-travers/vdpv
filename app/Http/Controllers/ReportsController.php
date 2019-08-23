@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Detainer;
 use App\Shift;
-use App\Wagon;
 use Carbon\Carbon;
 
 class ReportsController extends Controller
@@ -27,7 +26,7 @@ class ReportsController extends Controller
 
         $atTime = Carbon::createFromFormat('d.m.Y H:i', request('time'));
 
-        $wagons = Wagon::detainedAtAll(null, $atTime);
+        $wagons = detainedAtAll(null, $atTime);
 
         return view('reports.at-time', compact('detainers', 'atTime', 'wagons'));
     }
@@ -39,7 +38,7 @@ class ReportsController extends Controller
         $shiftStartsAt = $this->shift->getLastShiftStart();
         $shiftEndsAt = $this->shift->getLastShiftEnd();
 
-        $wagons = Wagon::wagonsChangedForPeriod($shiftStartsAt, $shiftEndsAt);
+        $wagons = wagonsDetainedForPeriod($shiftStartsAt, $shiftEndsAt);
 
         return view('reports.period', compact('detainers', 'wagons', 'shiftStartsAt', 'shiftEndsAt'));
     }
@@ -51,7 +50,7 @@ class ReportsController extends Controller
         $shiftStartsAt = $this->shift->getPrevShiftStart();
         $shiftEndsAt = $this->shift->getPrevShiftEnd();
 
-        $wagons = Wagon::wagonsChangedForPeriod($shiftStartsAt, $shiftEndsAt);
+        $wagons = wagonsDetainedForPeriod($shiftStartsAt, $shiftEndsAt);
 
         return view('reports.period', compact('detainers', 'wagons', 'shiftStartsAt', 'shiftEndsAt'));
     }
@@ -68,7 +67,7 @@ class ReportsController extends Controller
         $shiftStartsAt = Carbon::createFromFormat('d.m.Y H:i', request('start'));
         $shiftEndsAt = Carbon::createFromFormat('d.m.Y H:i', request('end'));
 
-        $wagons = Wagon::wagonsChangedForPeriod($shiftStartsAt, $shiftEndsAt);
+        $wagons = wagonsDetainedForPeriod($shiftStartsAt, $shiftEndsAt);
 
 
         return view('reports.period', compact('detainers', 'wagons', 'shiftStartsAt', 'shiftEndsAt'));

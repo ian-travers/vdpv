@@ -19,10 +19,10 @@
           <tr class="font-weight-bolder">
             <td width="60%">Задержано: всего/длительно простаивающих<br><span class="small text-muted">в том числе:</span></td>
             <td width="20%" class="text-center">
-              {{ App\Wagon::detainedAtCount(null, $atTime) }}
+              {{ detainedAtCount(null, $atTime) }}
             </td>
             <td width="20%" class="text-center">
-              {{ App\Wagon::detainedLongAtCount(null, $atTime) }}
+              {{ detainedLongAtCount(null, $atTime) }}
             </td>
           </tr>
 
@@ -30,10 +30,10 @@
             <tr>
               <td>{{ $detainer->name }}</td>
               <td class="text-center">
-                {{ App\Wagon::detainedAtCount($detainer, $atTime) }}
+                {{ detainedAtCount($detainer, $atTime) }}
               </td>
               <td class="text-center">
-                {{ App\Wagon::detainedLongAtCount($detainer, $atTime) }}
+                {{ detainedLongAtCount($detainer, $atTime) }}
               </td>
             </tr>
 

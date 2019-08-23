@@ -21,10 +21,10 @@
                 <h4>
                   Задержано: всего / длительно простаивающих
                   <a href="{{ route('long-only') }}">
-                    <span class="badge badge-danger float-right">{{ App\Wagon::detainedLongAtCount() }}</span>
+                    <span class="badge badge-danger float-right">{{ detainedLongAtCount() }}</span>
                   </a>
                   <a href="{{ route('all') }}">
-                    <span class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedAtCount() }}</span>
+                    <span class="badge badge-primary float-right mr-1">{{ detainedAtCount() }}</span>
                   </a>
                 </h4>
               </div>
@@ -40,12 +40,12 @@
 
                         <a href="{{ route('detained-by-long', $detainer) }}">
                           <span
-                              class="badge badge-danger float-right">{{ App\Wagon::detainedLongAtCount($detainer) }}</span>
+                              class="badge badge-danger float-right">{{ detainedLongAtCount($detainer) }}</span>
                         </a>
 
                         <a href="{{ route('detained-by', $detainer) }}">
                       <span
-                          class="badge badge-primary float-right mr-1">{{ App\Wagon::detainedAtCount($detainer) }}</span>
+                          class="badge badge-primary float-right mr-1">{{ detainedAtCount($detainer) }}</span>
                         </a>
                       </div>
                     </li>

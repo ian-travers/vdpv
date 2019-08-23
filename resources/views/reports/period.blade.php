@@ -20,10 +20,10 @@
           <tr class="font-weight-bolder">
             <td width="60%">Задержано: всего/длительно простаивающих<br><span class="small text-muted">в том числе:</span></td>
             <td width="20%" class="text-center">
-              {{ App\Wagon::detainedPeriodCount(null, $shiftStartsAt, $shiftEndsAt) }}
+              {{ detainedPeriodCount(null, $shiftStartsAt, $shiftEndsAt) }}
             </td>
             <td width="20%" class="text-center">
-              {{ App\Wagon::detainedLongPeriodCount(null, $shiftStartsAt, $shiftEndsAt) }}
+              {{ detainedLongPeriodCount(null, $shiftStartsAt, $shiftEndsAt) }}
             </td>
           </tr>
 
@@ -31,10 +31,10 @@
             <tr>
               <td>{{ $detainer->name }}</td>
               <td class="text-center">
-                {{ App\Wagon::detainedPeriodCount($detainer, $shiftStartsAt, $shiftEndsAt) }}
+                {{ detainedPeriodCount($detainer, $shiftStartsAt, $shiftEndsAt) }}
               </td>
               <td class="text-center">
-                {{ App\Wagon::detainedLongPeriodCount($detainer, $shiftStartsAt, $shiftEndsAt)}}
+                {{ detainedLongPeriodCount($detainer, $shiftStartsAt, $shiftEndsAt)}}
               </td>
             </tr>
 
