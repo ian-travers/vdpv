@@ -26,37 +26,44 @@ class Shift
      */
     protected $prevShiftEnd;
 
-    public function __construct()
+    public function __construct($hour = 0)
     {
-        if (Carbon::now()->hour <= 20) {
-            $this->lastShiftStart = Carbon::yesterday()->hour(20)->minute(0)->second(0);
+        $hour = ($hour >= 0 && $hour <= 23) ? $hour: 0;
+
+        if ($hour > 8 && $hour <= 20) {
             $this->lastShiftEnd = Carbon::today()->hour(8)->minute(0)->second(0);
-            $this->prevShiftStart = Carbon::yesterday()->hour(8)->minute(0)->second(0);
+            $this->lastShiftStart = Carbon::yesterday()->hour(20)->minute(0)->second(0);
             $this->prevShiftEnd = Carbon::yesterday()->hour(20)->minute(0)->second(0);
-        } else {
-            $this->lastShiftStart = Carbon::today()->hour(8)->minute(0)->second(0);
+            $this->prevShiftStart = Carbon::yesterday()->hour(8)->minute(0)->second(0);
+        } elseif ($hour > 20) {
             $this->lastShiftEnd = Carbon::today()->hour(20)->minute(0)->second(0);
-            $this->prevShiftStart = Carbon::yesterday()->hour(20)->minute(0)->second(0);
+            $this->lastShiftStart = Carbon::today()->hour(8)->minute(0)->second(0);
             $this->prevShiftEnd = Carbon::today()->hour(8)->minute(0)->second(0);
+            $this->prevShiftStart = Carbon::yesterday()->hour(20)->minute(0)->second(0);
+        } else {
+            $this->lastShiftEnd = Carbon::yesterday()->hour(20)->minute(0)->second(0);
+            $this->lastShiftStart = Carbon::yesterday()->hour(8)->minute(0)->second(0);
+            $this->prevShiftEnd = Carbon::yesterday()->hour(8)->minute(0)->second(0);
+            $this->prevShiftStart = Carbon::parse('-2 day')->hour(20)->minute(0)->second(0);
         }
     }
 
-    public function getLastShiftStart()
+    public function getLastShiftStart(): Carbon
     {
         return $this->lastShiftStart;
     }
 
-    public function getLastShiftEnd()
+    public function getLastShiftEnd(): Carbon
     {
         return $this->lastShiftEnd;
     }
 
-    public function getPrevShiftStart()
+    public function getPrevShiftStart(): Carbon
     {
         return $this->prevShiftStart;
     }
 
-    public function getPrevShiftEnd()
+    public function getPrevShiftEnd(): Carbon
     {
         return $this->prevShiftEnd;
     }
