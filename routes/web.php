@@ -13,7 +13,7 @@ Route::get('/long-only', 'InfoController@longOnly')->name('long-only');
 Route::get('/reports/at-time', 'ReportsController@showAtTime')->name('reports.at-time');
 Route::get('/reports/last', 'ReportsController@showLast')->name('reports.last');
 Route::get('/reports/previous', 'ReportsController@showPrevious')->name('reports.previous');
-Route::get('/reports/custom/{start}/{end}', 'ReportsController@showCustom')->name('reports.custom');
+Route::get('/reports/custom', 'ReportsController@showCustom')->name('reports.custom');
 
 Auth::routes();
 

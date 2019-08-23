@@ -13,12 +13,12 @@
     </div>
 
     <div class="d-flex justify-content-center">
-      <div class="w-50 p-3">
+      <div class="w-75 p-3">
         <p class="text-center lead"></p>
         <table class="table table-sm table-bordered">
           <tbody>
           <tr class="font-weight-bolder">
-            <td width="60%">Задержано: всего/длительно простаивающих<br><span class="small text-muted">в том числе:</span></td>
+            <td width="60%">Задержано: всего / длительно простаивающих<br><span class="small text-muted">в том числе:</span></td>
             <td width="20%" class="text-center">
               {{ detainedPeriodCount(null, $shiftStartsAt, $shiftEndsAt) }}
             </td>
