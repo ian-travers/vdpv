@@ -29,4 +29,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
+Route::group([
+    'middleware' => 'admin',
+    'prefix' => '/adm',
+    'namespace' => 'Backend',
+], function () {
+    Route::get('/', 'BackendController@overall')->name('admin');
+});
+
 
