@@ -13,6 +13,7 @@ use Carbon\Carbon;
  * @property int $id
  * @property int $creator_id
  * @property string $inw
+ * @property int $returning
  * @property \Illuminate\Support\Carbon|null $arrived_at
  * @property \Illuminate\Support\Carbon|null $detained_at
  * @property \Illuminate\Support\Carbon|null $released_at
@@ -58,6 +59,7 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon wherePark($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereReleasedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereReturning($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereTakenMeasure($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereWay($value)

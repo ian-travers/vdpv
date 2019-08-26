@@ -17,6 +17,10 @@
         <table class="table table-sm border border-bottom">
           <tbody>
           <tr>
+            <td width="15%" class="text-right text-muted">Возврат</td>
+            <td>{{ $wagon->returning ? 'Да' : 'Нет' }}</td>
+          </tr>
+          <tr>
             <td width="15%" class="text-right text-muted">Прибыл</td>
             <td>{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y в H:i') : '' }}</td>
           </tr>

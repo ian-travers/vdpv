@@ -134,6 +134,16 @@
         </div>
       </div>
 
+      {{-- Признак возврата --}}
+      <div class="form-group">
+        <label for="returning">Возврат</label>
+        <input type="checkbox" id="returning" name="returning"
+               @if($wagon->returning)
+               checked="checked"
+               @endif
+               class="form-control">
+      </div>
+
     </div>
   </div>
 </div>
