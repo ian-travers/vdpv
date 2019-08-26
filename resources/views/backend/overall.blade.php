@@ -8,8 +8,15 @@
       </div>
       <div class="col-10">
         Content
+        <div class="">
+          {!! $chart->container() !!}
+        </div>
       </div>
     </div>
   </div>
+@endsection
+
+@section('script')
+  {!! $chart->script() !!}
 @endsection
 

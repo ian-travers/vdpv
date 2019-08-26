@@ -16,6 +16,9 @@ try {
 // IziToast
 window.iziToast = require('izitoast/dist/js/iziToast.min');
 
+// Chart JS
+window.Chart = require('chart.js/dist/Chart.min');
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
