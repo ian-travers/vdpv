@@ -25,16 +25,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/wagons/{wagon}', 'WagonsController@update')->name('wagons.update');
     Route::post('/wagons', 'WagonsController@store')->name('wagons.store');
     Route::delete('/wagons/{wagon}', 'WagonsController@destroy')->name('wagons.destroy');
-
-    Route::get('/home', 'HomeController@index')->name('home');
+//    Route::get('/home', 'HomeController@index')->name('home');
 });
 
 Route::group([
-    'middleware' => 'admin',
+    'middleware' => ['auth', 'admin'],
     'prefix' => '/adm',
     'namespace' => 'Backend',
+    'as' => 'admin.'
 ], function () {
-    Route::get('/', 'BackendController@overall')->name('admin');
+    Route::get('/', 'BackendController@overall')->name('overall');
 });
 
 

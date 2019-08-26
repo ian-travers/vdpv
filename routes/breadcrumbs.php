@@ -107,3 +107,8 @@ Breadcrumbs::for('password.reset', function (BreadcrumbsGenerator $trail) {
     $trail->parent('login');
     $trail->push('Восстановление пароля', route('login'));
 });
+
+Breadcrumbs::for('admin.overall', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('root');
+    $trail->push('Администрирование');
+});

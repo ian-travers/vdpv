@@ -8,6 +8,6 @@ class BackendController extends Controller
 {
     public function overall()
     {
-        return 'Overall';
+        return view('backend.overall');
     }
 }
