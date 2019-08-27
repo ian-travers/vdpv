@@ -15,10 +15,12 @@ class WagonsController extends Controller
     {
         $term = request()->only('term');
 
-        $wagons = Auth::user()
-            ->wagons()
-            ->filter($term)
-            ->paginate($this->wagonsPerPage);
+        $wagons = Auth::user()->isAdmin()
+            ? Wagon::filter($term)
+                ->paginate($this->wagonsPerPage)
+            : Auth::user()->wagons()
+                ->filter($term)
+                ->paginate($this->wagonsPerPage);
 
         return view('wagons.index', compact('wagons', 'term'));
     }
