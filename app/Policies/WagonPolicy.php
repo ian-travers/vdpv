@@ -19,6 +19,6 @@ class WagonPolicy
      */
     public function manage(User $user, Wagon $wagon)
     {
-        return $user->is($wagon->creator);
+        return $user->is($wagon->creator)  || $user->isAdmin();
     }
 }

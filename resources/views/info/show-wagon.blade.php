@@ -8,8 +8,14 @@
       <div class="col-9">
 
         <div class="card">
-          <div class="card-header bg-light">
-            <h2>Информация о вагоне {{ $wagon->inw }}</h2>
+          <div class="card-header bg-light d-flex justify-content-between">
+            <h3>Информация о вагоне {{ $wagon->inw }}</h3>
+            @can('manage', $wagon)
+              <div class="text-right">
+                <a class="btn btn-outline-primary mr-2" href="{{ route('wagons.edit', $wagon) }}">Редактировать</a>
+              </div>
+
+            @endcan
           </div>
           <div class="card-body">
             <table class="table table-sm border border-bottom">
