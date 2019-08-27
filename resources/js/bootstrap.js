@@ -18,6 +18,7 @@ window.iziToast = require('izitoast/dist/js/iziToast.min');
 
 // Chart JS
 window.Chart = require('chart.js/dist/Chart.min');
+window.ChartDataLabels = require('chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

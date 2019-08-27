@@ -11,6 +11,10 @@
         <div class="">
           {!! $chart->container() !!}
         </div>
+
+        <div class="">
+          {!! $chartBy->container() !!}
+        </div>
       </div>
     </div>
   </div>
@@ -18,5 +22,6 @@
 
 @section('script')
   {!! $chart->script() !!}
+  {!! $chartBy->script() !!}
 @endsection
 
