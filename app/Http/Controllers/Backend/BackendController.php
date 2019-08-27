@@ -13,15 +13,29 @@ class BackendController extends Controller
     {
         $chart = new WagonsPerDayChart();
         $chart->labels(['One', 'Two', 'Three', 'Four']);
-        $chart->dataset('My dataset', 'line', [15, 12, 13, 9])->color('red')->backgroundcolor('rgba(0, 0, 0, 0.0)');
-        $chart->dataset('My dataset 2', 'line', [14, 18, 22, 11])->color('green')->backgroundcolor('rgba(0, 0, 0, 0.0)');;
+        $chart->dataset('My dataset', 'line', [15, 12, 13, 9])->color('red')->backgroundcolor('red');
+        $chart->dataset('My dataset 2', 'line', [14, 18, 22, 11])->color('green')->backgroundcolor('green');
         $chart->options([
+            'elements' => [
+                'line' => [
+                    'fill' => false
+                ]
+            ],
+            'scales' => [
+                'yAxes' => [
+                    'stacked' => true
+                ],
+            ],
             'plugins' => '{
                 datalabels: {
-                    color: "#36A2EB",
-                    align: "right",
-                    anchor: "end",
-                    clip: "true"
+                    backgroundColor: function(context) {
+                        return context.dataset.backgroundColor;
+                    },
+                    borderRadius: 4,
+                    color: "white",
+                    font: {
+                        weight: "bold"
+                    },
                 }
             }',
         ]);
