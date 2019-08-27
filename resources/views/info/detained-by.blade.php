@@ -15,11 +15,11 @@
 
         @else
           @include('info.wagons-table')
-        @endif
+          <nav>
+            {{ $wagons->appends(request()->only(['term']))->links() }}
+          </nav>
 
-        <nav>
-          {{ $wagons->appends(request()->only(['term']))->links() }}
-        </nav>
+        @endif
       </div>
       <div class="col-3">
 

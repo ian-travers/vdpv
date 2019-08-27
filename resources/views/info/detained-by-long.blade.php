@@ -4,7 +4,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <h3 class="mt-3">Длительно стоящие вагоны: {{ $detainer->name }}</h3>
+    <h3 class="mt-3">Длительно простаивающие вагоны: {{ $detainer->name }}</h3>
     <div class="row mt-3">
 
       <div class="col-9">

@@ -20,8 +20,6 @@
           </nav>
 
         @endif
-
-
       </div>
       <div class="col-3">
 
