@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Charts\LastTenDaysStatisticsChart;
 use App\Charts\WagonsPerDayChart;
 use App\Detainer;
 use App\Http\Controllers\Controller;
@@ -11,34 +12,7 @@ class BackendController extends Controller
 {
     public function overall()
     {
-        $chart = new WagonsPerDayChart();
-        $chart->labels(['One', 'Two', 'Three', 'Four']);
-        $chart->dataset('My dataset', 'line', [15, 12, 13, 9])->color('red')->backgroundcolor('red');
-        $chart->dataset('My dataset 2', 'line', [14, 18, 22, 11])->color('green')->backgroundcolor('green');
-        $chart->options([
-            'elements' => [
-                'line' => [
-                    'fill' => false
-                ]
-            ],
-            'scales' => [
-                'yAxes' => [
-                    'stacked' => true
-                ],
-            ],
-            'plugins' => '{
-                datalabels: {
-                    backgroundColor: function(context) {
-                        return context.dataset.backgroundColor;
-                    },
-                    borderRadius: 4,
-                    color: "white",
-                    font: {
-                        weight: "bold"
-                    },
-                }
-            }',
-        ]);
+        $lastTenDaysStats = new LastTenDaysStatisticsChart();
 
         $wagonsBy = Wagon::selectRaw('count(*) as cnt, detainer_id')
             ->groupBy('detainer_id')
@@ -77,6 +51,6 @@ class BackendController extends Controller
         ]);
 
 
-        return view('backend.overall', compact('chart', 'chartBy'));
+        return view('backend.overall', compact('lastTenDaysStats', 'chartBy'));
     }
 }

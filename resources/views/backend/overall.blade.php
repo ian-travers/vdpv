@@ -9,7 +9,7 @@
       <div class="col-10">
         Content
         <div class="">
-          {!! $chart->container() !!}
+          {!! $lastTenDaysStats->container() !!}
         </div>
 
         <div class="">
@@ -21,7 +21,7 @@
 @endsection
 
 @section('script')
-  {!! $chart->script() !!}
+  {!! $lastTenDaysStats->script() !!}
   {!! $chartBy->script() !!}
 @endsection
 

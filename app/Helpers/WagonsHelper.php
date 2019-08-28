@@ -141,3 +141,23 @@ function wagonsDetainedForPeriod(Carbon $startsAt, Carbon $endsAt)
         ->orderBy('detained_at')
         ->get();
 }
+
+function wagonsOperationCountByDay($operation, Carbon $day)
+{
+    if (!($operation == 'detained' || $operation == 'released' || $operation == 'departed')) {
+        return 0;
+    }
+
+    $queryOperation = $operation . '_at';
+
+    $start = Carbon::parse($day)->hour(0)->minute(0)->second(0);
+    $end = Carbon::parse($day)->hour(23)->minute(59)->second(59);
+
+    $query = Wagon::where($queryOperation, '>=', $start)
+        ->where($queryOperation, '<=', $end)
+        ->toSql();
+
+    return Wagon::where($queryOperation, '>=', $start)
+        ->where($queryOperation, '<=', $end)
+        ->count();
+}
