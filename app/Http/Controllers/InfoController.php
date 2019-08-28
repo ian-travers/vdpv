@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\LastTenDaysStatisticsChart;
 use App\Detainer;
 use App\Wagon;
 use Carbon\Carbon;
@@ -20,7 +21,9 @@ class InfoController extends Controller
                 ->paginate($this->wagonsPerPage)
             : [];
 
-        return view('info.index', compact('detainers', 'wagons'));
+        $lastTenDaysChart = new LastTenDaysStatisticsChart();
+
+        return view('info.index', compact('detainers', 'wagons', 'lastTenDaysChart'));
     }
 
     public function all()
