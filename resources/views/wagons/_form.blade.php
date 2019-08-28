@@ -3,7 +3,7 @@
 @csrf
 <div class="card border border-primary rounded-lg mb-2">
   <div class="card-header bg-primary text-light lead py-1">
-    Информация по вагону
+    Информация по задержанному вагону
   </div>
   <div class="card-body pb-0">
     <div class="d-sm-inline-flex justify-content-lg-start align-items-start">
@@ -121,7 +121,7 @@
 
       {{-- Дата/время задержания --}}
       <div class="form-group mr-2">
-        <label for="dtp_detained_at">Дата/время задержки</label>
+        <label id="detained_at_label" for="dtp_detained_at">Дата/время задержки</label>
         <div class="input-group" id="detained_at" data-target-input="nearest">
           <input type="text" id="dtp_detained_at"
                  name="detained_at"
@@ -225,13 +225,13 @@
 
 <div class="card border border-primary rounded-lg mb-2">
   <div class="card-header bg-primary text-light lead py-1">
-    Выпуск вагона
+    Снятие задержки и отправление вагона
   </div>
   <div class="card-body pb-0">
     <div class="d-inline-flex align-items-end justify-content-end">
 
       <div class="form-group mr-2">
-        <label for="dtp_released_at">Дата/время выпуска</label>
+        <label id="released_at_label" for="dtp_released_at">Дата/время выпуска</label>
         <div class="input-group" id="released_at" data-target-input="nearest">
           <input type="text" id="dtp_released_at"
                  name="released_at"
@@ -244,7 +244,7 @@
         </div>
       </div>
 
-      <div class="form-group mr-2">
+      <div class="form-group">
         <label for="dtp_departed_at">Дата/время отправления</label>
         <div class="input-group" id="departed_at" data-target-input="nearest">
           <input type="text" id="dtp_departed_at"
@@ -282,15 +282,22 @@
   </script>
 
   <script>
-      if (String($('#detainer_id').val()) !== String(7)) {
+      if (String($('#detainer_id').val()) === String(7)) {
+          $('#detained_at_label').html('Окончание грузовой операции');
+          $('#released_at_label').html('Уборка вагона');
+      } else {
           $('#local-wagon').hide();
       }
 
       $(document).ready(function () {
           $('#detainer_id').change(function () {
               if (String(this.value) === String(7)) {
+                  $('#detained_at_label').html('Окончание грузовой операции');
+                  $('#released_at_label').html('Уборка вагона');
                   $('#local-wagon').show(300);
               } else {
+                  $('#detained_at_label').html('Дата/время задержки');
+                  $('#released_at_label').html('Дата/время выпуска');
                   $('#local-wagon').hide(300);
               }
           });
