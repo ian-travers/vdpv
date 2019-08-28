@@ -56,6 +56,7 @@
             <th>Прибыл</th>
             <th>Задержан</th>
             <th>Причина</th>
+            <th>Возврат</th>
             <th>Отправлен</th>
           </tr>
           </thead>
@@ -71,6 +72,7 @@
               <td class="text-center">{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y H:i') : '' }}</td>
               <td class="text-center {{ $wagon->isDetainedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-info font-weight-bolder' : '' }}">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
               <td>{{ $wagon->reason }}</td>
+              <td class="text-center">{!! $wagon->renderReturning() !!}</td>
               <td class="text-center {{ $wagon->isDepartedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-success font-weight-bolder' : '' }}">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>
             </tr>
 

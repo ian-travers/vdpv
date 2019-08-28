@@ -9,6 +9,7 @@
     <th width="11%" class="align-top">Простой с момента задержания, ч.</th>
     <th width="13%" class="align-top">Простой после выпуска, ч.</th>
     <th class="align-top">Причина</th>
+    <th width="8%" class="align-top">Возврат</th>
   </tr>
   </thead>
   <tbody>
@@ -21,6 +22,7 @@
       <td class="text-center">{{ $wagon->detainedInHours() }}</td>
       <td class="text-center">{{ $wagon->detainedAfterReleaseInHours() }}</td>
       <td>{{ $wagon->reason }}</td>
+      <td class="text-center">{!! $wagon->renderReturning() !!}</td>
     </tr>
 
   @endforeach

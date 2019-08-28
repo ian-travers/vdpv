@@ -260,4 +260,16 @@ class WagonTest extends TestCase
 
         $this->assertEquals('text-danger', $wagon->fresh()->linkCssClass());
     }
+
+    /** @test */
+    function check_returning_render()
+    {
+        $wagon = app(WagonFactory::class)->create();
+
+        $this->assertEmpty($wagon->renderReturning());
+
+        $wagon->update(['returning' => true]);
+
+        $this->assertEquals('<span class="fa fa-check"></span>', $wagon->renderReturning());
+    }
 }

@@ -159,6 +159,11 @@ class Wagon extends Model
         return $this->detainer->long_detain_event;
     }
 
+    public function renderReturning()
+    {
+        return $this->returning ? '<span class="fa fa-check"></span>' : '';
+    }
+
 //    scopes
     public function scopeLatestFirst(Builder $query)
     {
