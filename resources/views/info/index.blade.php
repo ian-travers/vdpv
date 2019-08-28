@@ -55,14 +55,14 @@
               </div>
             </div>
 
-            <div class="widget">
-              <div class="widget-heading">
-                <h4>За последние 10 дней</h4>
-              </div>
-              <div style="max-height: 200px">
-                {!! $lastTenDaysChart->container() !!}
-              </div>
-            </div>
+            {{--<div class="widget">--}}
+              {{--<div class="widget-heading">--}}
+                {{--<h4>За последние 10 дней</h4>--}}
+              {{--</div>--}}
+              {{--<div style="max-height: 200px">--}}
+                {{--{!! $lastTenDaysChart->container() !!}--}}
+              {{--</div>--}}
+            {{--</div>--}}
 
           @endif
         @else
@@ -84,5 +84,5 @@
 @endsection
 
 @section('script')
-  {!! $lastTenDaysChart->script() !!}
+{{--  {!! $lastTenDaysChart->script() !!}--}}
 @endsection
