@@ -13,16 +13,19 @@ class LastTenDaysStatisticsChart extends Chart
 
         $labels = [];
         $detainedByDay = [];
+        $releasedByDay = [];
         $departedByDay = [];
         for ($i = 10; $i >= 1; $i--) {
             $labels[] = Carbon::parse('-' . $i . ' days')->format('d.m.Y');
             $detainedByDay[] = wagonsOperationCountByDay('detained', Carbon::parse('-' . $i . ' days'));
+            $releasedByDay[] = wagonsOperationCountByDay('released', Carbon::parse('-' . $i . ' days'));
             $departedByDay[] = wagonsOperationCountByDay('departed', Carbon::parse('-' . $i . ' days'));
         }
 
 
         $this->labels = array_values($labels);
         $this->dataset('Задержано', 'line', array_values($detainedByDay))->color('blue')->backgroundcolor('blue');
+        $this->dataset('Задержано', 'line', array_values($releasedByDay))->color('gray')->backgroundcolor('gray');
         $this->dataset('Отправлено', 'line', array_values($departedByDay))->color('green')->backgroundcolor('green');
         $this->options([
             'elements' => [
