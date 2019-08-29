@@ -110,5 +110,10 @@ Breadcrumbs::for('password.reset', function (BreadcrumbsGenerator $trail) {
 
 Breadcrumbs::for('admin.overall', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
-    $trail->push('Администрирование');
+    $trail->push('Администрирование', route('admin.overall'));
+});
+
+Breadcrumbs::for('admin.users.index', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('admin.overall');
+    $trail->push('Пользователи', route('admin.users.index'));
 });

@@ -35,6 +35,8 @@ Route::group([
     'as' => 'admin.'
 ], function () {
     Route::get('/', 'BackendController@overall')->name('overall');
+
+    Route::get('/users', 'UsersController@index')->name('users.index');
 });
 
 
