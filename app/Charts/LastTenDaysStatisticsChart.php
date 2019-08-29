@@ -25,7 +25,7 @@ class LastTenDaysStatisticsChart extends Chart
 
         $this->labels = array_values($labels);
         $this->dataset('Задержано', 'line', array_values($detainedByDay))->color('blue')->backgroundcolor('blue');
-        $this->dataset('Задержано', 'line', array_values($releasedByDay))->color('gray')->backgroundcolor('gray');
+        $this->dataset('Выпущено', 'line', array_values($releasedByDay))->color('gray')->backgroundcolor('gray');
         $this->dataset('Отправлено', 'line', array_values($departedByDay))->color('green')->backgroundcolor('green');
         $this->options([
             'elements' => [
