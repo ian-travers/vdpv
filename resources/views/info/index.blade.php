@@ -19,11 +19,14 @@
             <div class="widget">
               <div class="widget-heading">
                 <h4>
-                  Задержано: всего / длительно простаивающих
-                  <a href="{{ route('long-only') }}">
-                    <span class="badge badge-danger float-right">{{ detainedLongAtCount() }}</span>
+                  Вагоны: задержанные / длительно простаивающие / на контроле
+                  <a href="{{ route('controlled') }}">
+                    <span class="badge badge-secondary float-right">{{ controlledAtCount() }}</span>
                   </a>
-                  <a href="{{ route('all') }}">
+                  <a href="{{ route('long-only') }}">
+                    <span class="badge badge-danger float-right mr-1">{{ detainedLongAtCount() }}</span>
+                  </a>
+                  <a href="{{ route('detained') }}">
                     <span class="badge badge-primary float-right mr-1">{{ detainedAtCount() }}</span>
                   </a>
                 </h4>
@@ -40,7 +43,11 @@
 
                         <a href="{{ route('detained-by-long', $detainer) }}">
                           <span
-                              class="badge badge-danger float-right">{{ detainedLongAtCount($detainer) }}</span>
+                              class="badge badge-secondary float-right">{{ controlledAtCount($detainer) }}</span>
+                        </a>
+                        <a href="{{ route('detained-by-long', $detainer) }}">
+                          <span
+                              class="badge badge-danger float-right mr-1">{{ detainedLongAtCount($detainer) }}</span>
                         </a>
 
                         <a href="{{ route('detained-by', $detainer) }}">

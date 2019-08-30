@@ -4,6 +4,132 @@ use Carbon\Carbon;
 use App\Detainer;
 use App\Wagon;
 
+function controlledAtQuery(Detainer $detainer = null, Carbon $datetime = null)
+{
+    if ($datetime) {
+        $query = $detainer
+            ? $detainer->wagons()
+                ->where('detained_at', '<', $datetime)
+                ->where(function ($query) use ($datetime) {
+                    $query
+                        ->whereNull('departed_at')
+                        ->orWhere('departed_at', '>=', $datetime);
+                })
+
+
+            : Wagon::where('detained_at', '<', $datetime)
+                ->where(function ($query) use ($datetime) {
+                    $query
+                        ->whereNull('departed_at')
+                        ->orWhere('departed_at', '>=', $datetime);
+                });
+    } else {
+        $query = $detainer
+            ? $detainer->wagons()->whereNull('departed_at')
+            : Wagon::whereNull('departed_at');
+    }
+
+    return $query;
+}
+
+/**
+ * Returns controlled wagons at time
+ *
+ * @param Detainer|null $detainer
+ * @param Carbon|null $datetime
+ * @return Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+ */
+function controlledAtAll(Detainer $detainer = null, Carbon $datetime = null)
+{
+    return controlledAtQuery($detainer, $datetime)->get();
+}
+
+/**
+ * Returns count controlled wagons on the certain date (now if date is null)
+ *
+ * @param Detainer|null $detainer
+ * @param Carbon|null $datetime
+ * @return int
+ */
+function controlledAtCount(Detainer $detainer = null, Carbon $datetime = null)
+{
+    return controlledAtQuery($detainer, $datetime)->count();
+}
+
+/* ----------------------------- */
+
+function detainedAtQuery(Detainer $detainer = null, Carbon $datetime = null)
+{
+    $repairedIds = $datetime
+        ? Wagon::select('id')
+            ->where('detainer_id', 1)
+            ->where('departed_at', '<', $datetime)
+            ->where('released_at', '>', $datetime)
+            ->get()
+            ->toArray()
+        : Wagon::select('id')
+            ->where('detainer_id', 1)
+            ->whereNull('departed_at')
+            ->whereNotNull('released_at')
+            ->get()
+            ->toArray();
+
+    if ($datetime) {
+        $query = $detainer
+            ? $detainer->wagons()
+                ->where('detained_at', '<', $datetime)
+                ->where(function ($query) use ($datetime) {
+                    $query
+                        ->whereNull('departed_at')
+                        ->orWhere('departed_at', '>=', $datetime);
+                })
+                ->whereNotIn('id', $repairedIds)
+
+            : Wagon::where('detained_at', '<', $datetime)
+                ->where(function ($query) use ($datetime) {
+                    $query
+                        ->whereNull('departed_at')
+                        ->orWhere('departed_at', '>=', $datetime);
+                })
+                ->whereNotIn('id', $repairedIds);
+    } else {
+        $query = $detainer
+            ? $detainer->wagons()
+                ->whereNull('departed_at')
+                ->whereNotIn('id', $repairedIds)
+            : Wagon::whereNull('departed_at')
+                ->whereNotIn('id', $repairedIds);
+    }
+
+    return $query;
+}
+
+/**
+ * Returns detained wagons at time
+ *
+ * @param Detainer|null $detainer
+ * @param Carbon|null $datetime
+ * @return Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+ */
+function detainedAtAll(Detainer $detainer = null, Carbon $datetime = null)
+{
+    return detainedAtQuery($detainer, $datetime)->get();
+}
+
+/**
+ * Returns count detained wagons on the certain date (now if date is null)
+ *
+ * @param Detainer|null $detainer
+ * @param Carbon|null $datetime
+ * @return int
+ */
+function detainedAtCount(Detainer $detainer = null, Carbon $datetime = null)
+{
+    return detainedAtQuery($detainer, $datetime)->count();
+}
+
+/* ----------------------------- */
+
 /**
  * Returns count detained wagons between two dates
  *
@@ -48,32 +174,6 @@ function detainedPeriodQuery(Detainer $detainer = null, Carbon $startAt, Carbon 
         : Wagon::where('detained_at', '>=', $startAt)->where('detained_at', '<', $endAt);
 }
 
-/* ----------------------------- */
-
-/**
- * Returns detained wagons at time
- *
- * @param Detainer|null $detainer
- * @param Carbon|null $datetime
- * @return Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
- */
-function detainedAtAll(Detainer $detainer = null, Carbon $datetime = null)
-{
-    return detainedAtQuery($detainer, $datetime)->get();
-}
-
-/**
- * Returns count detained wagons on the certain date (now if date is null)
- *
- * @param Detainer|null $detainer
- * @param Carbon|null $datetime
- * @return int
- */
-function detainedAtCount(Detainer $detainer = null, Carbon $datetime = null)
-{
-    return detainedAtQuery($detainer, $datetime)->count();
-}
-
 /**
  * Returns count long detained wagons on the certain date (now if date is null)
  *
@@ -83,7 +183,7 @@ function detainedAtCount(Detainer $detainer = null, Carbon $datetime = null)
  */
 function detainedLongAtCount(Detainer $detainer = null, Carbon $datetime = null)
 {
-    $wagons = detainedAtQuery($detainer, $datetime)->get();
+    $wagons = controlledAtQuery($detainer, $datetime)->get();
 
     $res = 0;
 
@@ -97,33 +197,6 @@ function detainedLongAtCount(Detainer $detainer = null, Carbon $datetime = null)
     return $res;
 }
 
-function detainedAtQuery(Detainer $detainer = null, Carbon $datetime = null)
-{
-    if ($datetime) {
-        $query = $detainer
-            ? $detainer->wagons()
-                ->where('detained_at', '<', $datetime)
-                ->where(function ($query) use ($datetime) {
-                    $query
-                        ->whereNull('departed_at')
-                        ->orWhere('departed_at', '>=', $datetime);
-                })
-
-
-            : Wagon::where('detained_at', '<', $datetime)
-                ->where(function ($query) use ($datetime) {
-                    $query
-                        ->whereNull('departed_at')
-                        ->orWhere('departed_at', '>=', $datetime);
-                });
-    } else {
-        $query = $detainer
-            ? $detainer->wagons()->whereNull('departed_at')
-            : Wagon::whereNull('departed_at');
-    }
-
-    return $query;
-}
 
 /*  ----------------------------- */
 
@@ -137,7 +210,7 @@ function detainedAtQuery(Detainer $detainer = null, Carbon $datetime = null)
 function wagonsDetainedForPeriod(Carbon $startsAt, Carbon $endsAt)
 {
     return Wagon::where('detained_at', '>=', $startsAt)
-        ->where('detained_at', '<' , $endsAt)
+        ->where('detained_at', '<', $endsAt)
         ->orderBy('detained_at')
         ->get();
 }

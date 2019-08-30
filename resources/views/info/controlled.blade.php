@@ -4,13 +4,13 @@
 
 @section('content')
   <div class="container-fluid">
-    <h3 class="mt-3">Задержано: все вагоны</h3>
+    <h3 class="mt-3">Вагоны на контроле: все</h3>
     <div class="row mt-3">
       <div class="col-9">
 
         @if(!count($wagons))
           <div class="alert alert-warning">
-            Задержанных вагонов нет!
+            Задержанных и длительно простаивающих вагонов нет!
           </div>
 
         @else

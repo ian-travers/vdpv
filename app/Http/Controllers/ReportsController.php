@@ -26,7 +26,7 @@ class ReportsController extends Controller
 
         $atTime = Carbon::createFromFormat('d.m.Y H:i', request('time'));
 
-        $wagons = detainedAtAll(null, $atTime);
+        $wagons = controlledAtAll(null, $atTime);
 
         return view('reports.at-time', compact('detainers', 'atTime', 'wagons'));
     }

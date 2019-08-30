@@ -14,8 +14,8 @@ class InfoTest extends TestCase
     /** @test */
     function show_empty_info()
     {
-        $this->assertCount(0, detainedAtAll());
-        $this->assertEquals(0, detainedAtCount());
+        $this->assertCount(0, controlledAtAll());
+        $this->assertEquals(0, controlledAtCount());
         $this->assertEquals(0, detainedLongAtCount());
 
         $this->get(route('all'))->assertSee('Задержанных вагонов нет');
@@ -41,8 +41,8 @@ class InfoTest extends TestCase
             'released_at' => Carbon::parse('-25 hours'),
         ]);
 
-        $this->assertCount(1, detainedAtAll());
-        $this->assertEquals(1, detainedAtCount());
+        $this->assertCount(1, controlledAtAll());
+        $this->assertEquals(1, controlledAtCount());
         $this->assertEquals(1, detainedLongAtCount());
 
         $this->get(route('all'))->assertSee($wagon->inw);
@@ -55,8 +55,8 @@ class InfoTest extends TestCase
     {
         $wagon = app(WagonFactory::class)->create();
 
-        $this->assertCount(1, detainedAtAll());
-        $this->assertEquals(1, detainedAtCount());
+        $this->assertCount(1, controlledAtAll());
+        $this->assertEquals(1, controlledAtCount());
         $this->assertEquals(0, detainedLongAtCount());
 
         $this->get(route('all'))->assertSee($wagon->inw);
@@ -82,8 +82,8 @@ class InfoTest extends TestCase
             'released_at' => Carbon::parse('-10 minutes'),
         ]);
 
-        $this->assertCount(1, detainedAtAll());
-        $this->assertEquals(1, detainedAtCount());
+        $this->assertCount(1, controlledAtAll());
+        $this->assertEquals(1, controlledAtCount());
         $this->assertEquals(0, detainedLongAtCount());
 
         $this->get(route('recent', ['today', 'detained']))->assertSee($wagon->inw);
@@ -107,8 +107,8 @@ class InfoTest extends TestCase
             'departed_at' => Carbon::parse('-5 minutes'),
         ]);
 
-        $this->assertCount(0, detainedAtAll());
-        $this->assertEquals(0, detainedAtCount());
+        $this->assertCount(0, controlledAtAll());
+        $this->assertEquals(0, controlledAtCount());
         $this->assertEquals(0, detainedLongAtCount());
 
         $this->get(route('recent', ['today', 'detained']))->assertSee($wagon->inw);
@@ -246,5 +246,21 @@ class InfoTest extends TestCase
         $this->get(route('recent', ['before-yesterday', 'detained']))->assertSee($wagon->inw);
         $this->get(route('recent', ['before-yesterday', 'released']))->assertSee($wagon->inw);
         $this->get(route('recent', ['before-yesterday', 'departed']))->assertSee($wagon->inw);
+    }
+
+    /** @test */
+    function ttt()
+    {
+        $w1 = app(WagonFactory::class)->create();
+
+        $this->assertEquals(1, controlledAtCount());
+        $this->assertEquals(1, detainedAtCount());
+
+        $w1->update([
+            'released_at' => Carbon::parse('-5 min')
+        ]);
+
+        $this->assertEquals(1, controlledAtCount());
+        $this->assertEquals(0, detainedAtCount());
     }
 }
