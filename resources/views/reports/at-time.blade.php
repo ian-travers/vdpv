@@ -19,7 +19,7 @@
           <tr class="font-weight-bolder">
             <td width="60%">Задержано: всего / длительно простаивающих<br><span class="small text-muted">в том числе:</span></td>
             <td width="20%" class="text-center">
-              {{ controlledAtCount(null, $atTime) }}
+              {{ detainedAtCount(null, $atTime) }}
             </td>
             <td width="20%" class="text-center">
               {{ detainedLongAtCount(null, $atTime) }}
@@ -30,7 +30,7 @@
             <tr>
               <td>{{ $detainer->name }}</td>
               <td class="text-center">
-                {{ controlledAtCount($detainer, $atTime) }}
+                {{ detainedAtCount($detainer, $atTime) }}
               </td>
               <td class="text-center">
                 {{ detainedLongAtCount($detainer, $atTime) }}

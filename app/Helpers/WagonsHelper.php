@@ -63,8 +63,12 @@ function detainedAtQuery(Detainer $detainer = null, Carbon $datetime = null)
     $repairedIds = $datetime
         ? Wagon::select('id')
             ->where('detainer_id', 1)
-            ->where('departed_at', '<', $datetime)
-            ->where('released_at', '>', $datetime)
+            ->where(function ($query) use ($datetime) {
+                $query
+                    ->whereNull('departed_at')
+                    ->orWhere('departed_at', '>=', $datetime);
+            })
+            ->where('released_at', '<', $datetime)
             ->get()
             ->toArray()
         : Wagon::select('id')
