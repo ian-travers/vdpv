@@ -10,17 +10,23 @@ Breadcrumbs::for('root', function (BreadcrumbsGenerator $trail) {
     $trail->push('Главная', route('root'));
 });
 
+Breadcrumbs::for('show-wagon', function (BreadcrumbsGenerator $trail, $wagon) {
+    $trail->parent('root');
+    $trail->push($wagon->inw);
+});
+
 Breadcrumbs::for('controlled', function (BreadcrumbsGenerator $trail) {
     $trail->push('Главная', route('root'));
 });
 
-Breadcrumbs::for('detained', function (BreadcrumbsGenerator $trail) {
-    $trail->push('Главная', route('root'));
+Breadcrumbs::for('controlled-by', function (BreadcrumbsGenerator $trail, $detainer) {
+    $trail->parent('root');
+    $trail->push('На контроле');
+    $trail->push($detainer->name);
 });
 
-Breadcrumbs::for('show-wagon', function (BreadcrumbsGenerator $trail, $wagon) {
-    $trail->parent('root');
-    $trail->push($wagon->inw);
+Breadcrumbs::for('detained', function (BreadcrumbsGenerator $trail) {
+    $trail->push('Главная', route('root'));
 });
 
 Breadcrumbs::for('detained-by', function (BreadcrumbsGenerator $trail, $detainer) {

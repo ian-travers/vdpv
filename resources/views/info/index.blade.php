@@ -41,7 +41,7 @@
                           {{ $detainer->name }}
                         </a>
 
-                        <a href="{{ route('detained-by-long', $detainer) }}">
+                        <a href="{{ route('controlled-by', $detainer) }}">
                           <span
                               class="badge badge-secondary float-right">{{ controlledAtCount($detainer) }}</span>
                         </a>

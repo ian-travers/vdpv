@@ -26,6 +26,11 @@ class InfoController extends Controller
         return view('info.index', compact('detainers', 'wagons', 'lastTenDaysChart'));
     }
 
+    public function showWagon(Wagon $wagon)
+    {
+        return view('info.show-wagon', compact('wagon'));
+    }
+
     public function controlled()
     {
         $detainers = Detainer::all();
@@ -48,23 +53,18 @@ class InfoController extends Controller
         return view('info.detained', compact('detainers', 'wagons'));
     }
 
-    public function longOnly()
+    public function controlledBy(Detainer $detainer)
     {
-        $wagons = Wagon::with('detainer')
-            ->longDetainedOnly()
+        $wagons = controlledAtQuery($detainer)
+            ->longDetainedFirst()
             ->paginate($this->wagonsPerPage);
 
-        return view('info.long-only', compact('wagons'));
-    }
-
-    public function showWagon(Wagon $wagon)
-    {
-        return view('info.show-wagon', compact('wagon'));
+        return view('info.controlled-by', compact('detainer', 'wagons'));
     }
 
     public function detainedBy(Detainer $detainer)
     {
-        $wagons = $detainer->wagons()
+        $wagons = detainedAtQuery()
             ->longDetainedFirst()
             ->paginate($this->wagonsPerPage);
 
@@ -78,6 +78,15 @@ class InfoController extends Controller
             ->paginate($this->wagonsPerPage);
 
         return view('info.detained-by-long', compact('detainer', 'wagons'));
+    }
+
+    public function longOnly()
+    {
+        $wagons = Wagon::with('detainer')
+            ->longDetainedOnly()
+            ->paginate($this->wagonsPerPage);
+
+        return view('info.long-only', compact('wagons'));
     }
 
     public function recent($day, $type)
