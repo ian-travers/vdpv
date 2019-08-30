@@ -166,26 +166,26 @@ class WagonTest extends TestCase
 
         $wagon = app(WagonFactory::class)->create();
 
-        $this->assertFalse($wagon->isDetainedLong());
+        $this->assertFalse($wagon->isLongIdle());
 
         $wagon->update([
             'detainer_id' => 2,
             'detained_at' => Carbon::parse('-45 hours'),
         ]);
 
-        $this->assertTrue($wagon->fresh()->isDetainedLong());
+        $this->assertTrue($wagon->fresh()->isLongIdle());
 
         $wagon->update([
             'departed_at' => Carbon::parse('-10 hours'),
         ]);
 
-        $this->assertTrue($wagon->fresh()->isDetainedLong());
+        $this->assertFalse($wagon->fresh()->isLongIdle());
 
         $wagon->update([
             'departed_at' => Carbon::parse('-35 hours'),
         ]);
 
-        $this->assertFalse($wagon->fresh()->isDetainedLong());
+        $this->assertFalse($wagon->fresh()->isLongIdle());
     }
 
     /** @test */
@@ -195,32 +195,32 @@ class WagonTest extends TestCase
 
         $wagon = app(WagonFactory::class)->create();
 
-        $this->assertFalse($wagon->isDetainedLong());
+        $this->assertFalse($wagon->isLongIdle());
 
         $wagon->update([
             'detainer_id' => 7,
             'detained_at' => Carbon::parse('-45 hours'),
         ]);
 
-        $this->assertFalse($wagon->fresh()->isDetainedLong());
+        $this->assertFalse($wagon->fresh()->isLongIdle());
 
         $wagon->update([
             'released_at' => Carbon::parse('-40 hours'),
         ]);
 
-        $this->assertTrue($wagon->fresh()->isDetainedLong());
+        $this->assertTrue($wagon->fresh()->isLongIdle());
 
         $wagon->update([
             'departed_at' => Carbon::parse('-16 hours'),
         ]);
 
-        $this->assertFalse($wagon->fresh()->isDetainedLong());
+        $this->assertFalse($wagon->fresh()->isLongIdle());
 
         $wagon->update([
             'departed_at' => Carbon::parse('-5 hours'),
         ]);
 
-        $this->assertTrue($wagon->fresh()->isDetainedLong());
+        $this->assertFalse($wagon->fresh()->isLongIdle());
     }
 
     /** @test */

@@ -17,8 +17,10 @@ class WagonsController extends Controller
 
         $wagons = Auth::user()->isAdmin()
             ? Wagon::filter($term)
+                ->orderBy('detained_at', 'desc')
                 ->paginate($this->wagonsPerPage)
             : Auth::user()->wagons()
+                ->orderBy('detained_at', 'desc')
                 ->filter($term)
                 ->paginate($this->wagonsPerPage);
 

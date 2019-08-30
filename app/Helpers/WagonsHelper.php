@@ -33,7 +33,7 @@ function detainedLongPeriodCount(Detainer $detainer = null, Carbon $startAt, Car
 
     /** @var Wagon $wagon */
     foreach ($wagons as $wagon) {
-        if ($wagon->isDetainedLong()) {
+        if ($wagon->isLongIdle()) {
             $res++;
         }
     }
@@ -89,7 +89,7 @@ function detainedLongAtCount(Detainer $detainer = null, Carbon $datetime = null)
 
     /** @var Wagon $wagon */
     foreach ($wagons as $wagon) {
-        if ($wagon->isDetainedLong()) {
+        if ($wagon->isLongIdle()) {
             $res++;
         }
     }

@@ -91,27 +91,47 @@ class Wagon extends Model
         return $this->belongsTo(Detainer::class);
     }
 
-    public function isReadyToDepart(): bool
+    public function isReadyToDepart(Carbon $at = null): bool
     {
-        return isset($this->released_at) ? $this->released_at < Carbon::now() : false;
+        return isset($this->released_at)
+            ? $at
+                ? $this->released_at < $at
+                : $this->released_at < now()
+            : false;
     }
 
-    public function isDeparted(): bool
+    public function isReleased(Carbon $at = null): bool
     {
-        return isset($this->departed_at) ? $this->departed_at < Carbon::now() : false;
+        return $this->isReadyToDepart($at);
     }
 
-    public function isDetainedLong(): bool
+    public function isDeparted(Carbon $at = null): bool
     {
-        return ($this->detainedLongInHours() > 0);
+        return isset($this->departed_at)
+            ? $at
+                ? $this->departed_at < $at
+                : $this->departed_at < now()
+            : false;
     }
 
-    public function linkCssClass()
+    public function isDetained(Carbon $at = null)
     {
-        if ($this->isDeparted()) return 'text-success';
-        if ($this->isDetainedLong()) return 'text-danger';
-        if ($this->isReadyToDepart()) return 'text-secondary';
-        return null;
+        return $this->getLongIdleFieldName() == 'detained_at'
+            ? !($this->isDeparted($at))
+            : !($this->isReleased($at)) || !($this->isDeparted($at));
+    }
+
+    public function isLongIdle(Carbon $at = null): bool
+    {
+        if ($this->isDeparted($at)) return false;
+
+        $fn = $this->getLongIdleFieldName();
+
+        $res =  $at
+            ? $at->diffInHours($this->$fn) >= 24
+            : now()->diffInHours($this->$fn) >= 24;
+
+        return $res;
     }
 
     public function isDetainedBetween($startsAt, $endsAt)
@@ -145,7 +165,7 @@ class Wagon extends Model
 
     public function detainedLongInHours()
     {
-        $fn = $this->getLongDetainFieldName();
+        $fn = $this->getLongIdleFieldName();
 
         $res = isset($this->departed_at) ? $this->departed_at->diffInHours($this->$fn) : now()->diffInHours($this->$fn);
 
@@ -154,9 +174,17 @@ class Wagon extends Model
         return ($res > 0) ? $res : 0;
     }
 
-    private function getLongDetainFieldName()
+    private function getLongIdleFieldName()
     {
         return $this->detainer->long_detain_event;
+    }
+
+    public function linkCssClass()
+    {
+        if ($this->isDeparted()) return 'text-success';
+        if ($this->isLongIdle()) return 'text-danger';
+        if ($this->isReadyToDepart()) return 'text-secondary';
+        return null;
     }
 
     public function renderReturning()
@@ -165,13 +193,6 @@ class Wagon extends Model
     }
 
 //    scopes
-    public function scopeLatestFirst(Builder $query)
-    {
-        return $query
-            ->whereNull('departed_at')
-            ->orWhere('departed_at', '<', Carbon::parse('-48 hours'))
-            ->orderBy('detained_at', 'desc');
-    }
 
     public function scopeLongDetainedFirst(Builder $query)
     {
@@ -188,8 +209,10 @@ class Wagon extends Model
 
         $ids = [];
 
+
+        /** @var Wagon $wagon */
         foreach ($wagons as $wagon) {
-            if ($wagon->isDetainedLong()) {
+            if ($wagon->isLongIdle()) {
                 $ids[] = $wagon->id;
             }
         }
