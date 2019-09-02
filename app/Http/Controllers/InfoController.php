@@ -64,7 +64,7 @@ class InfoController extends Controller
 
     public function detainedBy(Detainer $detainer)
     {
-        $wagons = detainedAtQuery()
+        $wagons = detainedAtQuery($detainer)
             ->longDetainedFirst()
             ->paginate($this->wagonsPerPage);
 
