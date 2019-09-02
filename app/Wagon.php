@@ -176,7 +176,8 @@ class Wagon extends Model
 
     private function getLongIdleFieldName()
     {
-        return $this->detainer->long_detain_event;
+//        return $this->detainer->long_detain_event;
+        return 'released_at';
     }
 
     public function linkCssClass()
