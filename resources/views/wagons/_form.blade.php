@@ -148,7 +148,7 @@
   </div>
 </div>
 
-<div class="card border border-primary rounded-lg mb-2">
+<div id="taken_measure_block" class="card border border-primary rounded-lg mb-2">
   <div class="card-header bg-primary text-light lead py-1">
     Принятые меры
   </div>
@@ -230,7 +230,7 @@
   <div class="card-body pb-0">
     <div class="d-inline-flex align-items-end justify-content-end">
 
-      <div class="form-group mr-2">
+      <div id="released_at_block" class="form-group mr-2">
         <label id="released_at_label" for="dtp_released_at">Дата/время выпуска</label>
         <div class="input-group" id="released_at" data-target-input="nearest">
           <input type="text" id="dtp_released_at"
@@ -284,7 +284,8 @@
   <script>
       if (String($('#detainer_id').val()) === String(7)) {
           $('#detained_at_label').html('Окончание грузовой операции');
-          $('#released_at_label').html('Уборка вагона');
+          $('#released_at_block').hide();
+          $('#taken_measure_block').hide();
       } else {
           $('#local-wagon').hide();
       }
@@ -293,11 +294,13 @@
           $('#detainer_id').change(function () {
               if (String(this.value) === String(7)) {
                   $('#detained_at_label').html('Окончание грузовой операции');
-                  $('#released_at_label').html('Уборка вагона');
+                  $('#released_at_block').hide();
+                  $('#taken_measure_block').hide();
                   $('#local-wagon').show(300);
               } else {
                   $('#detained_at_label').html('Дата/время задержки');
-                  $('#released_at_label').html('Дата/время выпуска');
+                  $('#released_at_block').show();
+                  $('#taken_measure_block').show();
                   $('#local-wagon').hide(300);
               }
           });
