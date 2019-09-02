@@ -66,6 +66,8 @@ class WagonsController extends Controller
     {
         $detainers = Detainer::all();
 
+        session()->put('url.intended', url()->previous());
+
         return view('wagons.edit', compact('wagon', 'detainers'));
     }
 
@@ -79,10 +81,11 @@ class WagonsController extends Controller
 
         $wagon->update($request->all());
 
-        return redirect(route('wagons.index'))->with([
+        return redirect()->intended()->with([
             'message' => 'Информация по вагону изменена',
-            'type' => 'success',
+            'type' => 'success'
         ]);
+
     }
 
     /**
