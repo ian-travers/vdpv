@@ -150,7 +150,15 @@ class Wagon extends Model
 
     public function detainedInHours()
     {
-        return isset($this->released_at) ? $this->released_at->diffInHours($this->detained_at) : now()->diffInHours($this->detained_at);
+        if ($this->released_at) {
+            return $this->released_at->diffInHours($this->detained_at);
+        }
+
+        if ($this->departed_at) {
+            return $this->departed_at->diffInHours($this->detained_at);
+        }
+
+        return now()->diffInHours($this->detained_at);
     }
 
     public function detainedInDays()

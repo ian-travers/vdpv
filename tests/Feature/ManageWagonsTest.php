@@ -80,7 +80,7 @@ class ManageWagonsTest extends TestCase
                 'destination_station' => 'changed',
                 'taken_measure' => 'changed',
             ])
-            ->assertRedirect(route('wagons.index'));
+            ->assertRedirect(session()->get('url.intended'));
 
         $this->get($wagon->path() . '/edit')->assertOk();
         $this->assertDatabaseHas('wagons', $attributes);

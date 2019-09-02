@@ -112,6 +112,8 @@ class InfoController extends Controller
             $type = 'отправлено';
         }
 
+        $arr = $wagons->total();
+
         return view('info.recent', compact('day', 'type', 'wagons'));
     }
 }

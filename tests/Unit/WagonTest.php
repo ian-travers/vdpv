@@ -70,7 +70,7 @@ class WagonTest extends TestCase
             'departed_at' => Carbon::parse('-2 hours')
         ]);
 
-        $this->assertEquals(9, $wagon->fresh()->detainedInHours());
+        $this->assertEquals(9, $wagon->detainedInHours());
 
     }
 
