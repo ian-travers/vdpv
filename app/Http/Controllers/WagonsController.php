@@ -49,6 +49,11 @@ class WagonsController extends Controller
     public function store(WagonRequest $request)
     {
         $request['returning'] = $request->has('returning') ? "1" : "0";
+
+        if ($request['detainer_id'] == 7) {
+            $request['taken_measure'] = null;
+        }
+
         Auth::user()->wagons()->create($request->all());
 
         return redirect(route('wagons.index'))->with([
@@ -67,6 +72,11 @@ class WagonsController extends Controller
     public function update(WagonRequest $request, Wagon $wagon)
     {
         $request['returning'] = $request->has('returning') ? "1" : "0";
+
+        if ($request['detainer_id'] == 7) {
+            $request['taken_measure'] = null;
+        }
+
         $wagon->update($request->all());
 
         return redirect(route('wagons.index'))->with([

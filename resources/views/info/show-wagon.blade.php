@@ -62,7 +62,7 @@
               </tr>
               <tr>
                 <td width="15%" class="text-right text-muted">Грузовая операция</td>
-                <td>{{ $wagon->operation }}</td>
+                <td>{{ $wagon->renderOperation() }}</td>
               </tr>
               <tr>
                 <td width="15%" class="text-right text-muted">Парк/Путь &rarr; НПЛФ</td>

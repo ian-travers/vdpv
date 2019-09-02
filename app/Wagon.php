@@ -197,6 +197,16 @@ class Wagon extends Model
         return $this->returning ? '<span class="fa fa-check"></span>' : '';
     }
 
+    public function renderOperation()
+    {
+        if (isset($this->operation)) {
+            if ($this->operation == 'loading') return 'Погрузка';
+            if ($this->operation == 'unloading') return 'Выгрузка';
+        }
+
+        return null;
+    }
+
 //    scopes
 
     public function scopeLongDetainedFirst(Builder $query)
