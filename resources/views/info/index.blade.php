@@ -19,7 +19,10 @@
             <div class="widget">
               <div class="widget-heading">
                 <h4>
-                  Вагоны: задержанные / длительно простаивающие / на контроле
+                  Вагоны:
+                  <span class="badge badge-primary">задержанные</span>
+                  <span class="badge badge-danger">длительно простаивающие</span>
+                  <span class="badge badge-secondary">на контроле</span>
                   <a href="{{ route('controlled') }}">
                     <span class="badge badge-secondary float-right">{{ controlledAtCount() }}</span>
                   </a>
@@ -50,10 +53,15 @@
                               class="badge badge-danger float-right mr-1">{{ detainedLongAtCount($detainer) }}</span>
                         </a>
 
-                        <a href="{{ route('detained-by', $detainer) }}">
-                      <span
-                          class="badge badge-primary float-right mr-1">{{ detainedAtCount($detainer) }}</span>
-                        </a>
+                        @if($detainer->id <> 7)
+                          <a href="{{ route('detained-by', $detainer) }}">
+                            <span
+                                class="badge badge-primary float-right mr-1">
+                              {{ detainedAtCount($detainer) }}
+                            </span>
+                          </a>
+
+                        @endif
                       </div>
                     </li>
 
