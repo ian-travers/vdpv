@@ -144,7 +144,7 @@ class WagonTest extends TestCase
 
         $wagon->update(['detainer_id' => 2]);
 
-        $this->assertEquals('text-secondary', $wagon->fresh()->linkCssClass());
+        $this->assertEquals('text-danger', $wagon->fresh()->linkCssClass());
     }
 
     /** @test */
