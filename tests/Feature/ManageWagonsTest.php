@@ -177,4 +177,22 @@ class ManageWagonsTest extends TestCase
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('detainer_id');
     }
+
+    /** @test */
+    function a_new_local_wagon_has_the_same_detained_and_released_times()
+    {
+        $this->withoutExceptionHandling();
+        $this->signIn();
+
+        $attributes = factory(Wagon::class)->raw(['detainer_id' => '7']);
+
+        $this->post('/wagons', $attributes)->assertStatus(Response::HTTP_FOUND);
+
+        $wagon = Wagon::find(1);
+
+        $this->assertInstanceOf("Carbon\Carbon", $wagon->detained_at);
+        $this->assertInstanceOf("Carbon\Carbon", $wagon->released_at);
+
+        $this->assertEquals($wagon->detained_at, $wagon->released_at);
+    }
 }

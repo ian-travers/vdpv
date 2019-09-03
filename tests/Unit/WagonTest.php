@@ -86,21 +86,10 @@ class WagonTest extends TestCase
         $wagon->update([
             'detainer_id' => 7,
             'detained_at' => Carbon::parse('-45 hours'),
-        ]);
-
-        $this->assertFalse($wagon->fresh()->isLongIdle());
-
-        $wagon->update([
-            'released_at' => Carbon::parse('-40 hours'),
+            'released_at' => Carbon::parse('-45 hours')
         ]);
 
         $this->assertTrue($wagon->fresh()->isLongIdle());
-
-        $wagon->update([
-            'departed_at' => Carbon::parse('-16 hours'),
-        ]);
-
-        $this->assertFalse($wagon->fresh()->isLongIdle());
 
         $wagon->update([
             'departed_at' => Carbon::parse('-5 hours'),

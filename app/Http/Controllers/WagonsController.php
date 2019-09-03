@@ -52,6 +52,7 @@ class WagonsController extends Controller
 
         if ($request['detainer_id'] == 7) {
             $request['taken_measure'] = null;
+            $request['released_at'] = $request['detained_at'];
         }
 
         Auth::user()->wagons()->create($request->all());
@@ -77,6 +78,7 @@ class WagonsController extends Controller
 
         if ($request['detainer_id'] == 7) {
             $request['taken_measure'] = null;
+            $request['released_at'] = $request['detained_at'];
         }
 
         $wagon->update($request->all());

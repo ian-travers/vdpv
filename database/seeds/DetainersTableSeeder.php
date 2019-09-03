@@ -35,7 +35,7 @@ class DetainersTableSeeder extends Seeder
             ],
             [
                 'name' => 'Местные вагоны',
-                'long_detain_event' => 'detained_at'
+                'long_detain_event' => 'released_at'
             ],
             [
                 'name' => 'Прочие',
