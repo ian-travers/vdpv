@@ -179,9 +179,8 @@ class ManageWagonsTest extends TestCase
     }
 
     /** @test */
-    function a_new_local_wagon_has_the_same_detained_and_released_times()
+    function a_local_wagon_has_the_same_detained_and_released_times()
     {
-        $this->withoutExceptionHandling();
         $this->signIn();
 
         $attributes = factory(Wagon::class)->raw(['detainer_id' => '7']);
@@ -194,5 +193,23 @@ class ManageWagonsTest extends TestCase
         $this->assertInstanceOf("Carbon\Carbon", $wagon->released_at);
 
         $this->assertEquals($wagon->detained_at, $wagon->released_at);
+    }
+
+    /** @test */
+    function a_local_wagon_cannot_be_detained_and_always_released()
+    {
+        $this->artisan('db:seed --class=DetainersTableSeeder');
+
+        $this->signIn();
+
+        $attributes = factory(Wagon::class)->raw(['detainer_id' => '7']);
+
+        $this->post('/wagons', $attributes)->assertStatus(Response::HTTP_FOUND);
+
+        $wagon = Wagon::find(1);
+
+        $this->assertTrue($wagon->isReleased());
+        $this->assertFalse($wagon->isDeparted());
+        $this->assertFalse($wagon->isDetained());
     }
 }
