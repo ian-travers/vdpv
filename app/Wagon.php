@@ -214,6 +214,22 @@ class Wagon extends Model
         return null;
     }
 
+    function isHasAnotherDetaining(): bool
+    {
+        $records = Wagon::where('inw', $this->inw)->get();
+
+        return count($records) > 1;
+    }
+
+    function getAnotherDetaining()
+    {
+        if ($this->isHasAnotherDetaining()) {
+            return $wagons = Wagon::where('inw', $this->inw)->whereKeyNot($this->id)->get();
+        }
+
+        return null;
+    }
+
 //    scopes
 
     public function scopeLongDetainedFirst(Builder $query)

@@ -1,4 +1,7 @@
-@php /* @var App\Wagon $wagon */ @endphp
+@php
+  /* @var App\Wagon $wagon */
+  /* @var App\Wagon $another */
+@endphp
 
 @extends('layouts.app')
 
@@ -9,13 +12,40 @@
 
         <div class="card">
           <div class="card-header bg-light d-flex justify-content-between">
-            <h3>Информация о вагоне {{ $wagon->inw }}</h3>
+            <div>
+              <h3>Информация о вагоне {{ $wagon->inw }}</h3>
+
+              @if($wagon->isHasAnotherDetaining())
+                <span class="btn btn-warning btn-sm border border-dark">Внимание! По этому вагону есть еще информация</span>
+
+                @foreach($wagon->getAnotherDetaining() as $another)
+                  @if($another->isDetained())
+                    <a href="{{ $another->viewPath() }}"
+                       class="btn btn-sm btn-primary">Задержан {{ $another->detained_at->format('d.m.Y') }}</a>
+
+                  @endif
+                  @if($another->isReleased())
+                    <a href="{{ $another->viewPath() }}"
+                       class="btn btn-sm btn-secondary">Выпущен {{ $another->released_at->format('d.m.Y') }}</a>
+
+                  @endif
+                    @if($another->isDeparted())
+                      <a href="{{ $another->viewPath() }}"
+                         class="btn btn-sm btn-success">Отправлен {{ $another->departed_at->format('d.m.Y') }}</a>
+
+                    @endif
+                @endforeach
+              @endif
+            </div>
+
             @can('manage', $wagon)
               <div class="text-right">
                 <a class="btn btn-outline-primary mr-2" href="{{ route('wagons.edit', $wagon) }}">Редактировать</a>
               </div>
 
             @endcan
+
+
           </div>
           <div class="card-body">
             <table class="table table-sm border border-bottom">

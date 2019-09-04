@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Detainer;
 use App\User;
+use App\Wagon;
 use Carbon\Carbon;
 use Tests\Setup\WagonFactory;
 use Tests\TestCase;
@@ -146,5 +147,25 @@ class WagonTest extends TestCase
         $wagon->update(['returning' => true]);
 
         $this->assertEquals('<span class="fa fa-check"></span>', $wagon->renderReturning());
+    }
+
+    /** @test */
+    function it_has_not_another_detaining_after_creating()
+    {
+        $wagon = app(WagonFactory::class)->create();
+
+        $this->assertFalse($wagon->isHasAnotherDetaining());
+        $this->assertNull($wagon->getAnotherDetaining());
+    }
+
+    /** @test */
+    function it_may_has_another_detaining()
+    {
+        $wagon = app(WagonFactory::class)->create();
+
+        factory(Wagon::class)->create(['inw' => $wagon->inw]);
+
+        $this->assertTrue($wagon->isHasAnotherDetaining());
+        $this->assertCount(1, $wagon->getAnotherDetaining());
     }
 }
