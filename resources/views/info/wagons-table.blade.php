@@ -18,12 +18,16 @@
     <tr>
       <td class="text-center">{{ (request('page')) ? (request('page') - 1) * $wagons->perPage() + $loop->index + 1 : $loop->index + 1 }}</td>
       <td class="text-center">
-        <a href="{{ $wagon->viewPath() }}" class="{{ $wagon->linkCssClass() }}">{{ $wagon->inw }}</a>
+        <a href="{{ $wagon->viewPath() }}" class="{{ $wagon->linkCssClass() }}">
+          {{ $wagon->inw }}
 
-        @if($wagon->isHasAnotherDetaining())
-          <span class="badge badge-warning border align-top float-right" title="Есть дополнительна информация">!</span>
+          @if($wagon->isHasAnotherDetaining())
+            <span class="badge badge-warning border align-top float-right" title="Есть дополнительна информация">!</span>
 
-        @endif
+          @endif
+        </a>
+
+
       </td>
       <td class="text-center">{{ $wagon->detainedInDays() }}</td>
       <td class="text-center">{{ $wagon->detainedInHours() }}</td>
