@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WagonsController extends Controller
 {
-    protected $wagonsPerPage = 20;
+    protected $wagonsPerPage = 50;
 
     public function index()
     {
