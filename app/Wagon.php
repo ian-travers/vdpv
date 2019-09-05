@@ -69,8 +69,6 @@ class Wagon extends Model
 {
     use Sortable;
 
-//    public $sortable = ['detainer_id', 'detained_at', 'released_at', 'departed_at'];
-
     protected $guarded = [];
 
     protected $dates = ['arrived_at', 'detained_at', 'released_at', 'departed_at'];
@@ -93,6 +91,11 @@ class Wagon extends Model
     public function detainer()
     {
         return $this->belongsTo(Detainer::class);
+    }
+
+    public function isLocal(): bool
+    {
+        return $this->detainer_id === 7;
     }
 
     public function isReadyToDepart(Carbon $at = null): bool

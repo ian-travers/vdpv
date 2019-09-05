@@ -168,4 +168,13 @@ class WagonTest extends TestCase
         $this->assertTrue($wagon->isHasAnotherDetaining());
         $this->assertCount(1, $wagon->getAnotherDetaining());
     }
+
+    /** @test */
+    function check_is_local()
+    {
+        $wagon = app(WagonFactory::class)->create();
+        $wagon->update(['detainer_id' => 7]);
+
+        $this->assertTrue($wagon->isLocal());
+    }
 }

@@ -16,7 +16,8 @@
               <h3>Информация о вагоне {{ $wagon->inw }}</h3>
 
               @if($wagon->isHasAnotherDetaining())
-                <span class="btn btn-warning btn-sm border border-dark">Внимание! По этому вагону есть еще информация</span>
+                <span
+                    class="btn btn-warning btn-sm border border-dark">Внимание! По этому вагону есть еще информация</span>
 
                 @foreach($wagon->getAnotherDetaining() as $another)
                   @if($another->isDetained())
@@ -29,11 +30,11 @@
                        class="btn btn-sm btn-secondary">Выпущен {{ $another->released_at->format('d.m.Y') }}</a>
 
                   @endif
-                    @if($another->isDeparted())
-                      <a href="{{ $another->viewPath() }}"
-                         class="btn btn-sm btn-success">Отправлен {{ $another->departed_at->format('d.m.Y') }}</a>
+                  @if($another->isDeparted())
+                    <a href="{{ $another->viewPath() }}"
+                       class="btn btn-sm btn-success">Отправлен {{ $another->departed_at->format('d.m.Y') }}</a>
 
-                    @endif
+                  @endif
                 @endforeach
               @endif
             </div>
@@ -90,16 +91,20 @@
                 <td width="15%" class="text-right text-muted">Принятые меры</td>
                 <td>{{ $wagon->taken_measure }}</td>
               </tr>
-              <tr>
-                <td width="15%" class="text-right text-muted">Грузовая операция</td>
-                <td>{{ $wagon->renderOperation() }}</td>
-              </tr>
-              <tr>
-                <td width="15%" class="text-right text-muted">Парк/Путь &rarr; НПЛФ</td>
-                <td>
-                  {{ $wagon->park ? $wagon->park . "/" . $wagon->way : '' }}
-                  {{ $wagon->nplf ? '- ' . $wagon->nplf : '' }}</td>
-              </tr>
+
+              @if($wagon->isLocal())
+                <tr>
+                  <td width="15%" class="text-right text-muted">Грузовая операция</td>
+                  <td>{{ $wagon->renderOperation() }}</td>
+                </tr>
+                <tr>
+                  <td width="15%" class="text-right text-muted">Парк/Путь &rarr; НПЛФ</td>
+                  <td>
+                    {{ $wagon->park ? $wagon->park . "/" . $wagon->way : '' }}
+                    {{ $wagon->nplf ? '- ' . $wagon->nplf : '' }}</td>
+                </tr>
+
+              @endif
               <tr>
                 <td width="15%" class="text-right text-muted">Выпущен</td>
                 <td>{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y в H:i') : '' }}</td>
