@@ -44,9 +44,13 @@ Breadcrumbs::for('detained-by-long', function (BreadcrumbsGenerator $trail, $det
 
 Breadcrumbs::for('long-only', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
-    $trail->push('Длительно стоящие вагоны');
+    $trail->push('Длительно простаивающие вагоны');
 });
 
+Breadcrumbs::for('help', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('root');
+    $trail->push('Помощь');
+});
 
 Breadcrumbs::for('recent', function (BreadcrumbsGenerator $trail, $day, $type) {
     $trail->parent('root');

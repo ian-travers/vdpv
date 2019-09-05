@@ -40,6 +40,10 @@
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#custom-report">Произвольный период</a>
           </div>
         </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('help') }}">Руководство пользователя</a>
+          </li>
       </ul>
 
       <!-- Right Side Of Navbar -->

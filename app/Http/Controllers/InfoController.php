@@ -116,4 +116,9 @@ class InfoController extends Controller
 
         return view('info.recent', compact('day', 'type', 'wagons'));
     }
+
+    public function help()
+    {
+        return view('info.help');
+    }
 }

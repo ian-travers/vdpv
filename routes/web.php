@@ -11,6 +11,7 @@ Route::get('/detained-by/{detainer}', 'InfoController@detainedBy')->name('detain
 Route::get('/detained-by/{detainer}/long', 'InfoController@detainedByLong')->name('detained-by-long');
 Route::get('/recent/{day}/{type}', 'InfoController@recent')->name('recent');
 Route::get('/long-only', 'InfoController@longOnly')->name('long-only');
+Route::get('/help', 'InfoController@help')->name('help');
 
 Route::get('/reports/at-time', 'ReportsController@showAtTime')->name('reports.at-time');
 Route::get('/reports/last', 'ReportsController@showLast')->name('reports.last');
