@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Kyslik\ColumnSortable\Sortable;
 
 
 /**
@@ -66,6 +67,10 @@ use Carbon\Carbon;
  */
 class Wagon extends Model
 {
+    use Sortable;
+
+//    public $sortable = ['detainer_id', 'detained_at', 'released_at', 'departed_at'];
+
     protected $guarded = [];
 
     protected $dates = ['arrived_at', 'detained_at', 'released_at', 'departed_at'];

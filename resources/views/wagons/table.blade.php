@@ -5,12 +5,12 @@
   <tr class="text-center">
     <th>№</th>
     <th>Номер</th>
-    <th width="15%" class="text-center">Кем задержан</th>
+    <th width="15%" class="text-center">@sortablelink('detainer_id', 'Кем задержан')</th>
     <th>Причина</th>
     <th>Груз/Эксп./Соб.</th>
-    <th width="10%" class="text-center">Задержан</th>
-    <th width="10%" class="text-center">Выпущен</th>
-    <th width="10%" class="text-center">Отправлен</th>
+    <th width="10%" class="text-center">@sortablelink('detained_at', 'Задержан')</th>
+    <th width="10%" class="text-center">@sortablelink('released_at', 'Выпущен')</th>
+    <th width="10%" class="text-center">@sortablelink('departed_at', 'Отправлен')</th>
     <th width="7%" class="text-center">Действия</th>
   </tr>
   </thead>

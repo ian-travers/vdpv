@@ -16,12 +16,14 @@ class WagonsController extends Controller
         $term = request()->only('term');
 
         $wagons = Auth::user()->isAdmin()
-            ? Wagon::filter($term)
+            ? Wagon::sortable()
+                ->filter($term)
                 ->orderBy('detained_at', 'desc')
                 ->paginate($this->wagonsPerPage)
             : Auth::user()->wagons()
-                ->orderBy('detained_at', 'desc')
+                ->sortable()
                 ->filter($term)
+                ->orderBy('detained_at', 'desc')
                 ->paginate($this->wagonsPerPage);
 
         return view('wagons.index', compact('wagons', 'term'));
