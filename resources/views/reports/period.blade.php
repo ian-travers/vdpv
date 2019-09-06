@@ -70,10 +70,10 @@
 
               </td>
               <td class="text-center">{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y H:i') : '' }}</td>
-              <td class="text-center {{ $wagon->isDetainedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-info font-weight-bolder' : '' }}">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
+              <td class="text-center">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
               <td>{{ $wagon->reason }}</td>
               <td class="text-center">{!! $wagon->renderReturning() !!}</td>
-              <td class="text-center {{ $wagon->isDepartedBetween($shiftStartsAt, $shiftEndsAt) ? 'bg-success font-weight-bolder' : '' }}">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>
+              <td class="text-center">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>
             </tr>
 
           @endforeach
@@ -81,7 +81,7 @@
         </table>
 
       @else
-        <p class="lead ml-3">Операций с задержанными вагонами за этот период не зафиксировано!</p>
+        <p class="lead ml-3">Информации по операциям с задержанными вагонами за этот период нет!</p>
 
       @endif
     </div>

@@ -9,7 +9,7 @@
       <div class="col-9">
 
         @if(!count($wagons))
-          <div class="alert alert-warning">
+          <div class="alert alert-warning border">
             Задержанных и длительно простаивающих вагонов нет!
           </div>
 

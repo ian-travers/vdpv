@@ -41,6 +41,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon sortable($defaultParameters = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereArrivedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCargo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCreatedAt($value)

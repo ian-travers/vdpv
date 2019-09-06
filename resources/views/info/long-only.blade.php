@@ -10,8 +10,8 @@
       <div class="col-9">
 
         @if(!$wagons->count())
-          <div class="alert alert-warning">
-            Ничего не найдено!
+          <div class="alert alert-warning border">
+            На текущий момент длительно простаивающих вагонов нет!
           </div>
 
         @else
