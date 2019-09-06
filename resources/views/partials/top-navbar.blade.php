@@ -54,12 +54,12 @@
             <a class="nav-link" href="{{ route('login') }}">Вход</a>
           </li>
 
-          @if (Route::has('register'))
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
-            </li>
+{{--          @if (Route::has('register'))--}}
+            {{--<li class="nav-item">--}}
+              {{--<a class="nav-link" href="{{ route('register') }}">Регистрация</a>--}}
+            {{--</li>--}}
 
-          @endif
+          {{--@endif--}}
         @else
           @can('admin')
             <li class="nav-item">
