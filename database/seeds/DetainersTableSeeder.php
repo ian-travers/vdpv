@@ -14,7 +14,7 @@ class DetainersTableSeeder extends Seeder
                 'long_detain_event' => 'released_at'
             ],
             [
-                'name' => 'Служба грузовой и внешнеэкономической деятельности',
+                'name' => 'Пункт коммерческого осмотра вагонов',
                 'long_detain_event' => 'released_at'
             ],
             [
