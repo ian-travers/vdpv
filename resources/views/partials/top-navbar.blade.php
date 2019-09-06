@@ -22,6 +22,9 @@
           </li>
 
         @endif
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('help') }}">Руководство пользователя</a>
+        </li>
         <li class="nav-item dropdown">
           <a href="" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
              aria-expanded="false" v-pre>Отчеты по задержанным вагонам <span class="caret"></span></a>
@@ -40,10 +43,6 @@
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#custom-report">Произвольный период</a>
           </div>
         </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('help') }}">Руководство пользователя</a>
-          </li>
       </ul>
 
       <!-- Right Side Of Navbar -->

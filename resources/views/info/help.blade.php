@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('breadcrumbs', '')
-
 @section('content')
   <div class="container-fluid">
     <h3 class="mt-3 text-center" id="content">Руководство пользователя приложения "Учет задержанных и длительно
@@ -77,11 +75,17 @@
             углами) &mdash; означает количество задержанных вагонов, являеется ссылкой на соответствующую страницу сайта
             приложения.<br>
             <span class="badge badge-danger">12</span> (число белого цвета на квадрате красного цвета с закругленными
-            углами) &mdash; означает количество длительно простаивающих вагонов вагонов, являеется ссылкой на соответствующую страницу сайта
+            углами) &mdash; означает количество длительно простаивающих вагонов вагонов, являеется ссылкой на
+            соответствующую страницу сайта
             приложения.<br>
-            <span class="badge badge-secondary">40</span> (число белого цвета на квадрате серого цвета с закругленными углами) &mdash; означает количество вагонов на контроле, являеется ссылкой на соответствующую страницу сайта приложения.<br>
-            <span class="badge badge-success">25</span> (число белого цвета на квадрате зеленого цвета с закругленными углами) &mdash; означает количество вагонов на контроле, являеется ссылкой на соответствующую страницу сайта приложения.<br><br>
-            Во всех таблицах в колонке "инвентарный номер" цифры номера являются ссылкой на просмотр полной информации о вагоне и могут принимать цвет в зависимости от статуса вагона:<br>
+            <span class="badge badge-secondary">40</span> (число белого цвета на квадрате серого цвета с закругленными
+            углами) &mdash; означает количество вагонов на контроле, являеется ссылкой на соответствующую страницу сайта
+            приложения.<br>
+            <span class="badge badge-success">25</span> (число белого цвета на квадрате зеленого цвета с закругленными
+            углами) &mdash; означает количество вагонов на контроле, являеется ссылкой на соответствующую страницу сайта
+            приложения.<br><br>
+            Во всех таблицах в колонке "инвентарный номер" цифры номера являются ссылкой на просмотр полной информации о
+            вагоне и могут принимать цвет в зависимости от статуса вагона:<br>
             <span class="text-primary">68415546</span> &mdash; задержан,<br>
             <span class="text-danger">92624444</span> &mdash; длительно простаивает,<br>
             <span class="text-secondary">74961624</span> &mdash; на контроле,<br>
@@ -101,204 +105,64 @@
 
         <section id="root-page">
           <h5 class="mt-5">Главная страница</h5>
-          <p class="mb-1">В разработке</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores commodi dignissimos distinctio
-            eos est expedita explicabo, fugit harum labore maiores necessitatibus odit pariatur, porro possimus
-            provident quam quo reprehenderit sint tempora tenetur velit voluptate voluptatibus. Adipisci aliquid aperiam
-            aut beatae commodi consequuntur deserunt dolorem dolores ducimus eaque explicabo fuga id ipsum iure
-            laboriosam libero molestiae nemo odit omnis pariatur perferendis perspiciatis porro provident, quis
-            reiciendis sapiente sed sequi soluta tenetur ullam? Aliquid atque aut consequuntur deleniti dolore dolorum
-            ea enim illo, ipsa magnam modi mollitia nesciunt odit placeat veritatis voluptate voluptatem? A consequuntur
-            cum doloribus exercitationem pariatur perspiciatis quasi quibusdam quod recusandae repudiandae! Aliquid
-            consequatur dolor dolore ea eos iste obcaecati optio qui ratione vero! Accusantium aliquid animi consectetur
-            corporis delectus deleniti dolor dolorum, eum eveniet harum in laboriosam laborum laudantium libero magni,
-            minus nam natus nesciunt, nulla numquam omnis quia quibusdam repudiandae temporibus tenetur totam
-            voluptatum! Consectetur cum doloribus iusto mollitia placeat ratione sunt tenetur voluptatibus. Accusantium
-            asperiores autem dicta ducimus earum eum facilis inventore ipsa nobis provident, quisquam ratione repellat
-            repudiandae, sequi voluptas! Ea eaque eos eveniet laboriosam mollitia temporibus tenetur ut. Accusamus,
-            aperiam dolores iste iusto magnam modi nam nisi odio optio quae reiciendis rem totam vitae. Assumenda cumque
-            dolores molestias nihil placeat porro quas, quod sequi? Accusamus accusantium amet, assumenda atque beatae
-            consequatur consequuntur culpa delectus dolore doloribus, dolorum eaque esse exercitationem fuga fugiat ipsa
-            necessitatibus non nulla placeat porro provident quae quis sint sunt ullam voluptatibus voluptatum? Animi
-            atque cumque eaque illum ipsam itaque maxime molestiae, numquam obcaecati officia praesentium quo
-            repellendus voluptas? Accusamus accusantium animi aperiam architecto aspernatur assumenda consequatur culpa
-            distinctio dolor dolorem, eaque earum excepturi explicabo, facilis fuga illum ipsa iusto labore laboriosam
-            magnam molestias mollitia natus nemo nesciunt, numquam odio odit omnis optio perspiciatis quibusdam rem
-            repellat sit sunt ullam velit vitae voluptas. Amet atque eligendi placeat. Adipisci animi architecto atque,
-            aut commodi, dolorem dolores earum facere hic in ipsum molestias natus, nobis officia quae quo reiciendis
-            reprehenderit. Aliquam architecto deserunt dolorem eligendi est fugiat labore laboriosam, nihil nulla,
-            perferendis quis, quisquam recusandae saepe temporibus ut veniam voluptatum! Debitis deserunt eligendi
-            eveniet, explicabo ipsum iure laudantium magnam molestiae mollitia pariatur ut veritatis vitae voluptatum!
-            Accusamus aliquam beatae ducimus eaque eius est fugiat hic in ipsam iusto minus necessitatibus, nulla
-            perferendis praesentium repellat saepe suscipit, veritatis voluptates. Alias ducimus earum eius, eum,
-            expedita explicabo illo in labore laboriosam minima minus modi nisi ratione rem sed similique vel.
-            Accusantium amet autem beatae blanditiis consequuntur cum cumque delectus deserunt distinctio dolor dolores
-            dolorum ducimus eius eligendi error esse fugit ipsam magni natus nesciunt officia omnis placeat quis
-            quisquam quod reiciendis, repellat repudiandae sapiente sed sit sunt suscipit ullam unde vel veniam
-            voluptates voluptatibus. A accusantium cupiditate deleniti deserunt dignissimos eum facilis, impedit
-            necessitatibus, nemo nihil odio provident quaerat, repellat repudiandae sint ullam voluptatem voluptatibus!
-            Aspernatur, cum, debitis ducimus expedita facere itaque maxime molestiae necessitatibus omnis provident qui
-            rerum ut! Aliquam animi assumenda blanditiis, debitis deserunt dignissimos ducimus esse eum eveniet fugiat
-            id illo ipsa, laboriosam laborum magnam magni minima modi molestiae natus nemo provident quis quo rem
-            repudiandae, tempora temporibus ut vero. A accusamus, cupiditate deserunt dolor earum est expedita fugiat
-            fugit illum ipsum mollitia odit officia quae quasi quidem quod temporibus! Aliquam aperiam architecto dolore
-            est molestiae molestias quo sint ullam veritatis. Accusantium adipisci dicta eligendi eum ipsum neque
-            praesentium quod voluptatibus. A assumenda, cupiditate deserunt dolorum eius et excepturi facere magnam modi
-            </p>
+          <p class="mb-1">Адрес главной страницы сайта http://dpv.plck.rw/. Эта страница традиционна для веб-приложения
+            и состоит из гланого меню, основной части и боковой панели.<br>
+          <p class="mb-1">Главное меню включает логотип приложения:<br>
+            <img src="{{ asset('storage/images/tank-wagon.png') }}" alt="" width="36" class="mr-3">, клик по которому
+            всегда возвращает пользователя на главную страница;<br>
+            Пункты меню для формирования отчетов, просмотра "руководства пользователя" и входа для пользователей,
+            авторизованных редактировать информацию по вагонам.
+          </p>
+          <p>
+            В основной части представлена сводная информация о текущем количестве задержанных, длительно простаивающих
+            вагонах и вагонах, находящихся на контроле у оперативного персонала станции. И эта же информация в разрезе
+            организаций (подразделений).<br>
+          </p>
+          <p>
+            В боковой панели находится панель поиска и краткая статистика за последние три дня. Поиск можно проводить по
+            инвентарному номере вагона (целиком или частично) или по наименованию собственника.
+          </p>
+
+
         </section>
 
         <section id="reports">
           <h5 class="mt-5">Формирование отчетов</h5>
-          <p class="mb-1">В разработке</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores commodi dignissimos distinctio
-            eos est expedita explicabo, fugit harum labore maiores necessitatibus odit pariatur, porro possimus
-            provident quam quo reprehenderit sint tempora tenetur velit voluptate voluptatibus. Adipisci aliquid aperiam
-            aut beatae commodi consequuntur deserunt dolorem dolores ducimus eaque explicabo fuga id ipsum iure
-            laboriosam libero molestiae nemo odit omnis pariatur perferendis perspiciatis porro provident, quis
-            reiciendis sapiente sed sequi soluta tenetur ullam? Aliquid atque aut consequuntur deleniti dolore dolorum
-            ea enim illo, ipsa magnam modi mollitia nesciunt odit placeat veritatis voluptate voluptatem? A consequuntur
-            cum doloribus exercitationem pariatur perspiciatis quasi quibusdam quod recusandae repudiandae! Aliquid
-            consequatur dolor dolore ea eos iste obcaecati optio qui ratione vero! Accusantium aliquid animi consectetur
-            corporis delectus deleniti dolor dolorum, eum eveniet harum in laboriosam laborum laudantium libero magni,
-            minus nam natus nesciunt, nulla numquam omnis quia quibusdam repudiandae temporibus tenetur totam
-            voluptatum! Consectetur cum doloribus iusto mollitia placeat ratione sunt tenetur voluptatibus. Accusantium
-            asperiores autem dicta ducimus earum eum facilis inventore ipsa nobis provident, quisquam ratione repellat
-            repudiandae, sequi voluptas! Ea eaque eos eveniet laboriosam mollitia temporibus tenetur ut. Accusamus,
-            aperiam dolores iste iusto magnam modi nam nisi odio optio quae reiciendis rem totam vitae. Assumenda cumque
-            dolores molestias nihil placeat porro quas, quod sequi? Accusamus accusantium amet, assumenda atque beatae
-            consequatur consequuntur culpa delectus dolore doloribus, dolorum eaque esse exercitationem fuga fugiat ipsa
-            necessitatibus non nulla placeat porro provident quae quis sint sunt ullam voluptatibus voluptatum? Animi
-            atque cumque eaque illum ipsam itaque maxime molestiae, numquam obcaecati officia praesentium quo
-            repellendus voluptas? Accusamus accusantium animi aperiam architecto aspernatur assumenda consequatur culpa
-            distinctio dolor dolorem, eaque earum excepturi explicabo, facilis fuga illum ipsa iusto labore laboriosam
-            magnam molestias mollitia natus nemo nesciunt, numquam odio odit omnis optio perspiciatis quibusdam rem
-            repellat sit sunt ullam velit vitae voluptas. Amet atque eligendi placeat. Adipisci animi architecto atque,
-            aut commodi, dolorem dolores earum facere hic in ipsum molestias natus, nobis officia quae quo reiciendis
-            reprehenderit. Aliquam architecto deserunt dolorem eligendi est fugiat labore laboriosam, nihil nulla,
-            perferendis quis, quisquam recusandae saepe temporibus ut veniam voluptatum! Debitis deserunt eligendi
-            eveniet, explicabo ipsum iure laudantium magnam molestiae mollitia pariatur ut veritatis vitae voluptatum!
-            Accusamus aliquam beatae ducimus eaque eius est fugiat hic in ipsam iusto minus necessitatibus, nulla
-            perferendis praesentium repellat saepe suscipit, veritatis voluptates. Alias ducimus earum eius, eum,
-            expedita explicabo illo in labore laboriosam minima minus modi nisi ratione rem sed similique vel.
-            Accusantium amet autem beatae blanditiis consequuntur cum cumque delectus deserunt distinctio dolor dolores
-            dolorum ducimus eius eligendi error esse fugit ipsam magni natus nesciunt officia omnis placeat quis
-            quisquam quod reiciendis, repellat repudiandae sapiente sed sit sunt suscipit ullam unde vel veniam
-            voluptates voluptatibus. A accusantium cupiditate deleniti deserunt dignissimos eum facilis, impedit
-            necessitatibus, nemo nihil odio provident quaerat, repellat repudiandae sint ullam voluptatem voluptatibus!
-            Aspernatur, cum, debitis ducimus expedita facere itaque maxime molestiae necessitatibus omnis provident qui
-            rerum ut! Aliquam animi assumenda blanditiis, debitis deserunt dignissimos ducimus esse eum eveniet fugiat
-            id illo ipsa, laboriosam laborum magnam magni minima modi molestiae natus nemo provident quis quo rem
-            repudiandae, tempora temporibus ut vero. A accusamus, cupiditate deserunt dolor earum est expedita fugiat
-            fugit illum ipsum mollitia odit officia quae quasi quidem quod temporibus! Aliquam aperiam architecto dolore
-            est molestiae molestias quo sint ullam veritatis. Accusantium adipisci dicta eligendi eum ipsum neque
-            praesentium quod voluptatibus. A assumenda, cupiditate deserunt dolorum eius et excepturi facere magnam modi
-          </p>
+          <p class="mb-1">Раздел приложения для получения отчетов может формировать отчет на момент времени либо за
+            период.<br>
+            Пункт меню "На дату-время" вызывает диалоговое окно для выбора времени отчета:<br>
+          <div class="text-center"><img src="{{ asset('storage/images/report-at.png') }}" alt="" width="300"></div>
+          Для получения отчета необходимо выберать дату и время и кликнуть "Сформировать отчет".<br>
+          Пункт меню "произвольный период" вызывает диалоговое окно для выбора периода отчета:<br>
+          <div class="text-center"><img src="{{ asset('storage/images/report-period.png') }}" alt="" width="300"></div>
+          Для получения отчета необходимо выберать дату и время начала и окончания периода и кликнуть "Сформировать
+          отчет".<br><br>
+          Отчет "Последная смена" формирует отчет за последнюю <strong>полную</strong> смену. Аналогично формируется
+          отчет за предпроследнюю смену. Обратите внимание на начало и окончание кождого из этих отчетов.
         </section>
 
         <section id="manage-wagons">
           <h5 class="mt-5">Работа с вагонами</h5>
           <p class="mb-1">В разработке</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores commodi dignissimos distinctio
-            eos est expedita explicabo, fugit harum labore maiores necessitatibus odit pariatur, porro possimus
-            provident quam quo reprehenderit sint tempora tenetur velit voluptate voluptatibus. Adipisci aliquid aperiam
-            aut beatae commodi consequuntur deserunt dolorem dolores ducimus eaque explicabo fuga id ipsum iure
-            laboriosam libero molestiae nemo odit omnis pariatur perferendis perspiciatis porro provident, quis
-            reiciendis sapiente sed sequi soluta tenetur ullam? Aliquid atque aut consequuntur deleniti dolore dolorum
-            ea enim illo, ipsa magnam modi mollitia nesciunt odit placeat veritatis voluptate voluptatem? A consequuntur
-            cum doloribus exercitationem pariatur perspiciatis quasi quibusdam quod recusandae repudiandae! Aliquid
-            consequatur dolor dolore ea eos iste obcaecati optio qui ratione vero! Accusantium aliquid animi consectetur
-            corporis delectus deleniti dolor dolorum, eum eveniet harum in laboriosam laborum laudantium libero magni,
-            minus nam natus nesciunt, nulla numquam omnis quia quibusdam repudiandae temporibus tenetur totam
-            voluptatum! Consectetur cum doloribus iusto mollitia placeat ratione sunt tenetur voluptatibus. Accusantium
-            asperiores autem dicta ducimus earum eum facilis inventore ipsa nobis provident, quisquam ratione repellat
-            repudiandae, sequi voluptas! Ea eaque eos eveniet laboriosam mollitia temporibus tenetur ut. Accusamus,
-            aperiam dolores iste iusto magnam modi nam nisi odio optio quae reiciendis rem totam vitae. Assumenda cumque
-            dolores molestias nihil placeat porro quas, quod sequi? Accusamus accusantium amet, assumenda atque beatae
-            consequatur consequuntur culpa delectus dolore doloribus, dolorum eaque esse exercitationem fuga fugiat ipsa
-            necessitatibus non nulla placeat porro provident quae quis sint sunt ullam voluptatibus voluptatum? Animi
-            atque cumque eaque illum ipsam itaque maxime molestiae, numquam obcaecati officia praesentium quo
-            repellendus voluptas? Accusamus accusantium animi aperiam architecto aspernatur assumenda consequatur culpa
-            distinctio dolor dolorem, eaque earum excepturi explicabo, facilis fuga illum ipsa iusto labore laboriosam
-            magnam molestias mollitia natus nemo nesciunt, numquam odio odit omnis optio perspiciatis quibusdam rem
-            repellat sit sunt ullam velit vitae voluptas. Amet atque eligendi placeat. Adipisci animi architecto atque,
-            aut commodi, dolorem dolores earum facere hic in ipsum molestias natus, nobis officia quae quo reiciendis
-            reprehenderit. Aliquam architecto deserunt dolorem eligendi est fugiat labore laboriosam, nihil nulla,
-            perferendis quis, quisquam recusandae saepe temporibus ut veniam voluptatum! Debitis deserunt eligendi
-            eveniet, explicabo ipsum iure laudantium magnam molestiae mollitia pariatur ut veritatis vitae voluptatum!
-            Accusamus aliquam beatae ducimus eaque eius est fugiat hic in ipsam iusto minus necessitatibus, nulla
-            perferendis praesentium repellat saepe suscipit, veritatis voluptates. Alias ducimus earum eius, eum,
-            expedita explicabo illo in labore laboriosam minima minus modi nisi ratione rem sed similique vel.
-            Accusantium amet autem beatae blanditiis consequuntur cum cumque delectus deserunt distinctio dolor dolores
-            dolorum ducimus eius eligendi error esse fugit ipsam magni natus nesciunt officia omnis placeat quis
-            quisquam quod reiciendis, repellat repudiandae sapiente sed sit sunt suscipit ullam unde vel veniam
-            voluptates voluptatibus. A accusantium cupiditate deleniti deserunt dignissimos eum facilis, impedit
-            necessitatibus, nemo nihil odio provident quaerat, repellat repudiandae sint ullam voluptatem voluptatibus!
-            Aspernatur, cum, debitis ducimus expedita facere itaque maxime molestiae necessitatibus omnis provident qui
-            rerum ut! Aliquam animi assumenda blanditiis, debitis deserunt dignissimos ducimus esse eum eveniet fugiat
-            id illo ipsa, laboriosam laborum magnam magni minima modi molestiae natus nemo provident quis quo rem
-            repudiandae, tempora temporibus ut vero. A accusamus, cupiditate deserunt dolor earum est expedita fugiat
-            fugit illum ipsum mollitia odit officia quae quasi quidem quod temporibus! Aliquam aperiam architecto dolore
-            est molestiae molestias quo sint ullam veritatis. Accusantium adipisci dicta eligendi eum ipsum neque
-            praesentium quod voluptatibus. A assumenda, cupiditate deserunt dolorum eius et excepturi facere magnam modi
-          </p>
+          <p class="mb-1"></p>
+          <p class="mb-1"></p>
+          <p class="mb-1"></p>
+          <p class="mb-1"></p>
         </section>
 
         <section id="requirement">
           <h5 class="mt-5">Требования</h5>
-          <p class="mb-1">В разработке</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores commodi dignissimos distinctio
-            eos est expedita explicabo, fugit harum labore maiores necessitatibus odit pariatur, porro possimus
-            provident quam quo reprehenderit sint tempora tenetur velit voluptate voluptatibus. Adipisci aliquid aperiam
-            aut beatae commodi consequuntur deserunt dolorem dolores ducimus eaque explicabo fuga id ipsum iure
-            laboriosam libero molestiae nemo odit omnis pariatur perferendis perspiciatis porro provident, quis
-            reiciendis sapiente sed sequi soluta tenetur ullam? Aliquid atque aut consequuntur deleniti dolore dolorum
-            ea enim illo, ipsa magnam modi mollitia nesciunt odit placeat veritatis voluptate voluptatem? A consequuntur
-            cum doloribus exercitationem pariatur perspiciatis quasi quibusdam quod recusandae repudiandae! Aliquid
-            consequatur dolor dolore ea eos iste obcaecati optio qui ratione vero! Accusantium aliquid animi consectetur
-            corporis delectus deleniti dolor dolorum, eum eveniet harum in laboriosam laborum laudantium libero magni,
-            minus nam natus nesciunt, nulla numquam omnis quia quibusdam repudiandae temporibus tenetur totam
-            voluptatum! Consectetur cum doloribus iusto mollitia placeat ratione sunt tenetur voluptatibus. Accusantium
-            asperiores autem dicta ducimus earum eum facilis inventore ipsa nobis provident, quisquam ratione repellat
-            repudiandae, sequi voluptas! Ea eaque eos eveniet laboriosam mollitia temporibus tenetur ut. Accusamus,
-            aperiam dolores iste iusto magnam modi nam nisi odio optio quae reiciendis rem totam vitae. Assumenda cumque
-            dolores molestias nihil placeat porro quas, quod sequi? Accusamus accusantium amet, assumenda atque beatae
-            consequatur consequuntur culpa delectus dolore doloribus, dolorum eaque esse exercitationem fuga fugiat ipsa
-            necessitatibus non nulla placeat porro provident quae quis sint sunt ullam voluptatibus voluptatum? Animi
-            atque cumque eaque illum ipsam itaque maxime molestiae, numquam obcaecati officia praesentium quo
-            repellendus voluptas? Accusamus accusantium animi aperiam architecto aspernatur assumenda consequatur culpa
-            distinctio dolor dolorem, eaque earum excepturi explicabo, facilis fuga illum ipsa iusto labore laboriosam
-            magnam molestias mollitia natus nemo nesciunt, numquam odio odit omnis optio perspiciatis quibusdam rem
-            repellat sit sunt ullam velit vitae voluptas. Amet atque eligendi placeat. Adipisci animi architecto atque,
-            aut commodi, dolorem dolores earum facere hic in ipsum molestias natus, nobis officia quae quo reiciendis
-            reprehenderit. Aliquam architecto deserunt dolorem eligendi est fugiat labore laboriosam, nihil nulla,
-            perferendis quis, quisquam recusandae saepe temporibus ut veniam voluptatum! Debitis deserunt eligendi
-            eveniet, explicabo ipsum iure laudantium magnam molestiae mollitia pariatur ut veritatis vitae voluptatum!
-            Accusamus aliquam beatae ducimus eaque eius est fugiat hic in ipsam iusto minus necessitatibus, nulla
-            perferendis praesentium repellat saepe suscipit, veritatis voluptates. Alias ducimus earum eius, eum,
-            expedita explicabo illo in labore laboriosam minima minus modi nisi ratione rem sed similique vel.
-            Accusantium amet autem beatae blanditiis consequuntur cum cumque delectus deserunt distinctio dolor dolores
-            dolorum ducimus eius eligendi error esse fugit ipsam magni natus nesciunt officia omnis placeat quis
-            quisquam quod reiciendis, repellat repudiandae sapiente sed sit sunt suscipit ullam unde vel veniam
-            voluptates voluptatibus. A accusantium cupiditate deleniti deserunt dignissimos eum facilis, impedit
-            necessitatibus, nemo nihil odio provident quaerat, repellat repudiandae sint ullam voluptatem voluptatibus!
-            Aspernatur, cum, debitis ducimus expedita facere itaque maxime molestiae necessitatibus omnis provident qui
-            rerum ut! Aliquam animi assumenda blanditiis, debitis deserunt dignissimos ducimus esse eum eveniet fugiat
-            id illo ipsa, laboriosam laborum magnam magni minima modi molestiae natus nemo provident quis quo rem
-            repudiandae, tempora temporibus ut vero. A accusamus, cupiditate deserunt dolor earum est expedita fugiat
-            fugit illum ipsum mollitia odit officia quae quasi quidem quod temporibus! Aliquam aperiam architecto dolore
-            est molestiae molestias quo sint ullam veritatis. Accusantium adipisci dicta eligendi eum ipsum neque
-            praesentium quod voluptatibus. A assumenda, cupiditate deserunt dolorum eius et excepturi facere magnam modi
-            nesciunt, obcaecati odio, pariatur reiciendis sit tempore ullam vitae? Aperiam at beatae consectetur dolor
-            dolores doloribus dolorum enim est illo minima nemo perferendis quam qui ratione repellat repudiandae, unde
-            vitae voluptas. Autem deserunt distinctio dolore earum, fuga ipsum iusto laudantium minus molestiae nihil
-            nisi non odio odit pariatur porro quasi quisquam ratione recusandae repellendus sed similique tempore
-            voluptates? Consequatur cumque libero, natus non quam quia quis tempore veniam voluptas voluptates. Aliquid
-            autem earum incidunt omnis quae? Consequatur est labore necessitatibus unde vero! Alias animi aspernatur
-            consectetur culpa cumque doloribus error ex fugiat impedit incidunt itaque labore magni numquam perspiciatis
-            </p>
+          <p class="mb-5">Для работы приложения необходим компьютер с доступом в Единую сеть передачи данных Белорусской
+            железной дороги.<br>
+            "Учет задержанных и длительно простаивающих вагонов" являет веб-приложением и для запуска необходим один из следующих браузеров:
+            Microsoft Edge<br>
+            Google Chrome<br>
+            Mozilla Firefox (не ниже версии 49)<br>
+            Opera<br>
+            Для корректной печати отчетов на принтер рекомендуется использовать Microsoft Edge, Google Chrome или Opera<br><br>
+            Пользователь должен обладать опытом работы на персональном компьютере. Знать общие сведения о работе веб-приложений (сайт, ссылка, заполнение форм и т.д.)
+          </p>
         </section>
-
-
       </div>
     </div>
   </div>
