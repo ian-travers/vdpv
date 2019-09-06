@@ -15,23 +15,24 @@ class DetainersTableSeeder extends Seeder
             ],
             [
                 'name' => 'Служба грузовой и внешнеэкономической деятельности',
-                'long_detain_event' => 'detained_at'
+                'long_detain_event' => 'released_at'
             ],
             [
                 'name' => 'Таможенная служба',
-                'long_detain_event' => 'detained_at'
+                'long_detain_event' => 'released_at'
             ],
             [
                 'name' => 'Ветеринарный контроль',
-                'long_detain_event' => 'detained_at'
+                'long_detain_event' => 'released_at'
             ],
             [
                 'name' => 'Фитосанитарный контроль',
-                'long_detain_event' => 'detained_at'
+                'long_detain_event' => 'released_at
+                '
             ],
             [
                 'name' => 'Пункт передачи вагонов',
-                'long_detain_event' => 'detained_at'
+                'long_detain_event' => 'released_at'
             ],
             [
                 'name' => 'Местные вагоны',
@@ -39,7 +40,7 @@ class DetainersTableSeeder extends Seeder
             ],
             [
                 'name' => 'Прочие',
-                'long_detain_event' => 'detained_at'
+                'long_detain_event' => 'released_at'
             ]
         ]);
     }
