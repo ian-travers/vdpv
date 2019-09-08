@@ -131,10 +131,6 @@ class WagonTest extends TestCase
         $wagon->update(['detained_at' => Carbon::parse('-25 hours')]);
 
         $this->assertEquals('text-secondary', $wagon->linkCssClass());
-
-        $wagon->update(['detainer_id' => 2]);
-
-        $this->assertEquals('text-danger', $wagon->fresh()->linkCssClass());
     }
 
     /** @test */

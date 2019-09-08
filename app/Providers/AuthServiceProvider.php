@@ -14,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Wagon' => 'App\Policies\WagonPolicy'
+//        'App\Wagon' => 'App\Policies\WagonPolicy'
     ];
 
     /**
@@ -28,6 +28,14 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('admin', function (User $user) {
             return $user->isAdmin();
+        });
+
+        Gate::define('manage-wagons', function (User $user) {
+            return $user->isLocalWagonsManager() || $user->isWagonsManager() || $user->isStationAdmin() || $user->isAdmin();
+        });
+
+        Gate::define('manage-station', function (User $user) {
+            return $user->isStationAdmin() || $user->isAdmin();
         });
     }
 }

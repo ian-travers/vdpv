@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property int $id
  * @property string $name
  * @property string $username
+ * @property string $role
  * @property bool $is_admin
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
@@ -31,6 +32,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUsername($value)
  * @mixin \Eloquent
@@ -39,33 +41,60 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public const ROLE_USER = 'user';
+    public const ROLE_LOCAL_WAGONS_MANAGER = 'local-manager';
+    public const ROLE_WAGONS_MANAGER = 'manager';
+    public const ROLE_STATION_ADMIN = 'station-administrator';
+
     protected $fillable = [
-        'name', 'username', 'email', 'password', 'is_admin'
+        'name', 'username', 'email', 'password', 'is_admin', 'role'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean'
     ];
+
+    public static function rolesList(): array
+    {
+        return [
+            self::ROLE_USER => 'Пользователь',
+            self::ROLE_LOCAL_WAGONS_MANAGER => 'Управление местными вагонами',
+            self::ROLE_WAGONS_MANAGER => 'Управление всеми вагонами',
+            self::ROLE_STATION_ADMIN => 'Администратор станции',
+        ];
+    }
+
+    public function changeRole($role): void
+    {
+        if (!array_key_exists($role, self::rolesList())) {
+            throw new \InvalidArgumentException('Неизвестная роль "' . $role . '"');
+        }
+
+        if ($this->role === $role) {
+            throw new \DomainException('Эта роль уже назначена');
+        }
+        $this->update(['role' => $role]);
+    }
+
+    public function isLocalWagonsManager(): bool
+    {
+        return $this->role == self::ROLE_LOCAL_WAGONS_MANAGER;
+    }
+
+    public function isWagonsManager(): bool
+    {
+        return $this->role == self::ROLE_WAGONS_MANAGER;
+    }
+
+    public function isStationAdmin(): bool
+    {
+        return $this->role == self::ROLE_STATION_ADMIN;
+    }
 
     public function wagons()
     {

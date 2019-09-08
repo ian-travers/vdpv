@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Detainer;
+use App\User;
 use App\Wagon;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
@@ -10,7 +11,6 @@ use Tests\Setup\WagonFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Auth;
 
 class ManageWagonsTest extends TestCase
 {
@@ -29,9 +29,10 @@ class ManageWagonsTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_create_a_wagon()
+    function a_wagons_manager_can_create_a_wagon()
     {
-        $this->signIn();
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
 
         $attributes = [
             'inw' => $this->faker->numerify('########'),
@@ -58,11 +59,12 @@ class ManageWagonsTest extends TestCase
     }
     
     /** @test */ 
-    function a_user_can_update_a_wagon()
+    function a_wagons_manager_can_update_a_wagon()
     {
-        $this->withoutExceptionHandling();
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
 
-        $wagon = app(WagonFactory::class)->create();
+        $wagon = app(WagonFactory::class)->createdBy($manager)->create();
 
         $this->actingAs($wagon->creator)
             ->patch($wagon->path(), $attributes = [
@@ -87,11 +89,12 @@ class ManageWagonsTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_delete_their_wagons()
+    function a_wagons_manager_can_delete_their_wagons()
     {
-        $this->signIn();
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
 
-        $wagon = app(WagonFactory::class)->createdBy(Auth::user())->create();
+        $wagon = app(WagonFactory::class)->createdBy($manager)->create();
 
         $this->assertDatabaseHas('wagons', $wagon->toArray());
 
@@ -115,11 +118,12 @@ class ManageWagonsTest extends TestCase
     }
     
     /** @test */
-    function a_user_can_view_their_wagons()
+    function a_wagon_manager_can_view_their_wagons()
     {
-        $this->signIn();
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
 
-        $wagon = app(WagonFactory::class)->createdBy(Auth::user())->create();
+        $wagon = app(WagonFactory::class)->createdBy($manager)->create();
 
         $this->get($wagon->path())->assertOk();
     }
@@ -137,8 +141,10 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_an_inw()
     {
-        $this->signIn();
-        $attributes = factory(Wagon::class)->raw(['inw' => '']);
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
+
+        $attributes = factory(Wagon::class)->raw(['inw' => '', 'creator_id' => $manager->id]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('inw');
     }
@@ -146,16 +152,18 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_inw_is_exactly_8_digits()
     {
-        $this->signIn();
-        $attributes = factory(Wagon::class)->raw(['inw' => '1234567']);
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
+
+        $attributes = factory(Wagon::class)->raw(['inw' => '1234567', 'creator_id' => $manager->id]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('inw');
 
-        $attributes = factory(Wagon::class)->raw(['inw' => '123456789']);
+        $attributes = factory(Wagon::class)->raw(['inw' => '123456789', 'creator_id' => $manager->id]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('inw');
 
-        $attributes = factory(Wagon::class)->raw(['inw' => '123456aa']);
+        $attributes = factory(Wagon::class)->raw(['inw' => '123456aa', 'creator_id' => $manager->id]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('inw');
     }
@@ -163,8 +171,10 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_a_detained_at()
     {
-        $this->signIn();
-        $attributes = factory(Wagon::class)->raw(['detained_at' => null]);
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
+
+        $attributes = factory(Wagon::class)->raw(['detained_at' => null, 'creator_id' => $manager->id]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('detained_at');
     }
@@ -172,8 +182,10 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_wagon_requires_a_detainer()
     {
-        $this->signIn();
-        $attributes = factory(Wagon::class)->raw(['detainer_id' => '']);
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
+
+        $attributes = factory(Wagon::class)->raw(['detainer_id' => '', 'creator_id' => $manager->id]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('detainer_id');
     }
@@ -181,7 +193,8 @@ class ManageWagonsTest extends TestCase
     /** @test */
     function a_local_wagon_has_the_same_detained_and_released_times()
     {
-        $this->signIn();
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
 
         $attributes = factory(Wagon::class)->raw(['detainer_id' => '7']);
 
@@ -200,9 +213,10 @@ class ManageWagonsTest extends TestCase
     {
         $this->artisan('db:seed --class=DetainersTableSeeder');
 
-        $this->signIn();
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
 
-        $attributes = factory(Wagon::class)->raw(['detainer_id' => '7']);
+        $attributes = factory(Wagon::class)->raw(['detainer_id' => '7', 'creator_id' => $manager->id]);
 
         $this->post('/wagons', $attributes)->assertStatus(Response::HTTP_FOUND);
 
@@ -211,5 +225,23 @@ class ManageWagonsTest extends TestCase
         $this->assertTrue($wagon->isReleased());
         $this->assertFalse($wagon->isDeparted());
         $this->assertFalse($wagon->isDetained());
+    }
+
+    /** @test */
+    function a_manager_can_manage_wagon_created_by_local_manager()
+    {
+        $this->artisan('db:seed --class=DetainersTableSeeder');
+
+        $localManager = factory(User::class)->create(['role' => User::ROLE_LOCAL_WAGONS_MANAGER]);
+        $this->signIn($localManager);
+
+        $wagon = app(WagonFactory::class)->createdBy($localManager)->create();
+
+        $this->assertDatabaseHas('wagons', $wagon->toArray());
+
+        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
+        $this->signIn($manager);
+
+        $this->get('/wagons')->assertSee($wagon->inw);
     }
 }

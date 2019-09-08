@@ -15,13 +15,13 @@ class WagonsController extends Controller
     {
         $term = request()->only('term');
 
-        $wagons = Auth::user()->isAdmin()
-            ? Wagon::sortable()
+        $wagons = auth()->user()->isLocalWagonsManager()
+            ? Wagon::where('detainer_id', 7)
+                ->sortable()
                 ->filter($term)
                 ->orderBy('detained_at', 'desc')
                 ->paginate($this->wagonsPerPage)
-            : Auth::user()->wagons()
-                ->sortable()
+            : Wagon::sortable()
                 ->filter($term)
                 ->orderBy('detained_at', 'desc')
                 ->paginate($this->wagonsPerPage);
@@ -36,8 +36,6 @@ class WagonsController extends Controller
      */
     public function show(Wagon $wagon)
     {
-        $this->authorize('manage', $wagon);
-
         return view('wagons.show', compact('wagon'));
     }
 
@@ -99,8 +97,6 @@ class WagonsController extends Controller
      */
     public function destroy(Wagon $wagon)
     {
-        $this->authorize('manage', $wagon);
-
         $wagon->delete();
 
         return redirect(route('wagons.index'))->with([

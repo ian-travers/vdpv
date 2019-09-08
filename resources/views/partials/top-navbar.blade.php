@@ -16,12 +16,12 @@
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto ml-4">
 
-        @if(auth()->check())
+        @can('manage-wagons')
           <li class="nav-item">
             <a class="nav-link" href="{{ route('wagons.index') }}">Работа с вагонами</a>
           </li>
 
-        @endif
+        @endcan
         <li class="nav-item">
           <a class="nav-link" href="{{ route('help') }}">Руководство пользователя</a>
         </li>

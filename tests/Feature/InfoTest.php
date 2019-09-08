@@ -18,7 +18,7 @@ class InfoTest extends TestCase
         $this->assertEquals(0, controlledAtCount());
         $this->assertEquals(0, detainedLongAtCount());
 
-        $this->get(route('long-only'))->assertSee('Ничего не найдено');
+        $this->get(route('long-only'))->assertSee('вагонов нет');
         $this->get(route('recent', ['today', 'detained']))->assertSee('Ничего не найдено');
         $this->get(route('recent', ['today', 'released']))->assertSee('Ничего не найдено');
         $this->get(route('recent', ['today', 'departed']))->assertSee('Ничего не найдено');
@@ -57,7 +57,7 @@ class InfoTest extends TestCase
         $this->assertEquals(1, controlledAtCount());
         $this->assertEquals(0, detainedLongAtCount());
 
-        $this->get(route('long-only'))->assertSee('Ничего не найдено');
+        $this->get(route('long-only'))->assertSee('вагонов нет');
 
         $this->get(route('recent', ['today', 'detained']))->assertSee($wagon->inw);
         $this->get(route('recent', ['today', 'released']))->assertSee('Ничего не найдено');
