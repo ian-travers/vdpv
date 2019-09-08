@@ -66,7 +66,7 @@ class ManageWagonsTest extends TestCase
 
         $wagon = app(WagonFactory::class)->createdBy($manager)->create();
 
-        $this->actingAs($wagon->creator)
+        $this->actingAs($manager)
             ->patch($wagon->path(), $attributes = [
                 'inw' => '12345678',
                 'arrived_at' => Carbon::parse('-1 min'),

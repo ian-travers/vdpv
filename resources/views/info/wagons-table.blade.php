@@ -22,7 +22,7 @@
           {{ $wagon->inw }}
 
           @if($wagon->isHasAnotherDetaining())
-            <span class="badge badge-warning border align-top float-right" title="Есть дополнительна информация">!</span>
+            <span class="badge badge-warning border align-top float-right" title="Есть дополнительная информация">!</span>
 
           @endif
         </a>

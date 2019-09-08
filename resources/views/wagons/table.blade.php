@@ -23,7 +23,7 @@
       <td>{{ $wagon->detainer->name }}</td>
       <td>{{ $wagon->reason }}</td>
       <td>{{ $wagon->cargo }} / {{ $wagon->forwarder }} / {{ $wagon->ownership }}</td>
-      <td class="text-center">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
+      <td class="text-center">{{ !$wagon->isLocal() ? $wagon->detained_at->format('d.m.Y H:i') : '' }}</td>
       <td class="text-center">{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y H:i') : '' }}</td>
       <td class="text-center">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : '' }}</td>
       <td class="text-center">

@@ -70,7 +70,7 @@
 
               </td>
               <td class="text-center">{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y H:i') : '' }}</td>
-              <td class="text-center">{{ $wagon->detained_at->format('d.m.Y H:i') }}</td>
+              <td class="text-center">{{ !$wagon->isLocal() ? $wagon->detained_at->format('d.m.Y H:i') : '' }}</td>
               <td>{{ $wagon->reason }}</td>
               <td class="text-center">{!! $wagon->renderReturning() !!}</td>
               <td class="text-center">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : ''}}</td>

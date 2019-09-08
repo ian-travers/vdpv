@@ -65,6 +65,8 @@ class WagonsController extends Controller
 
     public function edit(Wagon $wagon)
     {
+        $this->authorize('manage', $wagon);
+
         $detainers = Detainer::all();
 
         session()->put('url.intended', url()->previous());
@@ -74,6 +76,8 @@ class WagonsController extends Controller
 
     public function update(WagonRequest $request, Wagon $wagon)
     {
+        $this->authorize('manage', $wagon);
+
         $request['returning'] = $request->has('returning') ? "1" : "0";
 
         if ($request['detainer_id'] == 7) {
