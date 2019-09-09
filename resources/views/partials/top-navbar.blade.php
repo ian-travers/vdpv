@@ -54,10 +54,10 @@
             <a class="nav-link" href="{{ route('login') }}">Вход</a>
           </li>
 
-{{--          @if (Route::has('register'))--}}
-            {{--<li class="nav-item">--}}
-              {{--<a class="nav-link" href="{{ route('register') }}">Регистрация</a>--}}
-            {{--</li>--}}
+          {{--          @if (Route::has('register'))--}}
+          {{--<li class="nav-item">--}}
+          {{--<a class="nav-link" href="{{ route('register') }}">Регистрация</a>--}}
+          {{--</li>--}}
 
           {{--@endif--}}
         @else
@@ -74,6 +74,10 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <p class="text-center m-3">Авторизация<br>
+                <span class="badge badge-dark">{{ App\User::rolesList()[auth()->user()->role] }}</span>
+              </p>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{ route('logout') }}"
                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 Выход
