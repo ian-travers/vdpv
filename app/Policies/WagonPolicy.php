@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Policies;
+
 use App\User;
 use App\Wagon;
 use Illuminate\Auth\Access\HandlesAuthorization;
+
 class WagonPolicy
 {
     use HandlesAuthorization;

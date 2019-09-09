@@ -41,7 +41,9 @@ class WagonsController extends Controller
 
     public function create()
     {
-        $detainers = Detainer::all();
+        $detainers = auth()->user()->isLocalWagonsManager()
+            ? Detainer::where('id', 7)->get()
+            : Detainer::all();
 
         return view('wagons.create', compact('detainers'));
     }
@@ -63,17 +65,30 @@ class WagonsController extends Controller
         ]);
     }
 
+    /**
+     * @param Wagon $wagon
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function edit(Wagon $wagon)
     {
         $this->authorize('manage', $wagon);
 
-        $detainers = Detainer::all();
+        $detainers = auth()->user()->isLocalWagonsManager()
+            ? Detainer::where('id', 7)->get()
+            : Detainer::all();
 
         session()->put('url.intended', url()->previous());
 
         return view('wagons.edit', compact('wagon', 'detainers'));
     }
 
+    /**
+     * @param WagonRequest $request
+     * @param Wagon $wagon
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(WagonRequest $request, Wagon $wagon)
     {
         $this->authorize('manage', $wagon);
@@ -101,6 +116,8 @@ class WagonsController extends Controller
      */
     public function destroy(Wagon $wagon)
     {
+        $this->authorize('manage', $wagon);
+
         $wagon->delete();
 
         return redirect(route('wagons.index'))->with([

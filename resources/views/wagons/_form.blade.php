@@ -29,6 +29,8 @@
                 required
         >@include('wagons._detainers')</select>
 
+{{--        @php dd($wagon->detainer_id) @endphp--}}
+
         @if($errors->has('detainer_id'))
           <div class="invalid-feedback">
             <strong>{{ $errors->first('detainer_id') }}</strong>
@@ -38,7 +40,7 @@
       </div>
 
       {{-- Причина задержки --}}
-      <div class="form-group mr-2">
+      <div id="reason-fg" class="form-group mr-2">
         <label for="reason">Причина задержки</label>
         <input type="text" id="reason" name="reason" value="{{ old('reason', $wagon->reason) }}"
                class="form-control {{ $errors->has('reason') ? 'is-invalid' : '' }}">
@@ -52,21 +54,21 @@
       </div>
 
       {{-- Груз --}}
-      <div class="form-group mr-2">
+      <div id="cargo-fg" class="form-group mr-2">
         <label for="cargo">Наименование груза</label>
         <input type="text" id="cargo" name="cargo" value="{{ old('cargo', $wagon->cargo) }}"
                class="form-control {{ $errors->has('cargo') ? 'is-invalid' : '' }}">
       </div>
 
       {{-- Экспедитор --}}
-      <div class="form-group mr-2">
+      <div id="forwarder-fg" class="form-group mr-2">
         <label for="forwarder">Экспедитор по БЧ</label>
         <input type="text" id="forwarder" name="forwarder" value="{{ old('forwarder', $wagon->forwarder) }}"
                class="form-control {{ $errors->has('forwarder') ? 'is-invalid' : '' }}">
       </div>
 
       {{-- Собственность вагона --}}
-      <div class="form-group mr-2">
+      <div id="ownership-fg" class="form-group mr-2">
         <label for="ownership">Собственность</label>
         <input type="text" id="ownership" name="ownership" value="{{ old('ownership', $wagon->ownership) }}"
                class="form-control {{ $errors->has('ownership') ? 'is-invalid' : '' }}">
@@ -75,7 +77,7 @@
 
     <div class="d-md-inline-flex justify-content-lg-start align-items-start">
       {{-- Станция отправления --}}
-      <div class="form-group mr-2">
+      <div id="departure_station-fg" class="form-group mr-2">
         <label for="departure_station">Станция отправления</label>
         <input type="text" id="departure_station" name="departure_station"
                value="{{ old('departure_station', $wagon->departure_station) }}"
@@ -135,7 +137,7 @@
       </div>
 
       {{-- Признак возврата --}}
-      <div class="form-group">
+      <div id="returning-fg" class="form-group">
         <label for="returning">Возврат</label>
         <input type="checkbox" id="returning" name="returning"
                @if($wagon->returning)
@@ -148,7 +150,7 @@
   </div>
 </div>
 
-<div id="taken_measure_block" class="card border border-primary rounded-lg mb-2">
+<div id="taken_measure-fg" class="card border border-primary rounded-lg mb-2">
   <div class="card-header bg-primary text-light lead py-1">
     Принятые меры
   </div>
@@ -192,33 +194,6 @@
           </option>
         </select>
       </div>
-
-      {{-- Парк --}}
-      <div class="form-group mr-2">
-        <label for="park">Парк</label>
-        <input type="text" id="park" name="park"
-               value="{{ old('park', $wagon->park) }}"
-               class="form-control {{ $errors->has('park') ? 'is-invalid' : '' }}">
-
-      </div>
-
-      {{-- Путь --}}
-      <div class="form-group mr-2">
-        <label for="way">Путь</label>
-        <input type="text" id="way" name="way"
-               value="{{ old('way', $wagon->way) }}"
-               class="form-control {{ $errors->has('way') ? 'is-invalid' : '' }}">
-
-      </div>
-
-      {{-- НПЛФ --}}
-      <div class="form-group mr-2">
-        <label for="nplf">НПЛФ</label>
-        <input type="text" id="nplf" name="nplf"
-               value="{{ old('nplf', $wagon->nplf) }}"
-               class="form-control {{ $errors->has('nplf') ? 'is-invalid' : '' }}">
-
-      </div>
     </div>
   </div>
 </div>
@@ -230,7 +205,7 @@
   <div class="card-body pb-0">
     <div class="d-inline-flex align-items-end justify-content-end">
 
-      <div id="released_at_block" class="form-group mr-2">
+      <div id="released_at-fg" class="form-group mr-2">
         <label id="released_at_label" for="dtp_released_at">Дата/время выпуска</label>
         <div class="input-group" id="released_at" data-target-input="nearest">
           <input type="text" id="dtp_released_at"
@@ -284,8 +259,14 @@
   <script>
       if (String($('#detainer_id').val()) === String(7)) {
           $('#detained_at_label').html('Окончание грузовой операции');
-          $('#released_at_block').hide();
-          $('#taken_measure_block').hide();
+          $('#reason-fg').hide();
+          $('#cargo-fg').hide();
+          $('#forwarder-fg').hide();
+          $('#ownership-fg').hide();
+          $('#departure_station-fg').hide();
+          $('#returning-fg').hide();
+          $('#taken_measure-fg').hide();
+          $('#released_at-fg').hide();
       } else {
           $('#local-wagon').hide();
       }
@@ -294,13 +275,25 @@
           $('#detainer_id').change(function () {
               if (String(this.value) === String(7)) {
                   $('#detained_at_label').html('Окончание грузовой операции');
-                  $('#released_at_block').hide();
-                  $('#taken_measure_block').hide();
+                  $('#reason-fg').hide();
+                  $('#cargo-fg').hide();
+                  $('#forwarder-fg').hide();
+                  $('#ownership-fg').hide();
+                  $('#departure_station-fg').hide();
+                  $('#returning-fg').hide();
+                  $('#released_at-fg').hide();
+                  $('#taken_measure-fg').hide();
                   $('#local-wagon').show(300);
               } else {
                   $('#detained_at_label').html('Дата/время задержки');
-                  $('#released_at_block').show();
-                  $('#taken_measure_block').show();
+                  $('#reason-fg').show();
+                  $('#cargo-fg').show();
+                  $('#forwarder-fg').show();
+                  $('#ownership-fg').show();
+                  $('#departure_station-fg').show();
+                  $('#returning-fg').show();
+                  $('#released_at-fg').show();
+                  $('#taken_measure-fg').show();
                   $('#local-wagon').hide(300);
               }
           });
