@@ -96,7 +96,7 @@ class Wagon extends Model
 
     public function isLocal(): bool
     {
-        return $this->detainer_id === 7;
+        return $this->detainer_id == 7;
     }
 
     public function isReadyToDepart(Carbon $at = null): bool
