@@ -7,13 +7,13 @@
         @include('backend.left-sidebar')
       </div>
       <div class="col-10">
-        Content
-        <div class="">
-          {!! $lastTenDaysStats->container() !!}
-        </div>
-
-        <div class="">
-          {!! $chartBy->container() !!}
+        <div class="row">
+          <div class="col-9">
+            {!! $lastTenDaysStats->container() !!}
+          </div>
+          <div class="col-3">
+            {!! $chartBy->container() !!}
+          </div>
         </div>
       </div>
     </div>
