@@ -61,4 +61,12 @@ ul.categories li:last-child {
   max-width: 26rem;
 }
 
+.form-group.required label:after {
+  content: " *";
+  color: red;
+}
+
+span.required {
+  color: red;
+}
 

@@ -8,7 +8,7 @@ class Admin
 {
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->isAdmin()) {
+        if (auth()->user()->can('manage-station')) {
             return $next($request);
         }
 

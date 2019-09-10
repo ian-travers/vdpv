@@ -122,6 +122,7 @@ Breadcrumbs::for('password.reset', function (BreadcrumbsGenerator $trail) {
     $trail->push('Восстановление пароля', route('login'));
 });
 
+// Backend Users
 Breadcrumbs::for('admin.overall', function (BreadcrumbsGenerator $trail) {
     $trail->parent('root');
     $trail->push('Администрирование', route('admin.overall'));
@@ -130,4 +131,14 @@ Breadcrumbs::for('admin.overall', function (BreadcrumbsGenerator $trail) {
 Breadcrumbs::for('admin.users.index', function (BreadcrumbsGenerator $trail) {
     $trail->parent('admin.overall');
     $trail->push('Пользователи', route('admin.users.index'));
+});
+
+Breadcrumbs::for('admin.users.create', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('admin.users.index');
+    $trail->push('Новый');
+});
+
+Breadcrumbs::for('admin.users.edit', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('admin.users.index');
+    $trail->push('Редактирование');
 });

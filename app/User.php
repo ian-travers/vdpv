@@ -69,6 +69,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function getRole()
+    {
+        return self::rolesList()[$this->role];
+    }
+
     public function changeRole($role): void
     {
         if (!array_key_exists($role, self::rolesList())) {
@@ -79,6 +84,13 @@ class User extends Authenticatable
             throw new \DomainException('Эта роль уже назначена');
         }
         $this->update(['role' => $role]);
+    }
+
+    public function isForceCanBeChanged(): bool
+    {
+        if ($this->id == auth()->id()) return true;
+
+        return $this->id != config('app.protected_user_id');
     }
 
     public function isLocalWagonsManager(): bool
@@ -109,5 +121,10 @@ class User extends Authenticatable
     public function setAdminRights()
     {
         $this->update(['is_admin' => true]);
+    }
+
+    public function setPassword(string $password): void
+    {
+        if (strlen($password)) $this->password = bcrypt($password);
     }
 }

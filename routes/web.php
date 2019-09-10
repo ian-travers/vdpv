@@ -38,7 +38,8 @@ Route::group([
 ], function () {
     Route::get('/', 'BackendController@overall')->name('overall');
 
-    Route::get('/users', 'UsersController@index')->name('users.index');
+    Route::patch('/users/change-password', 'UsersController@changePassword')->name('users.change-password');
+    Route::resource('/users', 'UsersController')->except('show');
 });
 
 
