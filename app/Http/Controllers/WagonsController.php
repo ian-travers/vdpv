@@ -41,9 +41,7 @@ class WagonsController extends Controller
 
     public function create()
     {
-        $detainers = auth()->user()->isLocalWagonsManager()
-            ? Detainer::where('id', 7)->get()
-            : Detainer::all();
+        $detainers = $this->prepareDetainers();
 
         return view('wagons.create', compact('detainers'));
     }
@@ -74,9 +72,7 @@ class WagonsController extends Controller
     {
         $this->authorize('manage', $wagon);
 
-        $detainers = auth()->user()->isLocalWagonsManager()
-            ? Detainer::where('id', 7)->get()
-            : Detainer::all();
+        $detainers = $this->prepareDetainers();
 
         session()->put('url.intended', url()->previous());
 
@@ -124,5 +120,12 @@ class WagonsController extends Controller
             'message' => 'Информация по вагону удалена',
             'type' => 'success',
         ]);
+    }
+
+    private function prepareDetainers()
+    {
+        return auth()->user()->isLocalWagonsManager()
+            ? Detainer::where('id', 7)->get()
+            : Detainer::all();
     }
 }
