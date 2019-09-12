@@ -11,7 +11,7 @@
         <a class="nav-link" href="{{ route('admin.users.index') }}">Пользователи</a>
       </li>
       <li class="list-group-item list-group-item-action">
-        <a class="nav-link" href="#">Задерживающие организации</a>
+        <a class="nav-link" href="{{ route('admin.detainers.index') }}">Задерживающие организации</a>
       </li>
     </ul>
   </nav>

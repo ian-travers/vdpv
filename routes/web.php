@@ -40,6 +40,7 @@ Route::group([
 
     Route::patch('/users/change-password', 'UsersController@changePassword')->name('users.change-password');
     Route::resource('/users', 'UsersController')->except('show');
+    Route::resource('/detainers', 'DetainersController')->except('show');
 });
 
 

@@ -27,4 +27,9 @@ class Detainer extends Model
     {
         return $this->hasMany(Wagon::class);
     }
+
+    public function isDeletable()
+    {
+        return !$this->wagons->count();
+    }
 }
