@@ -64,7 +64,7 @@ class User extends Authenticatable
         return [
             self::ROLE_USER => 'Пользователь',
             self::ROLE_LOCAL_WAGONS_MANAGER => 'Управление местными вагонами',
-            self::ROLE_WAGONS_MANAGER => 'Управление всеми вагонами',
+            self::ROLE_WAGONS_MANAGER => 'Управление вагонами',
             self::ROLE_STATION_ADMIN => 'Администратор станции',
         ];
     }

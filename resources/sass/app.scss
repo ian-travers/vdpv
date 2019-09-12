@@ -70,3 +70,28 @@ span.required {
   color: red;
 }
 
+// Table os Content
+.nav > a {
+  padding:0 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #767676;
+  background-color: transparent;
+}
+
+.nav > a:hover,
+.nav > a:focus {
+  color: #0004bd;
+  padding-left: 5px;
+  border-left: 1px solid #0004bd;
+}
+
+.nav-link.active,
+.nav-link.active:hover,
+.nav-link.active:focus {
+  padding-left: 4px;
+  font-weight: bold;
+  color: #0004bd;
+  background-color: transparent;
+  border-left: 2px solid #0004bd;
+}
