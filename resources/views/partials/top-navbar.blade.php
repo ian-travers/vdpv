@@ -63,7 +63,7 @@
         @else
           @can('manage-station')
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('admin.overall') }}">Адмистрирование</a>
+              <a class="nav-link" href="{{ route('admin.overall') }}">Администрирование</a>
             </li>
 
           @endcan
