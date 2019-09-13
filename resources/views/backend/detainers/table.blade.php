@@ -18,7 +18,7 @@
         <a href="{{ route('admin.detainers.edit', $detainer) }}" class="btn btn-outline-primary btn-sm fa fa-edit" title="Изменить"></a>
 
         @if($detainer->isDeletable())
-        <form class="d-inline" action="{{ route('admin.users.destroy', $detainer) }}" method="post">
+        <form class="d-inline" action="{{ route('admin.detainers.destroy', $detainer) }}" method="post">
 
           @method('delete')
           @csrf

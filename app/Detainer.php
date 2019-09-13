@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Detainer extends Model
 {
+    protected $guarded = [];
+
     public $timestamps = false;
 
     public function wagons()
