@@ -184,17 +184,6 @@ class Wagon extends Model
             : null;
     }
 
-    public function detainedLongInHours()
-    {
-        $fn = $this->getLongIdleFieldName();
-
-        $res = isset($this->departed_at) ? $this->departed_at->diffInHours($this->$fn) : now()->diffInHours($this->$fn);
-
-        $res -= 24;
-
-        return ($res > 0) ? $res : 0;
-    }
-
     private function getLongIdleFieldName()
     {
         return $this->detainer->long_detain_event;
