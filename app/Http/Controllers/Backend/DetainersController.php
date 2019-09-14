@@ -65,7 +65,7 @@ class DetainersController extends Controller
     {
         return request()->validate([
             'name' => 'required|string|max:100',
-            'long_detain_event' => 'required|string|max:20',
+            'idle_start_event' => 'required|string|max:20',
         ]);
     }
 }

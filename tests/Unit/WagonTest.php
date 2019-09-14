@@ -76,7 +76,7 @@ class WagonTest extends TestCase
     }
 
     /** @test */
-    function check_is_detained_long_time_the_local_wagons()
+    function check_is_idle_long_time_the_local_wagons()
     {
         $this->artisan('db:seed --class=DetainersTableSeeder');
 
@@ -87,7 +87,7 @@ class WagonTest extends TestCase
         $wagon->update([
             'detainer_id' => 7,
             'detained_at' => Carbon::parse('-45 hours'),
-            'released_at' => Carbon::parse('-45 hours')
+            'cargo_operation_finished_at' => Carbon::parse('-45 hours')
         ]);
 
         $this->assertTrue($wagon->fresh()->isLongIdle());

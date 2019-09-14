@@ -19,6 +19,9 @@ use Kyslik\ColumnSortable\Sortable;
  * @property \Illuminate\Support\Carbon|null $detained_at
  * @property \Illuminate\Support\Carbon|null $released_at
  * @property \Illuminate\Support\Carbon|null $departed_at
+ * @property \Illuminate\Support\Carbon|null $cargo_operation_finished_at
+ * @property \Illuminate\Support\Carbon|null $delivered_at
+ * @property \Illuminate\Support\Carbon|null $removed_at
  * @property int $detainer_id
  * @property string|null $reason
  * @property string|null $cargo
@@ -44,8 +47,10 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon sortable($defaultParameters = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereArrivedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCargo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCargoOperationFinishedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereCreatorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDeliveredAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDepartedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDepartureStation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereDestinationStation($value)
@@ -60,6 +65,7 @@ use Kyslik\ColumnSortable\Sortable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon wherePark($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereReleasedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereRemovedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereReturning($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereTakenMeasure($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Wagon whereUpdatedAt($value)
@@ -72,7 +78,7 @@ class Wagon extends Model
 
     protected $guarded = [];
 
-    protected $dates = ['arrived_at', 'detained_at', 'released_at', 'departed_at'];
+    protected $dates = ['arrived_at', 'detained_at', 'released_at', 'departed_at', 'delivered_at', 'removed_at', 'cargo_operation_finished_at'];
 
     public function path()
     {
@@ -186,7 +192,7 @@ class Wagon extends Model
 
     private function getLongIdleFieldName()
     {
-        return $this->detainer->long_detain_event;
+        return $this->detainer->idle_start_event;
     }
 
     public function linkCssClass()

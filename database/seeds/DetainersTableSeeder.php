@@ -11,36 +11,36 @@ class DetainersTableSeeder extends Seeder
         DB::table('detainers')->insert([
             [
                 'name' => 'Служба вагонного хозяйства',
-                'long_detain_event' => 'released_at'
+                'idle_start_event' => 'released_at'
             ],
             [
                 'name' => 'Пункт коммерческого осмотра вагонов',
-                'long_detain_event' => 'released_at'
+                'idle_start_event' => 'released_at'
             ],
             [
                 'name' => 'Таможенная служба',
-                'long_detain_event' => 'released_at'
+                'idle_start_event' => 'released_at'
             ],
             [
                 'name' => 'Ветеринарный контроль',
-                'long_detain_event' => 'released_at'
+                'idle_start_event' => 'released_at'
             ],
             [
                 'name' => 'Фитосанитарный контроль',
-                'long_detain_event' => 'released_at
+                'idle_start_event' => 'released_at
                 '
             ],
             [
                 'name' => 'Пункт передачи вагонов',
-                'long_detain_event' => 'released_at'
+                'idle_start_event' => 'released_at'
             ],
             [
                 'name' => 'Местные вагоны',
-                'long_detain_event' => 'released_at'
+                'idle_start_event' => 'cargo_operation_finished_at'
             ],
             [
                 'name' => 'Прочие',
-                'long_detain_event' => 'released_at'
+                'idle_start_event' => 'released_at'
             ]
         ]);
     }
