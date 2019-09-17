@@ -53,15 +53,10 @@
                               class="badge badge-danger float-right mr-1">{{ detainedLongAtCount($detainer) }}</span>
                         </a>
 
-                        @if($detainer->id <> 7)
-                          <a href="{{ route('detained-by', $detainer) }}">
-                            <span
-                                class="badge badge-primary float-right mr-1">
-                              {{ detainedAtCount($detainer) }}
-                            </span>
-                          </a>
-
-                        @endif
+                        <a href="{{ route('detained-by', $detainer) }}">
+                          <span
+                                class="badge badge-primary float-right mr-1">{{ detainedAtCount($detainer) }}</span>
+                        </a>
                       </div>
                     </li>
 

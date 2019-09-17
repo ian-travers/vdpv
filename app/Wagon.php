@@ -183,10 +183,18 @@ class Wagon extends Model
 
     public function detainedAfterReleaseInHours()
     {
-        return isset($this->released_at)
+//        return isset($this->released_at)
+//            ? isset($this->departed_at)
+//                ? $this->departed_at->diffInHours($this->released_at)
+//                : now()->diffInHours($this->released_at)
+//            : null;
+
+        $event = $this->getLongIdleFieldName();
+
+        return isset($this->$event)
             ? isset($this->departed_at)
-                ? $this->departed_at->diffInHours($this->released_at)
-                : now()->diffInHours($this->released_at)
+                ? $this->departed_at->diffInHours($this->$event)
+                : now()->diffInHours($this->$event)
             : null;
     }
 
@@ -293,6 +301,21 @@ class Wagon extends Model
     public function setDepartedAtAttribute($value)
     {
         $this->attributes['departed_at'] = $this->createDatetime($value);
+    }
+
+    public function setDeliveredAtAttribute($value)
+    {
+        $this->attributes['delivered_at'] = $this->createDatetime($value);
+    }
+
+    public function setCargoOperationFinishedAtAttribute($value)
+    {
+        $this->attributes['cargo_operation_finished_at'] = $this->createDatetime($value);
+    }
+
+    public function setRemovedAtAttribute($value)
+    {
+        $this->attributes['removed_at'] = $this->createDatetime($value);
     }
 
     protected function createDatetime($value)

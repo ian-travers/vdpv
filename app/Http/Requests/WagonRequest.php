@@ -27,21 +27,13 @@ class WagonRequest extends FormRequest
         return [
             'inw' => 'required|regex:/^\d{8}$/',
             'arrived_at' => 'nullable|date|before:detained_at',
-            'detained_at' => 'required|date|before:tomorrow',
+            'detained_at' => 'nullable|date|before:tomorrow',
             'released_at' => 'nullable|date|before:tomorrow',
             'departed_at' => 'nullable|date|before:tomorrow',
+            'delivered_at' => 'nullable|date|before:tomorrow',
+            'cargo_operation_finished_at' => 'nullable|date|before:tomorrow',
+            'removed_at' => 'nullable|date|before:tomorrow',
             'detainer_id' => 'required',
-//            'reason' => 'nullable:max:255',
-//            'cargo' => 'nullable|max:255',
-//            'forwarder' => 'nullable',
-//            'ownership' => 'nullable',
-//            'operation' => 'nullable',
-//            'park' => 'nullable',
-//            'way' => 'nullable',
-//            'nplf' => 'nullable',
-//            'departure_station' => 'nullable|max:255',
-//            'destination_station' => 'nullable|max:255',
-//            'taken_measure' => 'nullable',
         ];
     }
 

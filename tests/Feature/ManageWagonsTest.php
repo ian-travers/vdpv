@@ -169,17 +169,6 @@ class ManageWagonsTest extends TestCase
     }
 
     /** @test */
-    function a_wagon_requires_a_detained_at()
-    {
-        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
-        $this->signIn($manager);
-
-        $attributes = factory(Wagon::class)->raw(['detained_at' => null, 'creator_id' => $manager->id]);
-
-        $this->post('/wagons', $attributes)->assertSessionHasErrors('detained_at');
-    }
-
-    /** @test */
     function a_wagon_requires_a_detainer()
     {
         $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
@@ -188,43 +177,6 @@ class ManageWagonsTest extends TestCase
         $attributes = factory(Wagon::class)->raw(['detainer_id' => '', 'creator_id' => $manager->id]);
 
         $this->post('/wagons', $attributes)->assertSessionHasErrors('detainer_id');
-    }
-
-    /** @test */
-    function a_local_wagon_has_the_same_detained_and_released_times()
-    {
-        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
-        $this->signIn($manager);
-
-        $attributes = factory(Wagon::class)->raw(['detainer_id' => '7']);
-
-        $this->post('/wagons', $attributes)->assertStatus(Response::HTTP_FOUND);
-
-        $wagon = Wagon::find(1);
-
-        $this->assertInstanceOf("Carbon\Carbon", $wagon->detained_at);
-        $this->assertInstanceOf("Carbon\Carbon", $wagon->released_at);
-
-        $this->assertEquals($wagon->detained_at, $wagon->released_at);
-    }
-
-    /** @test */
-    function a_local_wagon_cannot_be_detained_and_always_released()
-    {
-        $this->artisan('db:seed --class=DetainersTableSeeder');
-
-        $manager = factory(User::class)->create(['role' => User::ROLE_WAGONS_MANAGER]);
-        $this->signIn($manager);
-
-        $attributes = factory(Wagon::class)->raw(['detainer_id' => '7', 'creator_id' => $manager->id]);
-
-        $this->post('/wagons', $attributes)->assertStatus(Response::HTTP_FOUND);
-
-        $wagon = Wagon::find(1);
-
-        $this->assertTrue($wagon->isReleased());
-        $this->assertFalse($wagon->isDeparted());
-        $this->assertFalse($wagon->isDetained());
     }
 
     /** @test */

@@ -51,10 +51,14 @@
           <div class="card-body">
             <table class="table table-sm border border-bottom">
               <tbody>
-              <tr>
-                <td width="15%" class="text-right text-muted">Возврат</td>
-                <td>{{ $wagon->returning ? 'Да' : 'Нет' }}</td>
-              </tr>
+
+              @if(!$wagon->isLocal())
+                <tr>
+                  <td width="15%" class="text-right text-muted">Возврат</td>
+                  <td>{{ $wagon->returning ? 'Да' : 'Нет' }}</td>
+                </tr>
+
+              @endif
               <tr>
                 <td width="15%" class="text-right text-muted">Прибыл</td>
                 <td>{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y в H:i') : '' }}</td>
@@ -67,30 +71,33 @@
                 <td width="15%" class="text-right text-muted">Причина задержки</td>
                 <td>{{ $wagon->reason }}</td>
               </tr>
-              <tr>
-                <td width="15%" class="text-right text-muted">Груз</td>
-                <td>{{ $wagon->cargo }}</td>
-              </tr>
-              <tr>
-                <td width="15%" class="text-right text-muted">Экспедитор по БЧ</td>
-                <td>{{ $wagon->forwarder }}</td>
-              </tr>
-              <tr>
-                <td width="15%" class="text-right text-muted">Собственность</td>
-                <td>{{ $wagon->ownership }}</td>
-              </tr>
-              <tr>
-                <td width="15%" class="text-right text-muted">Ст. отправления</td>
-                <td>{{ $wagon->departure_station }}</td>
-              </tr>
-              <tr>
-                <td width="15%" class="text-right text-muted">Ст. назначения</td>
-                <td>{{ $wagon->destination_station }}</td>
-              </tr>
-              <tr>
-                <td width="15%" class="text-right text-muted">Принятые меры</td>
-                <td>{{ $wagon->taken_measure }}</td>
-              </tr>
+
+              @if(!$wagon->isLocal())
+                <tr>
+                  <td width="15%" class="text-right text-muted">Груз</td>
+                  <td>{{ $wagon->cargo }}</td>
+                </tr>
+                <tr>
+                  <td width="15%" class="text-right text-muted">Экспедитор по БЧ</td>
+                  <td>{{ $wagon->forwarder }}</td>
+                </tr>
+                <tr>
+                  <td width="15%" class="text-right text-muted">Собственность</td>
+                  <td>{{ $wagon->ownership }}</td>
+                </tr>
+                <tr>
+                  <td width="15%" class="text-right text-muted">Ст. отправления</td>
+                  <td>{{ $wagon->departure_station }}</td>
+                </tr>
+                <tr>
+                  <td width="15%" class="text-right text-muted">Ст. назначения</td>
+                  <td>{{ $wagon->destination_station }}</td>
+                </tr>
+                <tr>
+                  <td width="15%" class="text-right text-muted">Принятые меры</td>
+                  <td>{{ $wagon->taken_measure }}</td>
+                </tr>
+              @endif
 
               @if($wagon->isLocal())
                 <tr>
@@ -103,6 +110,22 @@
                 <td width="15%" class="text-right text-muted">Выпущен</td>
                 <td>{{ $wagon->released_at ? $wagon->released_at->format('d.m.Y в H:i') : '' }}</td>
               </tr>
+
+              @if($wagon->isLocal())
+                <tr>
+                  <td width="15%" class="text-right text-muted">Подан</td>
+                  <td>{{ $wagon->delivered_at ? $wagon->delivered_at->format('d.m.Y в H:i') : '' }}</td>
+                </tr>
+                <tr>
+                  <td width="15%" class="text-right text-muted">Гр. опер. завершена</td>
+                  <td>{{ $wagon->cargo_operation_finished_at ? $wagon->cargo_operation_finished_at->format('d.m.Y в H:i') : '' }}</td>
+                </tr>
+                <tr>
+                  <td width="15%" class="text-right text-muted">Убран</td>
+                  <td>{{ $wagon->removed_at ? $wagon->removed_at->format('d.m.Y в H:i') : '' }}</td>
+                </tr>
+
+              @endif
               <tr>
                 <td width="15%" class="text-right text-muted">Отправлен</td>
                 <td>{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y в H:i') : ''}}</td>

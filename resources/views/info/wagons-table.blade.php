@@ -7,7 +7,7 @@
     <th width="10%" class="align-top">Номер вагона</th>
     <th width="12%" class="align-top">Простой с момента задержания, дн.</th>
     <th width="11%" class="align-top">Простой с момента задержания, ч.</th>
-    <th width="13%" class="align-top">Простой после выпуска, ч.</th>
+    <th width="13%" class="align-top">Простой после выпуска / окончания гр. операции, ч.</th>
     <th class="align-top">Причина</th>
     <th width="8%" class="align-top">Возврат</th>
   </tr>
