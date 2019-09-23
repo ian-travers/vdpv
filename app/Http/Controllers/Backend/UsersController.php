@@ -35,8 +35,10 @@ class UsersController extends Controller
         $user->saveOrFail();
 
         return redirect()->route('admin.users.index')->with([
-            'message' => 'Пользователь сохранен успешно',
-            'alert-type' => 'success',
+            'flash' => [
+                'type' => 'success',
+                'text' =>'Пользователь сохранен',
+            ]
         ]);
     }
 
@@ -53,8 +55,10 @@ class UsersController extends Controller
         $user->update($vr);
 
         return redirect()->route('admin.users.index')->with([
-            'message' => 'Пользователь сохранен успешно',
-            'alert-type' => 'success',
+            'flash' => [
+                'type' => 'success',
+                'text' =>'Пользователь изменен',
+            ]
         ]);
     }
 
@@ -68,8 +72,10 @@ class UsersController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index')->with([
-            'message' => 'Пользователь удален успешно',
-            'alert-type' => 'success',
+            'flash' => [
+                'type' => 'success',
+                'text' =>'Пользователь удален',
+            ]
         ]);
     }
 
@@ -109,14 +115,18 @@ class UsersController extends Controller
 
 
             return back()->with([
-                'message' => 'Пароль пользователя изменен успешно',
-                'alert-type' => 'success',
+                'flash' => [
+                    'type' => 'info',
+                    'text' =>'Пароль пользователя изменен успешно',
+                ]
             ]);
         }
 
         return back()->with([
-            'message' => 'Недопустимый метод',
-            'alert-type' => 'warning',
+            'flash' => [
+                'type' => 'error',
+                'text' =>'Недопустимый метод',
+            ]
         ]);
     }
 

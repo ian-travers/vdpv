@@ -45,7 +45,7 @@ class InfoTest extends TestCase
         $this->assertEquals(1, detainedLongAtCount());
 
         $this->get(route('long-only'))->assertSee($wagon->inw);
-//        $this->get(route('recent', ['yesterday', 'detained']))->assertSee($wagon->inw);
+        $this->get(route('recent', ['yesterday', 'detained']))->assertSee($wagon->inw);
     }
 
     /** @test */

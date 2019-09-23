@@ -26,8 +26,10 @@ class DetainersController extends Controller
         Detainer::create($this->validateRequest());
 
         return redirect()->route('admin.detainers.index')->with([
-            'message' => 'Организация сохранена успешно',
-            'alert-type' => 'success',
+            'flash' => [
+                'type' => 'success',
+                'text' =>'Организация сохранена',
+            ]
         ]);
     }
 
@@ -41,8 +43,10 @@ class DetainersController extends Controller
         $detainer->update($this->validateRequest());
 
         return redirect()->route('admin.detainers.index')->with([
-            'message' => 'Организация сохранена успешно',
-            'alert-type' => 'success',
+            'flash' => [
+                'type' => 'success',
+                'text' =>'Организация изменена',
+            ]
         ]);
     }
 
@@ -56,8 +60,10 @@ class DetainersController extends Controller
         $detainer->delete();
 
         return redirect()->route('admin.detainers.index')->with([
-            'message' => 'Организация удалена успешно',
-            'alert-type' => 'success',
+            'flash' => [
+                'type' => 'success',
+                'text' =>'Организация удалена',
+            ]
         ]);
     }
 

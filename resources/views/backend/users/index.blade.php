@@ -24,7 +24,7 @@
             <p class="display-4 text-center" id="username">NAME</p>
 
             @include('backend.users._formPassword')
-            <div class="d-flex justify-content-between align-items-end border-top">
+            <div class="d-flex justify-content-between align-items-end border-top pt-3">
               <button type="submit" class="btn btn-lg btn-outline-primary">Сменить пароль</button>
               <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Отменить
               </button>
