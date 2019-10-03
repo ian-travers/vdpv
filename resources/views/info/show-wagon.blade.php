@@ -21,18 +21,21 @@
 
                 @foreach($wagon->getAnotherDetaining() as $another)
                   @if($another->isDetained())
-                    <a href="{{ $another->viewPath() }}"
-                       class="btn btn-sm btn-primary">Задержан {{ $another->detained_at->format('d.m.Y') }}</a>
+                    <a href="{{ $another->viewPath() }}" class="btn btn-sm btn-primary">
+                      Задержан {{ $another->detained_at ? $another->detained_at->format('d.m.Y') : '' }}
+                    </a>
 
                   @endif
                   @if($another->isReleased())
-                    <a href="{{ $another->viewPath() }}"
-                       class="btn btn-sm btn-secondary">Выпущен {{ $another->released_at->format('d.m.Y') }}</a>
+                    <a href="{{ $another->viewPath() }}" class="btn btn-sm btn-secondary">
+                      Выпущен {{ $another->released_at ? $another->released_at->format('d.m.Y') : '' }}
+                    </a>
 
                   @endif
                   @if($another->isDeparted())
-                    <a href="{{ $another->viewPath() }}"
-                       class="btn btn-sm btn-success">Отправлен {{ $another->departed_at->format('d.m.Y') }}</a>
+                    <a href="{{ $another->viewPath() }}" class="btn btn-sm btn-success">
+                      Отправлен {{ $another->departed_at ? $another->departed_at->format('d.m.Y') : '' }}
+                    </a>
 
                   @endif
                 @endforeach
@@ -65,7 +68,7 @@
               </tr>
               <tr>
                 <td width="15%" class="text-right text-muted">Задержан</td>
-                <td><strong>{{ $wagon->detainer->name }}</strong> {{ $wagon->detained_at->format('d.m.Y в H:i') }}</td>
+                <td><strong>{{ $wagon->detainer->name }}</strong> {{ $wagon->detained_at ? $wagon->detained_at->format('d.m.Y в H:i') : '' }}</td>
               </tr>
               <tr>
                 <td width="15%" class="text-right text-muted">Причина задержки</td>

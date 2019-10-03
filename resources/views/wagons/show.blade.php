@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <td width="15%" class="text-right text-muted">Задержан</td>
-            <td><strong>{{ $wagon->detainer->name }}</strong> {{ $wagon->detained_at->format('d.m.Y в H:i') }}</td>
+            <td><strong>{{ $wagon->detainer->name }}</strong> {{ $wagon->detained_at ? $wagon->detained_at->format('d.m.Y в H:i') : '' }}</td>
           </tr>
           <tr>
             <td width="15%" class="text-right text-muted">Причина задержки</td>
