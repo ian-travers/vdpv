@@ -52,7 +52,15 @@ class WagonsController extends Controller
 
         if ($request['detainer_id'] == 7) {
             $request['taken_measure'] = null;
+        } elseif (!$request['detained_at']) {
+            return redirect()->back()->with([
+                'flash' => [
+                    'type' => 'error',
+                    'text' =>'Не введена информация о дате задержания вагона',
+                ]
+            ]);
         }
+
 
         Auth::user()->wagons()->create($request->all());
 
