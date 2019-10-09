@@ -67,7 +67,7 @@
                 <td>{{ $wagon->arrived_at ? $wagon->arrived_at->format('d.m.Y в H:i') : '' }}</td>
               </tr>
               <tr>
-                <td width="15%" class="text-right text-muted">Задержан</td>
+                <td width="15%" class="text-right text-muted">{{ $wagon->detained_at ? 'Задержан' : 'Категория' }}</td>
                 <td><strong>{{ $wagon->detainer->name }}</strong> {{ $wagon->detained_at ? $wagon->detained_at->format('d.m.Y в H:i') : '' }}</td>
               </tr>
               <tr>
