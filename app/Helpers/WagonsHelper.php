@@ -80,6 +80,7 @@ function detainedAtQuery(Detainer $detainer = null, Carbon $datetime = null)
     if ($datetime) {
         $query = $detainer
             ? $detainer->wagons()
+                ->whereNotNull('detained_at')
                 ->where('detained_at', '<', $datetime)
                 ->where(function ($query) use ($datetime) {
                     $query
@@ -88,7 +89,8 @@ function detainedAtQuery(Detainer $detainer = null, Carbon $datetime = null)
                 })
                 ->whereNotIn('id', $releasedIds)
 
-            : Wagon::where('detained_at', '<', $datetime)
+            : Wagon::whereNotNull('detained_at')
+                ->where('detained_at', '<', $datetime)
                 ->where(function ($query) use ($datetime) {
                     $query
                         ->whereNull('departed_at')
@@ -98,9 +100,11 @@ function detainedAtQuery(Detainer $detainer = null, Carbon $datetime = null)
     } else {
         $query = $detainer
             ? $detainer->wagons()
+                ->whereNotNull('detained_at')
                 ->whereNull('departed_at')
                 ->whereNotIn('id', $releasedIds)
-            : Wagon::whereNull('departed_at')
+            : Wagon::whereNotNull('detained_at')
+                ->whereNull('departed_at')
                 ->whereNotIn('id', $releasedIds);
     }
 

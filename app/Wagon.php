@@ -130,6 +130,11 @@ class Wagon extends Model
 
     public function isDetained(Carbon $at = null)
     {
+        if ( !$this->detained_at || ($this->detained_at > $at)) {
+            return false;
+        }
+
+
         return $this->getLongIdleFieldName() == 'detained_at'
             ? !($this->isDeparted($at))
             : !($this->isReleased($at)) && !($this->isDeparted($at));

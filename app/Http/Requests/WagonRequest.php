@@ -26,7 +26,7 @@ class WagonRequest extends FormRequest
     {
         return [
             'inw' => 'required|regex:/^\d{8}$/',
-            'arrived_at' => 'nullable|date|before:detained_at',
+            'arrived_at' => 'nullable|date|before:tomorrow',
             'detained_at' => 'nullable|date|before:tomorrow',
             'released_at' => 'nullable|date|before:tomorrow',
             'departed_at' => 'nullable|date|before:tomorrow',

@@ -291,9 +291,9 @@
   <script type="text/javascript">
       if (String($('#detainer_id').val()) === String(7)) {
           $('#not-local-block').hide();
-          if (String($('#reason').val()) === '') {
-              $('#reason').val('Для таможенного оформления');
-          }
+          // if (String($('#reason').val()) === '') {
+          //     $('#reason').val('Для таможенного оформления');
+          // }
       } else {
           $('#local-block').hide();
       }
@@ -301,15 +301,15 @@
       $(document).ready(function () {
           $('#detainer_id').change(function () {
               if (String(this.value) === String(7)) {
-                  if (String($('#reason').val()) === '') {
-                      $('#reason').val('Для таможенного оформления');
-                  }
+                  // if (String($('#reason').val()) === '') {
+                  //     $('#reason').val('Для таможенного оформления');
+                  // }
                   $('#local-block').show(300);
                   $('#not-local-block').hide(300);
               } else {
-                  if (String($('#reason').val()) === 'Для таможенного оформления') {
-                      $('#reason').val('{{ $wagon->reason }}');
-                  }
+                  // if (String($('#reason').val()) === 'Для таможенного оформления') {
+                      <!--$('#reason').val('{{ $wagon->reason }}');-->
+                  // }
                   $('#local-block').hide(300);
                   $('#not-local-block').show(300);
               }
