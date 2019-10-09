@@ -132,10 +132,9 @@ class Wagon extends Model
 
     public function isDetained(Carbon $at = null)
     {
-        if ( !$this->detained_at || ($this->detained_at > $at)) {
+        if (!$this->detained_at || ($this->detained_at > $at)) {
             return false;
         }
-
 
         return $this->getLongIdleFieldName() == 'detained_at'
             ? !($this->isDeparted($at))
@@ -146,13 +145,32 @@ class Wagon extends Model
     {
         if ($this->isDeparted($at)) return false;
 
-        $fn = $this->getLongIdleFieldName();
+        $event = $this->getLongIdleFieldName();
 
-        $res =  $at
-            ? $at->diffInHours($this->$fn) >= 24
-            : now()->diffInHours($this->$fn) >= 24;
+        return $at
+            ? $at->diffInHours($this->$event) >= 24
+            : now()->diffInHours($this->$event) >= 24;
+    }
 
-        return $res;
+    /**
+     * Check for a local wagon that just persist in the database. A wagon neither idle nor detain.
+     *
+     * @param Carbon|null $at
+     * @return bool
+     */
+    public function isJustLocal(Carbon $at = null)
+    {
+        if ($this->detainer_id != 7) return false;
+
+        if ($this->isDetained()) return false;
+
+        if (isset($this->cargo_operation_finished_at)) {
+            return $at
+                ? $this->cargo_operation_finished_at < $at
+                : $this->cargo_operation_finished_at < now();
+        }
+
+        return !$this->isDeparted();
     }
 
     public function isDetainedBetween($startsAt, $endsAt)
@@ -215,6 +233,7 @@ class Wagon extends Model
         if ($this->isDeparted()) return 'text-success';
         if ($this->isLongIdle()) return 'text-danger';
         if ($this->isReadyToDepart()) return 'text-secondary';
+        if ($this->isJustLocal()) return 'text-info italic';
         return null;
     }
 
