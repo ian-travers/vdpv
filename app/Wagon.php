@@ -107,10 +107,12 @@ class Wagon extends Model
 
     public function isReadyToDepart(Carbon $at = null): bool
     {
-        return isset($this->released_at)
+        $event = $this->getLongIdleFieldName();
+
+        return isset($this->$event)
             ? $at
-                ? $this->released_at < $at
-                : $this->released_at < now()
+                ? $this->$event < $at
+                : $this->$event < now()
             : false;
     }
 
