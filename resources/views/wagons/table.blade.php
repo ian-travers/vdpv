@@ -5,7 +5,11 @@
   <tr class="text-center">
     <th>№</th>
     <th>Номер</th>
-    <th @if(!auth()->user()->isLocalWagonsManager()) width="15%" @endif class="text-center">@sortablelink('detainer_id', 'Категория')</th>
+
+    @if(!auth()->user()->isLocalWagonsManager())
+      <th width="15%" class="text-center">@sortablelink('detainer_id', 'Категория')</th>
+
+    @endif
     <th>Причина</th>
 
     @if(!auth()->user()->isLocalWagonsManager())
@@ -32,7 +36,11 @@
     <tr>
       <td class="text-center">{{ (request('page')) ? (request('page') - 1) * $wagons->perPage() + $loop->index + 1 : $loop->index + 1 }}</td>
       <td><a href="{{ $wagon->path() }}">{{ $wagon->inw }}</a></td>
-      <td>{{ $wagon->detainer->name }}</td>
+
+      @if(!auth()->user()->isLocalWagonsManager())
+        <td>{{ $wagon->detainer->name }}</td>
+
+      @endif
       <td>{{ $wagon->reason }}</td>
 
       @if(!auth()->user()->isLocalWagonsManager())

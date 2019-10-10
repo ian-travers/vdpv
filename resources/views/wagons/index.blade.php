@@ -3,7 +3,7 @@
 @section('content')
   <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-start mb-3">
-      <h2 class="mb-0">{{ count($term) ? 'Результаты поиска' : 'Список задержанных вагонов' }}</h2>
+      <h2 class="mb-0">{{ count($term) ? 'Результаты поиска' : 'Список задержанных и/или местных вагонов' }}</h2>
       <div class="d-flex">
         <form action="{{ route('wagons.index') }}" class="mr-3">
           <div class="input-group">
