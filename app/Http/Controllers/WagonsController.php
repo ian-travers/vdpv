@@ -19,7 +19,7 @@ class WagonsController extends Controller
             ? Wagon::where('detainer_id', 7)
                 ->sortable()
                 ->filter($term)
-                ->orderBy('detained_at', 'desc')
+                ->orderBy('detained_at')
                 ->paginate($this->wagonsPerPage)
             : Wagon::sortable()
                 ->filter($term)
