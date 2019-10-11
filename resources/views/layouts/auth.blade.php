@@ -20,10 +20,10 @@
 <div id="app">
   <div class="d-flex justify-content-center my-4">
     <a href="{{ url("/") }}">
-      <img src="{{ asset('storage/images/tank-wagon.png') }}" width="48" class="">
+      <img src="{{ asset('storage/images/coal-wagon.png') }}" width="48" class="">
     </a>
   </div>
-  <h2 class="text-center">Учет задержанных и длительно простаивающих вагонов</h2>
+  <h2 class="text-center">Учет задержанных и длительно простаивающих вагонов ст. Витебск</h2>
 
   @yield('content')
 </div>
