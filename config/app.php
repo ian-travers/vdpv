@@ -4,7 +4,7 @@ return [
     'name' => env('APP_NAME', 'Учет задержанных и длительно простаивающих вагонов'),
     'env' => env('APP_ENV', 'production'),
     'debug' => env('APP_DEBUG', false),
-    'url' => env('APP_URL', 'http://dpv.lan'),
+    'url' => env('APP_URL', 'http://vdpv.lan'),
     'asset_url' => env('ASSET_URL', null),
 
     'timezone' => 'Europe/Minsk',
