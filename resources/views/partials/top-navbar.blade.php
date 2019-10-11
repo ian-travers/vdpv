@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ url('/') }}">
-      <img src="{{ asset('storage/images/tank-wagon.png') }}" alt="" width="36" class="mr-3 my-n1">
+      <img src="{{ asset('storage/images/coal-wagon.png') }}" alt="" width="36" class="mr-3 my-n1">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false"
