@@ -17,8 +17,9 @@ class DetainersController extends Controller
     public function create()
     {
         $detainer = new Detainer();
+        $events = Detainer::eventsList();
 
-        return view('backend.detainers.create', compact('detainer'));
+        return view('backend.detainers.create', compact('detainer', 'events'));
     }
 
     public function store()
@@ -35,7 +36,9 @@ class DetainersController extends Controller
 
     public function edit(Detainer $detainer)
     {
-        return view('backend.detainers.edit', compact('detainer'));
+        $events = Detainer::eventsList();
+
+        return view('backend.detainers.edit', compact('detainer', 'events'));
     }
 
     public function update(Detainer $detainer)
@@ -71,7 +74,7 @@ class DetainersController extends Controller
     {
         return request()->validate([
             'name' => 'required|string|max:100',
-            'idle_start_event' => 'required|string|max:20',
+            'idle_start_event' => 'required|string|max:30',
         ]);
     }
 }

@@ -33,7 +33,7 @@
         @endif
       </td>
       <td>{{ $detainer->name }}</td>
-      <td>{{ $detainer->idle_start_event }}</td>
+      <td>{{ $detainer->getIdleEvent() }}</td>
       <td class="text-center">{{ $detainer->id }}</td>
     </tr>
 

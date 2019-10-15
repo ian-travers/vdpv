@@ -15,13 +15,11 @@
 
 <div class="form-group shadow p-3 mb-3 bg-light rounded-lg required">
   <label for="idle_start_event" class="col-form-label">Событие для отсчета простоя</label>
-  <input type="text" id="idle_start_event" name="idle_start_event" value="{{ old('idle_start_event', $detainer->idle_start_event) }}"
-         class="form-control {{ $errors->has('idle_start_event') ? 'is-invalid' : '' }}" >
+  <select id="idle_start_event" class="form-control" name="idle_start_event">
 
-  @if ($errors->has('idle_start_event'))
-    <div class="invalid-feedback">
-      <strong>{{ $errors->first('idle_start_event') }}</strong>
-    </div>
+    @foreach ($events as $value => $label)
+      <option value="{{ $value }}"{{ $value === old('idle_start_event', $detainer->idle_start_event) ? ' selected' : '' }}>{{ $label }}</option>
 
-  @endif
+    @endforeach;
+  </select>
 </div>
