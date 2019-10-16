@@ -143,6 +143,26 @@ Breadcrumbs::for('admin.users.edit', function (BreadcrumbsGenerator $trail) {
     $trail->push('Редактирование');
 });
 
+Breadcrumbs::for('admin.wagons.index', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('admin.overall');
+    $trail->push('Вагоны', route('admin.wagons.index'));
+});
+
+Breadcrumbs::for('admin.wagons.create', function (BreadcrumbsGenerator $trail) {
+    $trail->parent('admin.wagons.index');
+    $trail->push('Новый');
+});
+
+Breadcrumbs::for('admin.wagons.edit', function (BreadcrumbsGenerator $trail, $wagon) {
+    $trail->parent('admin.wagons.show', $wagon);
+    $trail->push('Редактирование');
+});
+
+Breadcrumbs::for('admin.wagons.show', function (BreadcrumbsGenerator $trail, $wagon) {
+    $trail->parent('admin.wagons.index');
+    $trail->push($wagon->inw, route('admin.wagons.show', $wagon));
+});
+
 Breadcrumbs::for('admin.detainers.index', function (BreadcrumbsGenerator $trail) {
     $trail->parent('admin.overall');
     $trail->push('Задерживающие организации', route('admin.detainers.index'));

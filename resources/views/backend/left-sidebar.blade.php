@@ -5,7 +5,7 @@
   <nav class="nav flex-column">
     <ul class="list-group">
       <li class="list-group-item list-group-item-action">
-        <a class="nav-link" href="#">Вагоны</a>
+        <a class="nav-link" href="{{ route('admin.wagons.index') }}">Вагоны</a>
       </li>
       <li class="list-group-item list-group-item-action">
         <a class="nav-link" href="{{ route('admin.users.index') }}">Пользователи</a>
