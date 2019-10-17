@@ -83,7 +83,7 @@ class WagonsController extends Controller
 
         $detainers = $this->prepareDetainers();
 
-        session()->put('url.intended', url()->previous());
+        session()->put('url.intended', url()->previous() == url()->current() ? route('wagons.index') : url()->previous());
 
         return view('wagons.edit', compact('wagon', 'detainers'));
     }

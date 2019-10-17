@@ -267,7 +267,7 @@
 
 <div class="form-group d-flex align-items-end">
   <button type="submit" class="btn btn-outline-primary btn-lg mr-2">Сохранить</button>
-  <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-outline-secondary btn-sm">Отменить</a>
+  <a href="{{ redirect()->intended()->getTargetUrl() }}" class="btn btn-outline-secondary btn-sm">Отменить</a>
 </div>
 
 @section('script')
@@ -291,9 +291,6 @@
   <script type="text/javascript">
       if (String($('#detainer_id').val()) === String(7)) {
           $('#not-local-block').hide();
-          // if (String($('#reason').val()) === '') {
-          //     $('#reason').val('Для таможенного оформления');
-          // }
       } else {
           $('#local-block').hide();
       }
@@ -301,15 +298,9 @@
       $(document).ready(function () {
           $('#detainer_id').change(function () {
               if (String(this.value) === String(7)) {
-                  // if (String($('#reason').val()) === '') {
-                  //     $('#reason').val('Для таможенного оформления');
-                  // }
                   $('#local-block').show(300);
                   $('#not-local-block').hide(300);
               } else {
-                  // if (String($('#reason').val()) === 'Для таможенного оформления') {
-                      <!--$('#reason').val('{{ $wagon->reason }}');-->
-                  // }
                   $('#local-block').hide(300);
                   $('#not-local-block').show(300);
               }
