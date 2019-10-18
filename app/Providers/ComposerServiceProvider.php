@@ -35,5 +35,11 @@ class ComposerServiceProvider extends ServiceProvider
                 'yesterdayDetainedCount', 'yesterdayReleasedCount', 'yesterdayDepartedCount',
                 'beforeYesterdayDetainedCount', 'beforeYesterdayReleasedCount', 'beforeYesterdayDepartedCount'));
         });
+
+        view()->composer('backend.left-sidebar', function (View $view) {
+            list($controller, $action) = explode('@', class_basename(\Route::getCurrentRoute()->action['controller']));
+
+            return $view->with(compact('controller', 'action'));
+        });
     }
 }
