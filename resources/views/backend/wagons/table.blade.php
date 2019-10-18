@@ -27,9 +27,9 @@
       <td class="text-center">{{ $wagon->departed_at ? $wagon->departed_at->format('d.m.Y H:i') : '' }}</td>
       <td class="text-center">
         <a href="{{ route('admin.wagons.show', $wagon) }}" class="btn btn-sm btn-outline-primary fa fa-eye"
-           title="Просмотр"></a>
+           title="Посмотреть"></a>
         <a href="{{ route('admin.wagons.edit', $wagon) }}" class="btn btn-sm btn-outline-primary fa fa-edit"
-           title="Редактировать"></a>
+           title="Изменить"></a>
         <form action="{{ route('admin.wagons.destroy', $wagon) }}" method="post" class="d-inline">
 
           @csrf
@@ -40,7 +40,6 @@
       </td>
       <td class="text-center text-muted">{{ $wagon->id }}</td>
     </tr>
-
 
   @endforeach
   </tbody>
