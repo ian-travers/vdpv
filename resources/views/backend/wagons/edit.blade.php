@@ -4,18 +4,24 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-2">
 
         @include('backend.left-sidebar')
       </div>
       <div class="col-10">
-        <h2>Редактирование вагона</h2>
-        <form action="{{ route('admin.wagons.update', $wagon->id) }}" method="post">
+        <div class="card border-primary">
+          <div class="card-header">
+            <h3>Редактирование вагона</h3>
+          </div>
+          <div class="card-body">
+            <form action="{{ route('admin.wagons.update', $wagon->id) }}" method="post">
 
-          @method('patch')
-          @include('backend.wagons._form')
-        </form>
+              @method('patch')
+              @include('backend.wagons._form')
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

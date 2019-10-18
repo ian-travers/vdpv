@@ -4,7 +4,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-2">
 
         @include('backend.left-sidebar')

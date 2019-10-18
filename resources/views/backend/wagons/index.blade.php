@@ -10,8 +10,8 @@
       <div class="col-10">
         <div class="card">
           <div class="card-header bg-light">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-              <h2 class="mb-0">{{ count($term) ? 'Результаты поиска' : 'Управление вагонами' }}</h2>
+            <div class="d-flex justify-content-between align-items-start">
+              <h3 class="mb-0">{{ count($term) ? 'Результаты поиска' : 'Управление вагонами' }}</h3>
               <div class="d-flex">
                 <form action="{{ route('admin.wagons.index') }}" class="mr-3">
                   <div class="input-group">

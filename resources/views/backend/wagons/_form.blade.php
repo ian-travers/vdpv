@@ -240,7 +240,7 @@
   </div>
 </div>
 
-<div class="form-group d-flex align-items-end">
+<div class="d-flex align-items-end mt-3">
   <button type="submit" class="btn btn-outline-primary btn-lg mr-2">Сохранить</button>
   <a href="{{ url()->previous() == url()->current() ? route('admin.wagons.index') : url()->previous() }}" class="btn btn-outline-secondary btn-sm">Отменить</a>
 </div>

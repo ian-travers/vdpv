@@ -170,7 +170,7 @@ Breadcrumbs::for('admin.detainers.index', function (BreadcrumbsGenerator $trail)
 
 Breadcrumbs::for('admin.detainers.create', function (BreadcrumbsGenerator $trail) {
     $trail->parent('admin.detainers.index');
-    $trail->push('Новый');
+    $trail->push('Новая');
 });
 
 Breadcrumbs::for('admin.detainers.edit', function (BreadcrumbsGenerator $trail) {

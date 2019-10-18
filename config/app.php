@@ -16,7 +16,7 @@ return [
     'cipher' => 'AES-256-CBC',
 
     // Administrator the whole app. Protected to deleting.
-    'protected_user_id' => 3,
+    'protected_user_id' => 1,
 
     'providers' => [
         /*

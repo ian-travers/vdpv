@@ -2,17 +2,23 @@
 
 @section('content')
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-2">
 
         @include('backend.left-sidebar')
       </div>
       <div class="col-10">
-        <h2>Добавление вагона</h2>
-        <form action="{{ route('admin.wagons.store') }}" method="post">
+        <div class="card border-primary">
+          <div class="card-header">
+            <h3>Новый вагон</h3>
+          </div>
+          <div class="card-body">
+            <form action="{{ route('admin.wagons.store') }}" method="post">
 
-          @include('backend.wagons._form', [$wagon = new App\Wagon()])
-        </form>
+              @include('backend.wagons._form', [$wagon = new App\Wagon()])
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
